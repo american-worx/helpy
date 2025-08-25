@@ -1,0 +1,95 @@
+{
+  "@@locale": "en",
+  "appTitle": "Helpy Ninja",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "welcome": "Welcome",
+  "@welcome": {
+    "description": "Welcome message for users"
+  },
+  "meetYourHelpy": "Meet Your Helpy",
+  "@meetYourHelpy": {
+    "description": "Heading text for introducing the AI tutor"
+  },
+  "personalAITutor": "Your personal AI tutor that learns with you, grows with you",
+  "@personalAITutor": {
+    "description": "Description of what Helpy is"
+  },
+  "getStarted": "Get Started",
+  "@getStarted": {
+    "description": "Button text to begin onboarding"
+  },
+  "alreadyHaveAccount": "Already have an account?",
+  "@alreadyHaveAccount": {
+    "description": "Text asking if user has existing account"
+  },
+  "login": "Login",
+  "@login": {
+    "description": "Login button text"
+  },
+  "register": "Register",
+  "@register": {
+    "description": "Register button text"
+  },
+  "email": "Email",
+  "@email": {
+    "description": "Email field label"
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Password field label"
+  },
+  "askHelpyAnything": "Ask Helpy anything...",
+  "@askHelpyAnything": {
+    "description": "Placeholder text for chat input"
+  },
+  "helpyIsThinking": "Helpy is thinking",
+  "@helpyIsThinking": {
+    "description": "Message shown when AI is processing"
+  },
+  "chat": "Chat",
+  "@chat": {
+    "description": "Chat tab label"
+  },
+  "home": "Home",
+  "@home": {
+    "description": "Home tab label"
+  },
+  "learn": "Learn",
+  "@learn": {
+    "description": "Learn tab label"
+  },
+  "profile": "Profile",
+  "@profile": {
+    "description": "Profile tab label"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings screen title"
+  },
+  "darkMode": "Dark Mode",
+  "@darkMode": {
+    "description": "Dark mode setting label"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Language setting label"
+  },
+  "loading": "Loading...",
+  "@loading": {
+    "description": "Loading indicator text"
+  },
+  "error": "Error",
+  "@error": {
+    "description": "Generic error message"
+  },
+  "offline": "Offline",
+  "@offline": {
+    "description": "Offline status indicator"
+  },
+  "online": "Online",
+  "@online": {
+    "description": "Online status indicator"
+  }
+}

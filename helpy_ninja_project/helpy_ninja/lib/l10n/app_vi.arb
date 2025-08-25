@@ -1,0 +1,95 @@
+{
+  "@@locale": "vi",
+  "appTitle": "Helpy Ninja",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "welcome": "Chào mừng",
+  "@welcome": {
+    "description": "Welcome message for users"
+  },
+  "meetYourHelpy": "Gặp gỡ Helpy của bạn",
+  "@meetYourHelpy": {
+    "description": "Heading text for introducing the AI tutor"
+  },
+  "personalAITutor": "Gia sư AI cá nhân học cùng bạn, phát triển cùng bạn",
+  "@personalAITutor": {
+    "description": "Description of what Helpy is"
+  },
+  "getStarted": "Bắt đầu",
+  "@getStarted": {
+    "description": "Button text to begin onboarding"
+  },
+  "alreadyHaveAccount": "Đã có tài khoản?",
+  "@alreadyHaveAccount": {
+    "description": "Text asking if user has existing account"
+  },
+  "login": "Đăng nhập",
+  "@login": {
+    "description": "Login button text"
+  },
+  "register": "Đăng ký",
+  "@register": {
+    "description": "Register button text"
+  },
+  "email": "Email",
+  "@email": {
+    "description": "Email field label"
+  },
+  "password": "Mật khẩu",
+  "@password": {
+    "description": "Password field label"
+  },
+  "askHelpyAnything": "Hỏi Helpy bất cứ điều gì...",
+  "@askHelpyAnything": {
+    "description": "Placeholder text for chat input"
+  },
+  "helpyIsThinking": "Helpy đang suy nghĩ",
+  "@helpyIsThinking": {
+    "description": "Message shown when AI is processing"
+  },
+  "chat": "Trò chuyện",
+  "@chat": {
+    "description": "Chat tab label"
+  },
+  "home": "Trang chủ",
+  "@home": {
+    "description": "Home tab label"
+  },
+  "learn": "Học tập",
+  "@learn": {
+    "description": "Learn tab label"
+  },
+  "profile": "Hồ sơ",
+  "@profile": {
+    "description": "Profile tab label"
+  },
+  "settings": "Cài đặt",
+  "@settings": {
+    "description": "Settings screen title"
+  },
+  "darkMode": "Chế độ tối",
+  "@darkMode": {
+    "description": "Dark mode setting label"
+  },
+  "language": "Ngôn ngữ",
+  "@language": {
+    "description": "Language setting label"
+  },
+  "loading": "Đang tải...",
+  "@loading": {
+    "description": "Loading indicator text"
+  },
+  "error": "Lỗi",
+  "@error": {
+    "description": "Generic error message"
+  },
+  "offline": "Ngoại tuyến",
+  "@offline": {
+    "description": "Offline status indicator"
+  },
+  "online": "Trực tuyến",
+  "@online": {
+    "description": "Online status indicator"
+  }
+}
