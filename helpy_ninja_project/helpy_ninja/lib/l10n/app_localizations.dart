@@ -617,7 +617,7 @@ abstract class AppLocalizations {
   /// **'Study Time'**
   String get studyTime;
 
-  /// Label for weekly learning goal
+  /// Label for weekly goal
   ///
   /// In en, this message translates to:
   /// **'Weekly Goal'**
@@ -719,7 +719,7 @@ abstract class AppLocalizations {
   /// **'Browse Subjects'**
   String get browseSubjects;
 
-  /// Button text to continue learning
+  /// Button text to continue learning after completing a lesson
   ///
   /// In en, this message translates to:
   /// **'Continue Learning'**
@@ -796,6 +796,264 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your progress in different subjects'**
   String get yourProgressInDifferentSubjects;
+
+  /// Error message when lesson fails to start
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to start lesson: {error}'**
+  String lessonStartFailed(String error);
+
+  /// Success message when lesson is bookmarked
+  ///
+  /// In en, this message translates to:
+  /// **'Lesson bookmarked!'**
+  String get lessonBookmarked;
+
+  /// Message shown when sharing a lesson
+  ///
+  /// In en, this message translates to:
+  /// **'Sharing lesson...'**
+  String get lessonSharing;
+
+  /// Message shown when lesson report is submitted
+  ///
+  /// In en, this message translates to:
+  /// **'Report submitted'**
+  String get lessonReportSubmitted;
+
+  /// Title for lesson completion dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Lesson Complete!'**
+  String get lessonComplete;
+
+  /// Message shown when lesson is completed
+  ///
+  /// In en, this message translates to:
+  /// **'Congratulations! You have successfully completed this lesson.'**
+  String get lessonCompleteMessage;
+
+  /// Error message when lesson is not found
+  ///
+  /// In en, this message translates to:
+  /// **'Lesson not found'**
+  String get lessonNotFound;
+
+  /// Error message when quiz fails to start
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to start quiz: {error}'**
+  String quizStartFailed(String error);
+
+  /// Message shown when no quiz questions are available
+  ///
+  /// In en, this message translates to:
+  /// **'No questions available for this lesson'**
+  String get noQuestionsAvailable;
+
+  /// Title for quiz practice screen
+  ///
+  /// In en, this message translates to:
+  /// **'Quiz Practice'**
+  String get quizPractice;
+
+  /// Label for question number
+  ///
+  /// In en, this message translates to:
+  /// **'Question {number}'**
+  String questionNumber(int number);
+
+  /// Label for quiz score
+  ///
+  /// In en, this message translates to:
+  /// **'Score: {correct}/{total}'**
+  String scoreLabel(int correct, int total);
+
+  /// Label for question explanation
+  ///
+  /// In en, this message translates to:
+  /// **'Explanation'**
+  String get explanation;
+
+  /// Section title for unlocked achievements
+  ///
+  /// In en, this message translates to:
+  /// **'Unlocked Achievements'**
+  String get unlockedAchievements;
+
+  /// Section title for locked achievements
+  ///
+  /// In en, this message translates to:
+  /// **'Locked Achievements'**
+  String get lockedAchievements;
+
+  /// Title for progress analytics screen
+  ///
+  /// In en, this message translates to:
+  /// **'Progress Analytics'**
+  String get progressAnalytics;
+
+  /// Title for weekly progress section
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly Progress'**
+  String get weeklyProgress;
+
+  /// Label for daily average
+  ///
+  /// In en, this message translates to:
+  /// **'Average Per Day'**
+  String get averagePerDay;
+
+  /// Label for lesson count
+  ///
+  /// In en, this message translates to:
+  /// **'{count} Lessons'**
+  String lessonsCount(String count);
+
+  /// Label for progress section
+  ///
+  /// In en, this message translates to:
+  /// **'Progress'**
+  String get progressLabel;
+
+  /// Label for completion section
+  ///
+  /// In en, this message translates to:
+  /// **'Completion'**
+  String get completionLabel;
+
+  /// Label for lessons
+  ///
+  /// In en, this message translates to:
+  /// **'Lessons'**
+  String get lessons;
+
+  /// Title for study time analytics section
+  ///
+  /// In en, this message translates to:
+  /// **'Study Time Analytics'**
+  String get studyTimeAnalytics;
+
+  /// Label for total study time
+  ///
+  /// In en, this message translates to:
+  /// **'Total Study Time'**
+  String get totalStudyTime;
+
+  /// Label for average time per session
+  ///
+  /// In en, this message translates to:
+  /// **'Average Per Session'**
+  String get averagePerSession;
+
+  /// Label for most active time period
+  ///
+  /// In en, this message translates to:
+  /// **'Most Active'**
+  String get mostActive;
+
+  /// Title for streak analytics section
+  ///
+  /// In en, this message translates to:
+  /// **'Streak Analytics'**
+  String get streakAnalytics;
+
+  /// Label for current streak
+  ///
+  /// In en, this message translates to:
+  /// **'Current Streak'**
+  String get currentStreak;
+
+  /// Label for longest streak
+  ///
+  /// In en, this message translates to:
+  /// **'Longest Streak'**
+  String get longestStreak;
+
+  /// Encouragement message for active streak
+  ///
+  /// In en, this message translates to:
+  /// **'Keep going, you\'re on fire! 🚒'**
+  String get keepGoingOnFire;
+
+  /// Encouragement message to start studying for streak
+  ///
+  /// In en, this message translates to:
+  /// **'Start studying to build your streak'**
+  String get startStudyingToBuildStreak;
+
+  /// Abbreviation for Monday
+  ///
+  /// In en, this message translates to:
+  /// **'Mon'**
+  String get monday;
+
+  /// Abbreviation for Tuesday
+  ///
+  /// In en, this message translates to:
+  /// **'Tue'**
+  String get tuesday;
+
+  /// Abbreviation for Wednesday
+  ///
+  /// In en, this message translates to:
+  /// **'Wed'**
+  String get wednesday;
+
+  /// Abbreviation for Thursday
+  ///
+  /// In en, this message translates to:
+  /// **'Thu'**
+  String get thursday;
+
+  /// Abbreviation for Friday
+  ///
+  /// In en, this message translates to:
+  /// **'Fri'**
+  String get friday;
+
+  /// Abbreviation for Saturday
+  ///
+  /// In en, this message translates to:
+  /// **'Sat'**
+  String get saturday;
+
+  /// Abbreviation for Sunday
+  ///
+  /// In en, this message translates to:
+  /// **'Sun'**
+  String get sunday;
+
+  /// Time period: morning
+  ///
+  /// In en, this message translates to:
+  /// **'Morning'**
+  String get morning;
+
+  /// Time period: afternoon
+  ///
+  /// In en, this message translates to:
+  /// **'Afternoon'**
+  String get afternoon;
+
+  /// Time period: evening
+  ///
+  /// In en, this message translates to:
+  /// **'Evening'**
+  String get evening;
+
+  /// Time period: night
+  ///
+  /// In en, this message translates to:
+  /// **'Night'**
+  String get night;
+
+  /// Plural form of day
+  ///
+  /// In en, this message translates to:
+  /// **'Days'**
+  String get days;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

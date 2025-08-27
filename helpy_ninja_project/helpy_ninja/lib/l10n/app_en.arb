@@ -541,5 +541,223 @@
   "yourProgressInDifferentSubjects": "Your progress in different subjects",
   "@yourProgressInDifferentSubjects": {
     "description": "Subtitle for subject progress section"
+  },
+  "lessonStartFailed": "Failed to start lesson: {error}",
+  "@lessonStartFailed": {
+    "description": "Error message when lesson fails to start",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "description": "The error message"
+      }
+    }
+  },
+  "lessonBookmarked": "Lesson bookmarked!",
+  "@lessonBookmarked": {
+    "description": "Success message when lesson is bookmarked"
+  },
+  "lessonSharing": "Sharing lesson...",
+  "@lessonSharing": {
+    "description": "Message shown when sharing a lesson"
+  },
+  "lessonReportSubmitted": "Report submitted",
+  "@lessonReportSubmitted": {
+    "description": "Message shown when lesson report is submitted"
+  },
+  "lessonComplete": "Lesson Complete!",
+  "@lessonComplete": {
+    "description": "Title for lesson completion dialog"
+  },
+  "lessonCompleteMessage": "Congratulations! You have successfully completed this lesson.",
+  "@lessonCompleteMessage": {
+    "description": "Message shown when lesson is completed"
+  },
+  "continueLearning": "Continue Learning",
+  "@continueLearning": {
+    "description": "Button text to continue learning after completing a lesson"
+  },
+  "lessonNotFound": "Lesson not found",
+  "@lessonNotFound": {
+    "description": "Error message when lesson is not found"
+  },
+  "quizStartFailed": "Failed to start quiz: {error}",
+  "@quizStartFailed": {
+    "description": "Error message when quiz fails to start",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "description": "The error message"
+      }
+    }
+  },
+  "noQuestionsAvailable": "No questions available for this lesson",
+  "@noQuestionsAvailable": {
+    "description": "Message shown when no quiz questions are available"
+  },
+  "quizPractice": "Quiz Practice",
+  "@quizPractice": {
+    "description": "Title for quiz practice screen"
+  },
+  "questionNumber": "Question {number}",
+  "@questionNumber": {
+    "description": "Label for question number",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "The question number"
+      }
+    }
+  },
+  "scoreLabel": "Score: {correct}/{total}",
+  "@scoreLabel": {
+    "description": "Label for quiz score",
+    "placeholders": {
+      "correct": {
+        "type": "int",
+        "description": "Number of correct answers"
+      },
+      "total": {
+        "type": "int",
+        "description": "Total number of questions"
+      }
+    }
+  },
+  "explanation": "Explanation",
+  "@explanation": {
+    "description": "Label for question explanation"
+  },
+  "unlockedAchievements": "Unlocked Achievements",
+  "@unlockedAchievements": {
+    "description": "Section title for unlocked achievements"
+  },
+  "lockedAchievements": "Locked Achievements",
+  "@lockedAchievements": {
+    "description": "Section title for locked achievements"
+  },
+  "progressAnalytics": "Progress Analytics",
+  "@progressAnalytics": {
+    "description": "Title for progress analytics screen"
+  },
+  "weeklyProgress": "Weekly Progress",
+  "@weeklyProgress": {
+    "description": "Title for weekly progress section"
+  },
+  "weeklyGoal": "Weekly Goal",
+  "@weeklyGoal": {
+    "description": "Label for weekly goal"
+  },
+  "averagePerDay": "Average Per Day",
+  "@averagePerDay": {
+    "description": "Label for daily average"
+  },
+  "subjectProgress": "Subject Progress",
+  "@subjectProgress": {
+    "description": "Title for subject progress section"
+  },
+  "lessonsCount": "{count} Lessons",
+  "@lessonsCount": {
+    "description": "Label for lesson count",
+    "placeholders": {
+      "count": {
+        "type": "String",
+        "description": "The number of lessons"
+      }
+    }
+  },
+  "progressLabel": "Progress",
+  "@progressLabel": {
+    "description": "Label for progress section"
+  },
+  "completionLabel": "Completion",
+  "@completionLabel": {
+    "description": "Label for completion section"
+  },
+  "lessons": "Lessons",
+  "@lessons": {
+    "description": "Label for lessons"
+  },
+  "studyTimeAnalytics": "Study Time Analytics",
+  "@studyTimeAnalytics": {
+    "description": "Title for study time analytics section"
+  },
+  "totalStudyTime": "Total Study Time",
+  "@totalStudyTime": {
+    "description": "Label for total study time"
+  },
+  "averagePerSession": "Average Per Session",
+  "@averagePerSession": {
+    "description": "Label for average time per session"
+  },
+  "mostActive": "Most Active",
+  "@mostActive": {
+    "description": "Label for most active time period"
+  },
+  "streakAnalytics": "Streak Analytics",
+  "@streakAnalytics": {
+    "description": "Title for streak analytics section"
+  },
+  "currentStreak": "Current Streak",
+  "@currentStreak": {
+    "description": "Label for current streak"
+  },
+  "longestStreak": "Longest Streak",
+  "@longestStreak": {
+    "description": "Label for longest streak"
+  },
+  "keepGoingOnFire": "Keep going, you're on fire! 🚒",
+  "@keepGoingOnFire": {
+    "description": "Encouragement message for active streak"
+  },
+  "startStudyingToBuildStreak": "Start studying to build your streak",
+  "@startStudyingToBuildStreak": {
+    "description": "Encouragement message to start studying for streak"
+  },
+  "monday": "Mon",
+  "@monday": {
+    "description": "Abbreviation for Monday"
+  },
+  "tuesday": "Tue",
+  "@tuesday": {
+    "description": "Abbreviation for Tuesday"
+  },
+  "wednesday": "Wed",
+  "@wednesday": {
+    "description": "Abbreviation for Wednesday"
+  },
+  "thursday": "Thu",
+  "@thursday": {
+    "description": "Abbreviation for Thursday"
+  },
+  "friday": "Fri",
+  "@friday": {
+    "description": "Abbreviation for Friday"
+  },
+  "saturday": "Sat",
+  "@saturday": {
+    "description": "Abbreviation for Saturday"
+  },
+  "sunday": "Sun",
+  "@sunday": {
+    "description": "Abbreviation for Sunday"
+  },
+  "morning": "Morning",
+  "@morning": {
+    "description": "Time period: morning"
+  },
+  "afternoon": "Afternoon",
+  "@afternoon": {
+    "description": "Time period: afternoon"
+  },
+  "evening": "Evening",
+  "@evening": {
+    "description": "Time period: evening"
+  },
+  "night": "Night",
+  "@night": {
+    "description": "Time period: night"
+  },
+  "days": "Days",
+  "@days": {
+    "description": "Plural form of day"
   }
 }

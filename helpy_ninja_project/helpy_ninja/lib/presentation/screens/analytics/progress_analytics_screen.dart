@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:helpy_ninja/l10n/app_localizations.dart';
 
 import '../../../config/design_tokens.dart';
 import '../../../data/providers/dashboard_provider.dart';
@@ -13,6 +14,7 @@ class ProgressAnalyticsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
     final dashboardState = ref.watch(dashboardProvider);
     final learningStats = dashboardState.learningStats;
 
@@ -22,7 +24,7 @@ class ProgressAnalyticsScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Progress Analytics'),
+        title: Text(l10n.progressAnalytics),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
@@ -58,15 +60,16 @@ class ProgressAnalyticsScreen extends ConsumerWidget {
 
   /// Build weekly progress chart
   Widget _buildWeeklyProgressChart(BuildContext context, LearningStats stats) {
+    final l10n = AppLocalizations.of(context)!;
     // Sample weekly data - in a real app, this would come from the provider
     final weeklyData = [
-      WeeklyProgressData('Mon', 3),
-      WeeklyProgressData('Tue', 5),
-      WeeklyProgressData('Wed', 2),
-      WeeklyProgressData('Thu', 4),
-      WeeklyProgressData('Fri', 6),
-      WeeklyProgressData('Sat', 1),
-      WeeklyProgressData('Sun', 3),
+      WeeklyProgressData(l10n.monday, 3),
+      WeeklyProgressData(l10n.tuesday, 5),
+      WeeklyProgressData(l10n.wednesday, 2),
+      WeeklyProgressData(l10n.thursday, 4),
+      WeeklyProgressData(l10n.friday, 6),
+      WeeklyProgressData(l10n.saturday, 1),
+      WeeklyProgressData(l10n.sunday, 3),
     ];
 
     return GlassmorphicContainer(
@@ -76,7 +79,7 @@ class ProgressAnalyticsScreen extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Weekly Progress',
+            l10n.weeklyProgress,
             style: Theme.of(
               context,
             ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
@@ -97,7 +100,7 @@ class ProgressAnalyticsScreen extends ConsumerWidget {
                   dataSource: weeklyData,
                   xValueMapper: (WeeklyProgressData data, _) => data.day,
                   yValueMapper: (WeeklyProgressData data, _) => data.lessons,
-                  name: 'Lessons',
+                  name: l10n.lessons,
                   color: DesignTokens.primary,
                   borderRadius: BorderRadius.circular(4),
                 ),
@@ -111,7 +114,7 @@ class ProgressAnalyticsScreen extends ConsumerWidget {
             children: [
               _buildStatChip(
                 context,
-                'Weekly Goal',
+                l10n.weeklyGoal,
                 '${stats.weeklyCompletedLessons}/${stats.weeklyGoalLessons}',
                 stats.weeklyCompletedLessons >= stats.weeklyGoalLessons
                     ? DesignTokens.success
@@ -119,8 +122,10 @@ class ProgressAnalyticsScreen extends ConsumerWidget {
               ),
               _buildStatChip(
                 context,
-                'Average Per Day',
-                '${(stats.weeklyCompletedLessons / 7).toStringAsFixed(1)} Lessons',
+                l10n.averagePerDay,
+                l10n.lessonsCount(
+                  (stats.weeklyCompletedLessons / 7).toStringAsFixed(1),
+                ),
                 DesignTokens.success,
               ),
             ],
@@ -135,6 +140,7 @@ class ProgressAnalyticsScreen extends ConsumerWidget {
     BuildContext context,
     LearningStats stats,
   ) {
+    final l10n = AppLocalizations.of(context)!;
     return GlassmorphicContainer(
       padding: const EdgeInsets.all(DesignTokens.spaceL),
       borderRadius: DesignTokens.radiusL,
@@ -142,7 +148,7 @@ class ProgressAnalyticsScreen extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Subject Progress',
+            l10n.subjectProgress,
             style: Theme.of(
               context,
             ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
@@ -194,6 +200,7 @@ class ProgressAnalyticsScreen extends ConsumerWidget {
 
   /// Build study time analytics
   Widget _buildStudyTimeAnalytics(BuildContext context, LearningStats stats) {
+    final l10n = AppLocalizations.of(context)!;
     return GlassmorphicContainer(
       padding: const EdgeInsets.all(DesignTokens.spaceL),
       borderRadius: DesignTokens.radiusL,
@@ -201,7 +208,7 @@ class ProgressAnalyticsScreen extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Study Time Analytics',
+            l10n.studyTimeAnalytics,
             style: Theme.of(
               context,
             ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
@@ -212,22 +219,22 @@ class ProgressAnalyticsScreen extends ConsumerWidget {
             children: [
               _buildTimeStat(
                 context,
-                'Total Study Time',
+                l10n.totalStudyTime,
                 '${stats.totalStudyTimeHours.toStringAsFixed(1)}h',
                 Icons.access_time,
                 DesignTokens.primary,
               ),
               _buildTimeStat(
                 context,
-                'Average Per Session',
+                l10n.averagePerSession,
                 '~32m',
                 Icons.timer,
                 DesignTokens.accent,
               ),
               _buildTimeStat(
                 context,
-                'Most Active',
-                'Evening',
+                l10n.mostActive,
+                l10n.evening,
                 Icons.nights_stay,
                 DesignTokens.success,
               ),
@@ -240,6 +247,7 @@ class ProgressAnalyticsScreen extends ConsumerWidget {
 
   /// Build streak analytics
   Widget _buildStreakAnalytics(BuildContext context, LearningStats stats) {
+    final l10n = AppLocalizations.of(context)!;
     return GlassmorphicContainer(
       padding: const EdgeInsets.all(DesignTokens.spaceL),
       borderRadius: DesignTokens.radiusL,
@@ -247,7 +255,7 @@ class ProgressAnalyticsScreen extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Streak Analytics',
+            l10n.streakAnalytics,
             style: Theme.of(
               context,
             ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
@@ -258,15 +266,15 @@ class ProgressAnalyticsScreen extends ConsumerWidget {
             children: [
               _buildStreakStat(
                 context,
-                'Current Streak',
-                '${stats.currentStreak} Days',
+                l10n.currentStreak,
+                '${stats.currentStreak} ${l10n.days}',
                 Icons.local_fire_department,
                 DesignTokens.warning,
               ),
               _buildStreakStat(
                 context,
-                'Longest Streak',
-                '${stats.longestStreak} Days',
+                l10n.longestStreak,
+                '${stats.longestStreak} ${l10n.days}',
                 Icons.emoji_events,
                 DesignTokens.accent,
               ),
@@ -275,8 +283,8 @@ class ProgressAnalyticsScreen extends ConsumerWidget {
           const SizedBox(height: DesignTokens.spaceM),
           Text(
             stats.currentStreak > 0
-                ? 'Keep going, you\'re on fire! 🚒'
-                : 'Start studying to build your streak',
+                ? l10n.keepGoingOnFire
+                : l10n.startStudyingToBuildStreak,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               color: Theme.of(
                 context,

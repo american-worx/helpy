@@ -380,4 +380,143 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get yourProgressInDifferentSubjects => 'Your progress in different subjects';
+
+  @override
+  String lessonStartFailed(String error) {
+    return 'Failed to start lesson: $error';
+  }
+
+  @override
+  String get lessonBookmarked => 'Lesson bookmarked!';
+
+  @override
+  String get lessonSharing => 'Sharing lesson...';
+
+  @override
+  String get lessonReportSubmitted => 'Report submitted';
+
+  @override
+  String get lessonComplete => 'Lesson Complete!';
+
+  @override
+  String get lessonCompleteMessage => 'Congratulations! You have successfully completed this lesson.';
+
+  @override
+  String get lessonNotFound => 'Lesson not found';
+
+  @override
+  String quizStartFailed(String error) {
+    return 'Failed to start quiz: $error';
+  }
+
+  @override
+  String get noQuestionsAvailable => 'No questions available for this lesson';
+
+  @override
+  String get quizPractice => 'Quiz Practice';
+
+  @override
+  String questionNumber(int number) {
+    return 'Question $number';
+  }
+
+  @override
+  String scoreLabel(int correct, int total) {
+    return 'Score: $correct/$total';
+  }
+
+  @override
+  String get explanation => 'Explanation';
+
+  @override
+  String get unlockedAchievements => 'Unlocked Achievements';
+
+  @override
+  String get lockedAchievements => 'Locked Achievements';
+
+  @override
+  String get progressAnalytics => 'Progress Analytics';
+
+  @override
+  String get weeklyProgress => 'Weekly Progress';
+
+  @override
+  String get averagePerDay => 'Average Per Day';
+
+  @override
+  String lessonsCount(String count) {
+    return '$count Lessons';
+  }
+
+  @override
+  String get progressLabel => 'Progress';
+
+  @override
+  String get completionLabel => 'Completion';
+
+  @override
+  String get lessons => 'Lessons';
+
+  @override
+  String get studyTimeAnalytics => 'Study Time Analytics';
+
+  @override
+  String get totalStudyTime => 'Total Study Time';
+
+  @override
+  String get averagePerSession => 'Average Per Session';
+
+  @override
+  String get mostActive => 'Most Active';
+
+  @override
+  String get streakAnalytics => 'Streak Analytics';
+
+  @override
+  String get currentStreak => 'Current Streak';
+
+  @override
+  String get longestStreak => 'Longest Streak';
+
+  @override
+  String get keepGoingOnFire => 'Keep going, you\'re on fire! 🚒';
+
+  @override
+  String get startStudyingToBuildStreak => 'Start studying to build your streak';
+
+  @override
+  String get monday => 'Mon';
+
+  @override
+  String get tuesday => 'Tue';
+
+  @override
+  String get wednesday => 'Wed';
+
+  @override
+  String get thursday => 'Thu';
+
+  @override
+  String get friday => 'Fri';
+
+  @override
+  String get saturday => 'Sat';
+
+  @override
+  String get sunday => 'Sun';
+
+  @override
+  String get morning => 'Morning';
+
+  @override
+  String get afternoon => 'Afternoon';
+
+  @override
+  String get evening => 'Evening';
+
+  @override
+  String get night => 'Night';
+
+  @override
+  String get days => 'Days';
 }

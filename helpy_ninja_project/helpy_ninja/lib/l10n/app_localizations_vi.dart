@@ -284,7 +284,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get studyTime => 'Thời Gian Học';
 
   @override
-  String get weeklyGoal => 'Mục Tiêu Tuần';
+  String get weeklyGoal => 'Mục tiêu hàng tuần';
 
   @override
   String get onTrack => 'Đúng Tiến Độ';
@@ -343,7 +343,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get browseSubjects => 'Duyệt Môn Học';
 
   @override
-  String get continueLearning => 'Tiếp Tục Học';
+  String get continueLearning => 'Tiếp tục học tập';
 
   @override
   String get practiceQuiz => 'Luyện Tập Câu Hỏi';
@@ -376,8 +376,147 @@ class AppLocalizationsVi extends AppLocalizations {
   String get moreActivities => 'hoạt động khác';
 
   @override
-  String get subjectProgress => 'Tiến Độ Môn Học';
+  String get subjectProgress => 'Tiến độ môn học';
 
   @override
   String get yourProgressInDifferentSubjects => 'Tiến độ của bạn trong các môn học khác nhau';
+
+  @override
+  String lessonStartFailed(String error) {
+    return 'Không thể bắt đầu bài học: $error';
+  }
+
+  @override
+  String get lessonBookmarked => 'Bài học đã được đánh dấu!';
+
+  @override
+  String get lessonSharing => 'Đang chia sẻ bài học...';
+
+  @override
+  String get lessonReportSubmitted => 'Báo cáo đã được gửi';
+
+  @override
+  String get lessonComplete => 'Hoàn thành bài học!';
+
+  @override
+  String get lessonCompleteMessage => 'Chúc mừng! Bạn đã hoàn thành bài học này thành công.';
+
+  @override
+  String get lessonNotFound => 'Không tìm thấy bài học';
+
+  @override
+  String quizStartFailed(String error) {
+    return 'Không thể bắt đầu bài kiểm tra: $error';
+  }
+
+  @override
+  String get noQuestionsAvailable => 'Không có câu hỏi nào cho bài học này';
+
+  @override
+  String get quizPractice => 'Luyện tập kiểm tra';
+
+  @override
+  String questionNumber(int number) {
+    return 'Câu hỏi $number';
+  }
+
+  @override
+  String scoreLabel(int correct, int total) {
+    return 'Điểm: $correct/$total';
+  }
+
+  @override
+  String get explanation => 'Giải thích';
+
+  @override
+  String get unlockedAchievements => 'Thành tích đã mở khóa';
+
+  @override
+  String get lockedAchievements => 'Thành tích bị khóa';
+
+  @override
+  String get progressAnalytics => 'Phân tích tiến độ';
+
+  @override
+  String get weeklyProgress => 'Tiến độ hàng tuần';
+
+  @override
+  String get averagePerDay => 'Trung bình mỗi ngày';
+
+  @override
+  String lessonsCount(String count) {
+    return '$count Bài học';
+  }
+
+  @override
+  String get progressLabel => 'Tiến độ';
+
+  @override
+  String get completionLabel => 'Hoàn thành';
+
+  @override
+  String get lessons => 'Bài học';
+
+  @override
+  String get studyTimeAnalytics => 'Phân tích thời gian học tập';
+
+  @override
+  String get totalStudyTime => 'Tổng thời gian học tập';
+
+  @override
+  String get averagePerSession => 'Trung bình mỗi buổi';
+
+  @override
+  String get mostActive => 'Hoạt động nhất';
+
+  @override
+  String get streakAnalytics => 'Phân tích chuỗi học tập';
+
+  @override
+  String get currentStreak => 'Chuỗi hiện tại';
+
+  @override
+  String get longestStreak => 'Chuỗi dài nhất';
+
+  @override
+  String get keepGoingOnFire => 'Tiếp tục phát huy, bạn đang rất tích cực! 🚒';
+
+  @override
+  String get startStudyingToBuildStreak => 'Bắt đầu học để xây dựng chuỗi học tập của bạn';
+
+  @override
+  String get monday => 'Thứ Hai';
+
+  @override
+  String get tuesday => 'Thứ Ba';
+
+  @override
+  String get wednesday => 'Thứ Tư';
+
+  @override
+  String get thursday => 'Thứ Năm';
+
+  @override
+  String get friday => 'Thứ Sáu';
+
+  @override
+  String get saturday => 'Thứ Bảy';
+
+  @override
+  String get sunday => 'Chủ Nhật';
+
+  @override
+  String get morning => 'Buổi sáng';
+
+  @override
+  String get afternoon => 'Buổi chiều';
+
+  @override
+  String get evening => 'Buổi tối';
+
+  @override
+  String get night => 'Ban đêm';
+
+  @override
+  String get days => 'Ngày';
 }

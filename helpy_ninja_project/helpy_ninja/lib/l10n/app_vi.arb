@@ -540,6 +540,224 @@
   },
   "yourProgressInDifferentSubjects": "Tiến độ của bạn trong các môn học khác nhau",
   "@yourProgressInDifferentSubjects": {
-    "description": "Phụ đề cho phần tiến độ môn học"
+    "description": "Subtitle for subject progress section"
+  },
+  "lessonStartFailed": "Không thể bắt đầu bài học: {error}",
+  "@lessonStartFailed": {
+    "description": "Error message when lesson fails to start",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "description": "The error message"
+      }
+    }
+  },
+  "lessonBookmarked": "Bài học đã được đánh dấu!",
+  "@lessonBookmarked": {
+    "description": "Success message when lesson is bookmarked"
+  },
+  "lessonSharing": "Đang chia sẻ bài học...",
+  "@lessonSharing": {
+    "description": "Message shown when sharing a lesson"
+  },
+  "lessonReportSubmitted": "Báo cáo đã được gửi",
+  "@lessonReportSubmitted": {
+    "description": "Message shown when lesson report is submitted"
+  },
+  "lessonComplete": "Hoàn thành bài học!",
+  "@lessonComplete": {
+    "description": "Title for lesson completion dialog"
+  },
+  "lessonCompleteMessage": "Chúc mừng! Bạn đã hoàn thành bài học này thành công.",
+  "@lessonCompleteMessage": {
+    "description": "Message shown when lesson is completed"
+  },
+  "continueLearning": "Tiếp tục học tập",
+  "@continueLearning": {
+    "description": "Button text to continue learning after completing a lesson"
+  },
+  "lessonNotFound": "Không tìm thấy bài học",
+  "@lessonNotFound": {
+    "description": "Error message when lesson is not found"
+  },
+  "quizStartFailed": "Không thể bắt đầu bài kiểm tra: {error}",
+  "@quizStartFailed": {
+    "description": "Error message when quiz fails to start",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "description": "The error message"
+      }
+    }
+  },
+  "noQuestionsAvailable": "Không có câu hỏi nào cho bài học này",
+  "@noQuestionsAvailable": {
+    "description": "Message shown when no quiz questions are available"
+  },
+  "quizPractice": "Luyện tập kiểm tra",
+  "@quizPractice": {
+    "description": "Title for quiz practice screen"
+  },
+  "questionNumber": "Câu hỏi {number}",
+  "@questionNumber": {
+    "description": "Label for question number",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "description": "The question number"
+      }
+    }
+  },
+  "scoreLabel": "Điểm: {correct}/{total}",
+  "@scoreLabel": {
+    "description": "Label for quiz score",
+    "placeholders": {
+      "correct": {
+        "type": "int",
+        "description": "Number of correct answers"
+      },
+      "total": {
+        "type": "int",
+        "description": "Total number of questions"
+      }
+    }
+  },
+  "explanation": "Giải thích",
+  "@explanation": {
+    "description": "Label for question explanation"
+  },
+  "unlockedAchievements": "Thành tích đã mở khóa",
+  "@unlockedAchievements": {
+    "description": "Section title for unlocked achievements"
+  },
+  "lockedAchievements": "Thành tích bị khóa",
+  "@lockedAchievements": {
+    "description": "Section title for locked achievements"
+  },
+  "progressAnalytics": "Phân tích tiến độ",
+  "@progressAnalytics": {
+    "description": "Title for progress analytics screen"
+  },
+  "weeklyProgress": "Tiến độ hàng tuần",
+  "@weeklyProgress": {
+    "description": "Title for weekly progress section"
+  },
+  "weeklyGoal": "Mục tiêu hàng tuần",
+  "@weeklyGoal": {
+    "description": "Label for weekly goal"
+  },
+  "averagePerDay": "Trung bình mỗi ngày",
+  "@averagePerDay": {
+    "description": "Label for daily average"
+  },
+  "subjectProgress": "Tiến độ môn học",
+  "@subjectProgress": {
+    "description": "Title for subject progress section"
+  },
+  "lessonsCount": "{count} Bài học",
+  "@lessonsCount": {
+    "description": "Label for lesson count",
+    "placeholders": {
+      "count": {
+        "type": "String",
+        "description": "The number of lessons"
+      }
+    }
+  },
+  "progressLabel": "Tiến độ",
+  "@progressLabel": {
+    "description": "Label for progress section"
+  },
+  "completionLabel": "Hoàn thành",
+  "@completionLabel": {
+    "description": "Label for completion section"
+  },
+  "lessons": "Bài học",
+  "@lessons": {
+    "description": "Label for lessons"
+  },
+  "studyTimeAnalytics": "Phân tích thời gian học tập",
+  "@studyTimeAnalytics": {
+    "description": "Title for study time analytics section"
+  },
+  "totalStudyTime": "Tổng thời gian học tập",
+  "@totalStudyTime": {
+    "description": "Label for total study time"
+  },
+  "averagePerSession": "Trung bình mỗi buổi",
+  "@averagePerSession": {
+    "description": "Label for average time per session"
+  },
+  "mostActive": "Hoạt động nhất",
+  "@mostActive": {
+    "description": "Label for most active time period"
+  },
+  "streakAnalytics": "Phân tích chuỗi học tập",
+  "@streakAnalytics": {
+    "description": "Title for streak analytics section"
+  },
+  "currentStreak": "Chuỗi hiện tại",
+  "@currentStreak": {
+    "description": "Label for current streak"
+  },
+  "longestStreak": "Chuỗi dài nhất",
+  "@longestStreak": {
+    "description": "Label for longest streak"
+  },
+  "keepGoingOnFire": "Tiếp tục phát huy, bạn đang rất tích cực! 🚒",
+  "@keepGoingOnFire": {
+    "description": "Encouragement message for active streak"
+  },
+  "startStudyingToBuildStreak": "Bắt đầu học để xây dựng chuỗi học tập của bạn",
+  "@startStudyingToBuildStreak": {
+    "description": "Encouragement message to start studying for streak"
+  },
+  "monday": "Thứ Hai",
+  "@monday": {
+    "description": "Abbreviation for Monday"
+  },
+  "tuesday": "Thứ Ba",
+  "@tuesday": {
+    "description": "Abbreviation for Tuesday"
+  },
+  "wednesday": "Thứ Tư",
+  "@wednesday": {
+    "description": "Abbreviation for Wednesday"
+  },
+  "thursday": "Thứ Năm",
+  "@thursday": {
+    "description": "Abbreviation for Thursday"
+  },
+  "friday": "Thứ Sáu",
+  "@friday": {
+    "description": "Abbreviation for Friday"
+  },
+  "saturday": "Thứ Bảy",
+  "@saturday": {
+    "description": "Abbreviation for Saturday"
+  },
+  "sunday": "Chủ Nhật",
+  "@sunday": {
+    "description": "Abbreviation for Sunday"
+  },
+  "morning": "Buổi sáng",
+  "@morning": {
+    "description": "Time period: morning"
+  },
+  "afternoon": "Buổi chiều",
+  "@afternoon": {
+    "description": "Time period: afternoon"
+  },
+  "evening": "Buổi tối",
+  "@evening": {
+    "description": "Time period: evening"
+  },
+  "night": "Ban đêm",
+  "@night": {
+    "description": "Time period: night"
+  },
+  "days": "Ngày",
+  "@days": {
+    "description": "Plural form of day"
   }
 }

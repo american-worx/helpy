@@ -51,7 +51,7 @@ class AchievementsScreen extends ConsumerWidget {
             // Unlocked achievements section
             if (unlockedAchievements.isNotEmpty) ...[
               Text(
-                'Unlocked Achievements',
+                l10n.unlockedAchievements,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -64,7 +64,7 @@ class AchievementsScreen extends ConsumerWidget {
             // Locked achievements section
             if (lockedAchievements.isNotEmpty) ...[
               Text(
-                'Locked Achievements',
+                l10n.lockedAchievements,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -80,6 +80,7 @@ class AchievementsScreen extends ConsumerWidget {
 
   /// Build achievement stats header
   Widget _buildAchievementStats(BuildContext context, learningStats) {
+    final l10n = AppLocalizations.of(context)!;
     return GlassmorphicContainer(
       padding: const EdgeInsets.all(DesignTokens.spaceL),
       borderRadius: DesignTokens.radiusL,
@@ -91,21 +92,21 @@ class AchievementsScreen extends ConsumerWidget {
               _buildStatItem(
                 context,
                 learningStats.achievementsUnlocked.toString(),
-                'Unlocked',
+                l10n.achievements,
                 Icons.emoji_events_rounded,
                 DesignTokens.accent,
               ),
               _buildStatItem(
                 context,
                 '${learningStats.achievementsUnlocked}/${learningStats.totalAchievements}',
-                'Progress',
+                l10n.progressLabel,
                 Icons.trending_up,
                 DesignTokens.primary,
               ),
               _buildStatItem(
                 context,
                 '${((learningStats.achievementsUnlocked / learningStats.totalAchievements) * 100).round()}%',
-                'Completion',
+                l10n.completionLabel,
                 Icons.percent,
                 DesignTokens.success,
               ),

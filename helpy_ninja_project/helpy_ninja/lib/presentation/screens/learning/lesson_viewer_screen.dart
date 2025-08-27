@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:helpy_ninja/l10n/app_localizations.dart';
 
 import '../../../config/design_tokens.dart';
 import '../../../data/providers/learning_session_provider.dart';
@@ -91,9 +92,10 @@ class _LessonViewerScreenState extends ConsumerState<LessonViewerScreen>
       });
     } catch (e) {
       if (mounted) {
+        final l10n = AppLocalizations.of(context)!;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed to start lesson: $e'),
+            content: Text(l10n.lessonStartFailed(e.toString())),
             backgroundColor: DesignTokens.error,
           ),
         );
@@ -106,21 +108,22 @@ class _LessonViewerScreenState extends ConsumerState<LessonViewerScreen>
   }
 
   void _handleMenuAction(String action, Lesson lesson) {
+    final l10n = AppLocalizations.of(context)!;
     switch (action) {
       case 'bookmark':
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(const SnackBar(content: Text('Lesson bookmarked!')));
+        ).showSnackBar(SnackBar(content: Text(l10n.lessonBookmarked)));
         break;
       case 'share':
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(const SnackBar(content: Text('Sharing lesson...')));
+        ).showSnackBar(SnackBar(content: Text(l10n.lessonSharing)));
         break;
       case 'report':
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(const SnackBar(content: Text('Report submitted')));
+        ).showSnackBar(SnackBar(content: Text(l10n.lessonReportSubmitted)));
         break;
     }
   }
@@ -158,20 +161,19 @@ class _LessonViewerScreenState extends ConsumerState<LessonViewerScreen>
   }
 
   void _completeLesson() {
+    final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Lesson Complete!'),
-        content: const Text(
-          'Congratulations! You have successfully completed this lesson.',
-        ),
+        title: Text(l10n.lessonComplete),
+        content: Text(l10n.lessonCompleteMessage),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.pop(context);
               context.pop();
             },
-            child: const Text('Continue Learning'),
+            child: Text(l10n.continueLearning),
           ),
         ],
       ),
@@ -180,11 +182,12 @@ class _LessonViewerScreenState extends ConsumerState<LessonViewerScreen>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final lesson = ref.watch(lessonProvider(widget.lessonId));
 
     if (lesson == null) {
       return Scaffold(
-        appBar: AppBar(title: const Text('Lesson')),
+        appBar: AppBar(title: Text(l10n.lessonNotFound)),
         body: const Center(child: Text('Lesson not found')),
       );
     }

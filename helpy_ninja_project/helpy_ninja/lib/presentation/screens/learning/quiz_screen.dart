@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:helpy_ninja/l10n/app_localizations.dart';
 
 import '../../../config/design_tokens.dart';
 import '../../../data/providers/learning_session_provider.dart';
@@ -116,19 +117,21 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       });
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('Failed to start quiz: $e')));
+        final l10n = AppLocalizations.of(context)!;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.quizStartFailed(e.toString()))),
+        );
       }
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     if (_questions.isEmpty) {
       return Scaffold(
         appBar: ModernAppBar(
-          title: 'Quiz',
+          title: l10n.quizPractice,
           leading: IconButton(
             onPressed: () => context.pop(),
             icon: const Icon(Icons.arrow_back_rounded),
@@ -141,7 +144,20 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     }
 
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: ModernAppBar(
+        title: l10n.quizPractice,
+        subtitle: '${_currentQuestionIndex + 1} of ${_questions.length}',
+        leading: IconButton(
+          onPressed: () => _handleBackPress(),
+          icon: const Icon(Icons.arrow_back_rounded),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () => _showQuizSettings(),
+            icon: const Icon(Icons.settings_rounded),
+          ),
+        ],
+      ),
       body: FadeTransition(
         opacity: _fadeAnimation,
         child: Column(
@@ -161,8 +177,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
   }
 
   PreferredSizeWidget _buildAppBar() {
+    final l10n = AppLocalizations.of(context)!;
     return ModernAppBar(
-      title: 'Quiz Practice',
+      title: l10n.quizPractice,
       subtitle: '${_currentQuestionIndex + 1} of ${_questions.length}',
       leading: IconButton(
         onPressed: () => _handleBackPress(),
@@ -178,6 +195,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
   }
 
   Widget _buildProgressHeader() {
+    final l10n = AppLocalizations.of(context)!;
     final progress = (_currentQuestionIndex + 1) / _questions.length;
 
     return Container(
@@ -188,13 +206,13 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Question ${_currentQuestionIndex + 1}',
+                l10n.questionNumber(_currentQuestionIndex + 1),
                 style: Theme.of(
                   context,
                 ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
               ),
               Text(
-                'Score: $_correctAnswers/${_answers.length}',
+                l10n.scoreLabel(_correctAnswers, _answers.length),
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   color: DesignTokens.primary,
                   fontWeight: FontWeight.bold,
@@ -221,6 +239,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
 
   Widget _buildQuestionArea() {
     final question = _questions[_currentQuestionIndex];
+    final l10n = AppLocalizations.of(context)!;
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(DesignTokens.spaceL),
@@ -298,7 +317,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Explanation',
+                      l10n.explanation,
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: DesignTokens.primary,
