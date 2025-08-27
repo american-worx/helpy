@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../config/design_tokens.dart';
 import '../../../config/routes.dart';
-import '../../../generated/l10n/app_localizations.dart';
+import 'package:helpy_ninja/l10n/app_localizations.dart';
 import '../../widgets/auth/glassmorphic_container.dart';
 import '../../widgets/common/gradient_button.dart';
 

@@ -16,8 +16,8 @@ import '../presentation/screens/chat/chat_list_screen.dart' as chat_list;
 import '../presentation/screens/chat/chat_screen.dart' as chat;
 import '../config/constants.dart';
 
-// Import placeholder screens (will be created in presentation layer)
-// For now, using simple placeholder widgets
+// Import screens for learning session routes
+import '../presentation/screens/learning/lesson_viewer_screen.dart';
 
 /// Custom refresh listenable for Go Router to react to auth changes
 class GoRouterRefreshStream extends ChangeNotifier {
@@ -314,6 +314,33 @@ final goRouterProvider = Provider<GoRouter>((ref) {
             ],
           ),
 
+          // Learning routes
+          GoRoute(
+            path: '/learning/lesson/:id',
+            builder: (context, state) {
+              final lessonId = state.pathParameters['id']!;
+              return LessonViewerScreen(lessonId: lessonId);
+            },
+          ),
+          GoRoute(
+            path: '/learning/practice/:subjectId',
+            builder: (context, state) {
+              // For now, we'll use the subjectId in the future when we implement practice mode
+              return const SubjectsScreen();
+            },
+          ),
+          GoRoute(
+            path: '/learning/assessment/:id',
+            builder: (context, state) {
+              // For now, we'll use the id in the future when we implement assessment
+              return const SubjectsScreen();
+            },
+          ),
+          GoRoute(
+            path: '/learning/whiteboard',
+            builder: (context, state) => const SubjectsScreen(),
+          ),
+
           // Profile routes
           GoRoute(
             path: '/profile',
@@ -385,7 +412,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
       }
 
       // Protect authenticated routes
-      final protectedRoutes = ['/home/', '/chat', '/profile'];
+      final protectedRoutes = ['/home/', '/chat', '/profile', '/learning'];
       final isProtectedRoute = protectedRoutes.any(
         (route) => currentPath.startsWith(route),
       );

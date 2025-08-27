@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:logger/logger.dart';
 
 import '../../domain/entities/conversation.dart';
 import '../../domain/entities/message.dart';
@@ -9,7 +10,19 @@ import '../../services/helpy_ai_service.dart';
 
 /// Chat state notifier for managing conversations and messages
 class ChatNotifier extends StateNotifier<ChatState> {
+  final Logger _logger = Logger(
+    printer: PrettyPrinter(
+      methodCount: 0,
+      errorMethodCount: 5,
+      lineLength: 100,
+      colors: false,
+      printEmojis: false,
+      dateTimeFormat: DateTimeFormat.onlyTimeAndSinceStart,
+    ),
+  );
+
   ChatNotifier() : super(const ChatState()) {
+    _logger.d('ChatNotifier initialized');
     _initializeChat();
   }
 
@@ -19,6 +32,7 @@ class ChatNotifier extends StateNotifier<ChatState> {
 
   /// Initialize chat system
   Future<void> _initializeChat() async {
+    _logger.d('Initializing chat system');
     state = state.copyWith(isLoading: true);
 
     try {
@@ -26,6 +40,7 @@ class ChatNotifier extends StateNotifier<ChatState> {
       _chatBox = await Hive.openBox('conversations');
       _messagesBox = await Hive.openBox('messages');
       _personalitiesBox = await Hive.openBox('personalities');
+      _logger.d('All Hive boxes opened successfully');
 
       // Load cached data
       await _loadConversations();
@@ -36,7 +51,9 @@ class ChatNotifier extends StateNotifier<ChatState> {
         isInitialized: true,
         lastUpdated: DateTime.now(),
       );
+      _logger.d('Chat system initialized successfully');
     } catch (e) {
+      _logger.e('Failed to initialize chat: $e');
       state = state.copyWith(
         isLoading: false,
         error: 'Failed to initialize chat: $e',
@@ -46,8 +63,13 @@ class ChatNotifier extends StateNotifier<ChatState> {
 
   /// Load conversations from storage
   Future<void> _loadConversations() async {
+    _logger.d('Loading conversations from storage');
     try {
       final conversationMaps = _chatBox.values.toList();
+      _logger.d(
+        'Found ${conversationMaps.length} conversation maps in storage',
+      );
+
       final conversations = conversationMaps
           .map((map) => Conversation.fromJson(Map<String, dynamic>.from(map)))
           .toList();
@@ -61,17 +83,23 @@ class ChatNotifier extends StateNotifier<ChatState> {
       });
 
       state = state.copyWith(conversations: conversations);
+      _logger.d('Loaded ${conversations.length} conversations');
     } catch (e) {
+      _logger.e('Failed to load conversations: $e');
       debugPrint('Failed to load conversations: $e');
     }
   }
 
   /// Load Helpy personalities
   Future<void> _loadPersonalities() async {
+    _logger.d('Loading Helpy personalities from storage');
     try {
       final personalityMaps = _personalitiesBox.values.toList();
+      _logger.d('Found ${personalityMaps.length} personality maps in storage');
+
       if (personalityMaps.isEmpty) {
         // Create default personalities
+        _logger.d('No personalities found, creating default personalities');
         await _createDefaultPersonalities();
         return;
       }
@@ -84,13 +112,16 @@ class ChatNotifier extends StateNotifier<ChatState> {
           .toList();
 
       state = state.copyWith(availablePersonalities: personalities);
+      _logger.d('Loaded ${personalities.length} active personalities');
     } catch (e) {
+      _logger.e('Failed to load personalities: $e');
       debugPrint('Failed to load personalities: $e');
     }
   }
 
   /// Create default Helpy personalities
   Future<void> _createDefaultPersonalities() async {
+    _logger.d('Creating default Helpy personalities');
     final defaultPersonalities = [
       HelpyPersonality(
         id: 'helpy_friendly',
@@ -234,6 +265,9 @@ class ChatNotifier extends StateNotifier<ChatState> {
     ConversationType type = ConversationType.general,
     Map<String, dynamic>? metadata,
   }) async {
+    _logger.d(
+      'Creating new conversation - title: $title, userId: $userId, personalityId: $helpyPersonalityId, type: ${type.toString()}',
+    );
     try {
       final conversation = Conversation(
         id: 'conv_${DateTime.now().millisecondsSinceEpoch}',
@@ -250,16 +284,20 @@ class ChatNotifier extends StateNotifier<ChatState> {
 
       // Save to storage
       await _chatBox.put(conversation.id, conversation.toJson());
+      _logger.d('Conversation saved to storage: ${conversation.id}');
 
       // Update state
       final updatedConversations = [conversation, ...state.conversations];
       state = state.copyWith(conversations: updatedConversations);
+      _logger.d('Conversation added to state');
 
       // Send welcome message from Helpy
       await _sendWelcomeMessage(conversation);
+      _logger.d('Welcome message sent for conversation: ${conversation.id}');
 
       return conversation;
     } catch (e) {
+      _logger.e('Failed to create conversation: $e');
       throw Exception('Failed to create conversation: $e');
     }
   }
@@ -295,6 +333,9 @@ class ChatNotifier extends StateNotifier<ChatState> {
     String? replyToMessageId,
     List<MessageAttachment>? attachments,
   }) async {
+    _logger.d(
+      'Sending message - conversationId: $conversationId, senderId: $senderId, senderName: $senderName, contentType: ${type.toString()}, hasReply: ${replyToMessageId != null}, attachmentCount: ${attachments?.length ?? 0}',
+    );
     try {
       final message = Message(
         id: 'msg_${DateTime.now().millisecondsSinceEpoch}',
@@ -311,21 +352,26 @@ class ChatNotifier extends StateNotifier<ChatState> {
 
       // Save message
       await _saveMessage(message);
+      _logger.d('Message saved with status: sending');
 
       // Update conversation
       await _updateConversationLastMessage(conversationId, message);
+      _logger.d('Conversation last message updated');
 
       // Mark as sent
       final sentMessage = message.copyWith(status: MessageStatus.sent);
       await _updateMessage(sentMessage);
+      _logger.d('Message status updated to sent');
 
       // If this is a user message, trigger Helpy response
       if (!message.isFromHelpy) {
+        _logger.d('User message detected, scheduling Helpy response');
         _scheduleHelpyResponse(conversationId, message);
       }
 
       return sentMessage;
     } catch (e) {
+      _logger.e('Failed to send message: $e');
       // Mark as failed
       final failedMessage = Message(
         id: 'msg_${DateTime.now().millisecondsSinceEpoch}',
@@ -341,6 +387,7 @@ class ChatNotifier extends StateNotifier<ChatState> {
       );
 
       await _saveMessage(failedMessage);
+      _logger.d('Failed message saved with status: failed');
       throw Exception('Failed to send message: $e');
     }
   }
@@ -652,15 +699,19 @@ class ChatNotifier extends StateNotifier<ChatState> {
 
   /// Delete conversation
   Future<void> deleteConversation(String conversationId) async {
+    _logger.d('Deleting conversation: $conversationId');
     try {
       // Delete conversation
       await _chatBox.delete(conversationId);
+      _logger.d('Conversation deleted from storage');
 
       // Delete all messages
       final messages = state.currentMessages[conversationId] ?? [];
+      _logger.d('Deleting ${messages.length} messages for conversation');
       for (final message in messages) {
         await _messagesBox.delete(message.id);
       }
+      _logger.d('All messages deleted');
 
       // Update state
       final updatedConversations = state.conversations
@@ -676,7 +727,9 @@ class ChatNotifier extends StateNotifier<ChatState> {
         conversations: updatedConversations,
         currentMessages: updatedCurrentMessages,
       );
+      _logger.d('Conversation removed from state');
     } catch (e) {
+      _logger.e('Failed to delete conversation: $e');
       throw Exception('Failed to delete conversation: $e');
     }
   }
@@ -688,9 +741,11 @@ class ChatNotifier extends StateNotifier<ChatState> {
 
   /// Refresh chat data
   Future<void> refresh() async {
+    _logger.d('Refreshing chat data');
     state = state.copyWith(isLoading: true, error: null);
     await _loadConversations();
     state = state.copyWith(isLoading: false, lastUpdated: DateTime.now());
+    _logger.d('Chat data refreshed successfully');
   }
 }
 

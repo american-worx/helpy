@@ -333,6 +333,8 @@ enum RecentActivityType {
   lessonCompleted,
   achievementUnlocked,
   streakMilestone,
+  quizCompleted,
+  subjectStarted,
   levelUp,
   quizPassed,
   practiceSession,

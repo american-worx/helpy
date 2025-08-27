@@ -7,10 +7,8 @@ import '../../../data/providers/chat_provider.dart';
 import '../../../data/providers/providers.dart';
 import '../../../domain/entities/conversation.dart';
 import '../../../domain/entities/helpy_personality.dart';
-import '../../widgets/navigation/modern_navigation.dart';
-import '../../widgets/auth/glassmorphic_container.dart';
-import '../../widgets/layout/modern_layout.dart';
-import '../../widgets/common/gradient_button.dart';
+import 'package:helpy_ninja/l10n/app_localizations.dart';
+import '../../widgets/chat/chat_list_components.dart';
 
 /// Chat list screen showing conversation history and new chat options
 class ChatListScreen extends ConsumerStatefulWidget {
@@ -68,26 +66,12 @@ class _ChatListScreenState extends ConsumerState<ChatListScreen>
   @override
   Widget build(BuildContext context) {
     final chatState = ref.watch(chatProvider);
-    // final user = ref.watch(currentUserProvider);
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
-      appBar: ModernAppBar(
-        title: 'Chat with Helpy',
-        subtitle: chatState.totalUnreadCount > 0
-            ? '${chatState.totalUnreadCount} unread messages'
-            : null,
-        showProfile: true,
-        showNotifications: false,
-        actions: [
-          IconButton(
-            onPressed: () => _showNewChatOptions(context),
-            icon: const Icon(Icons.add_rounded),
-            style: IconButton.styleFrom(
-              backgroundColor: DesignTokens.primary.withValues(alpha: 0.1),
-              foregroundColor: DesignTokens.primary,
-            ),
-          ),
-        ],
+      appBar: ChatListAppBar(
+        totalUnreadCount: chatState.totalUnreadCount,
+        onNewChatPressed: () => _showNewChatOptions(context),
       ),
       body: FadeTransition(
         opacity: _fadeAnimation,
@@ -96,10 +80,20 @@ class _ChatListScreenState extends ConsumerState<ChatListScreen>
           child: chatState.isLoading
               ? const Center(child: CircularProgressIndicator())
               : chatState.error != null
-              ? _buildErrorState(context, chatState.error!)
+              ? ChatListErrorState(
+                  error: chatState.error!,
+                  onRetry: () => ref.read(chatProvider.notifier).refresh(),
+                )
               : chatState.conversations.isEmpty
-              ? _buildEmptyState(context)
-              : _buildConversationsList(context, chatState.conversations),
+              ? ChatListEmptyState(
+                  personalities: ref.watch(availablePersonalitiesProvider),
+                  onStartFirstChat: () => _showNewChatOptions(context),
+                  onSeeAllPersonalities: () => _showNewChatOptions(context),
+                )
+              : ChatListConversationsList(
+                  conversations: chatState.conversations,
+                  onConversationAction: _handleConversationAction,
+                ),
         ),
       ),
       floatingActionButton: chatState.conversations.isNotEmpty
@@ -107,437 +101,15 @@ class _ChatListScreenState extends ConsumerState<ChatListScreen>
               onPressed: () => _showNewChatOptions(context),
               backgroundColor: DesignTokens.primary,
               icon: const Icon(Icons.smart_toy_rounded, color: Colors.white),
-              label: const Text(
-                'New Chat',
-                style: TextStyle(
+              label: Text(
+                l10n.newChat,
+                style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w600,
                 ),
               ),
             )
           : null,
-    );
-  }
-
-  Widget _buildErrorState(BuildContext context, String error) {
-    return Center(
-      child: ModernSection(
-        showGlassmorphism: true,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              Icons.error_outline_rounded,
-              size: 64,
-              color: DesignTokens.error,
-            ),
-            Space.m,
-            Text(
-              'Oops! Something went wrong',
-              style: Theme.of(
-                context,
-              ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
-            ),
-            Space.s,
-            Text(
-              error,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(
-                  context,
-                ).colorScheme.onSurface.withValues(alpha: 0.7),
-              ),
-              textAlign: TextAlign.center,
-            ),
-            Space.l,
-            GradientButton(
-              onPressed: () => ref.read(chatProvider.notifier).refresh(),
-              text: 'Try Again',
-              icon: Icons.refresh_rounded,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildEmptyState(BuildContext context) {
-    final personalities = ref.watch(availablePersonalitiesProvider);
-
-    return Padding(
-      padding: const EdgeInsets.all(DesignTokens.spaceL),
-      child: Column(
-        children: [
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Animated Helpy illustration
-                TweenAnimationBuilder<double>(
-                  duration: const Duration(seconds: 2),
-                  tween: Tween(begin: 0.0, end: 1.0),
-                  builder: (context, value, child) {
-                    return Transform.scale(
-                      scale: 0.8 + (0.2 * value),
-                      child: Container(
-                        width: 120,
-                        height: 120,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              DesignTokens.primary.withValues(alpha: 0.2),
-                              DesignTokens.accent.withValues(alpha: 0.2),
-                            ],
-                          ),
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(
-                          Icons.smart_toy_rounded,
-                          size: 60,
-                          color: DesignTokens.primary,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-                Space.xl,
-                Text(
-                  'Start Your Learning Journey!',
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                Space.m,
-                Text(
-                  'Choose a Helpy personality to begin chatting and get personalized help with your studies.',
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.onSurface.withValues(alpha: 0.7),
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                Space.xl,
-              ],
-            ),
-          ),
-
-          // Quick personality selection
-          if (personalities.isNotEmpty) ...[
-            ModernSection(
-              title: 'Choose Your Helpy',
-              showGlassmorphism: true,
-              child: Column(
-                children: [
-                  // Show first 3 personalities as quick options
-                  ...personalities
-                      .take(3)
-                      .map(
-                        (personality) =>
-                            _buildPersonalityQuickCard(context, personality),
-                      )
-                      .toList(),
-                  Space.m,
-                  OutlineButton(
-                    onPressed: () => _showNewChatOptions(context),
-                    text: 'See All Personalities',
-                    icon: Icons.explore_rounded,
-                  ),
-                ],
-              ),
-            ),
-          ] else ...[
-            GradientButton(
-              onPressed: () => _showNewChatOptions(context),
-              text: 'Start First Chat',
-              icon: Icons.smart_toy_rounded,
-              width: double.infinity,
-            ),
-          ],
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPersonalityQuickCard(
-    BuildContext context,
-    HelpyPersonality personality,
-  ) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: DesignTokens.spaceM),
-      child: GestureDetector(
-        onTap: () => _startNewChat(personality),
-        child: Container(
-          padding: const EdgeInsets.all(DesignTokens.spaceM),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Color(
-                  int.parse(personality.colorTheme.substring(1), radix: 16) |
-                      0xFF000000,
-                ).withValues(alpha: 0.1),
-                Color(
-                  int.parse(personality.colorTheme.substring(1), radix: 16) |
-                      0xFF000000,
-                ).withValues(alpha: 0.05),
-              ],
-            ),
-            borderRadius: BorderRadius.circular(DesignTokens.radiusM),
-            border: Border.all(
-              color: Color(
-                int.parse(personality.colorTheme.substring(1), radix: 16) |
-                    0xFF000000,
-              ).withValues(alpha: 0.2),
-              width: 1,
-            ),
-          ),
-          child: Row(
-            children: [
-              Container(
-                width: 50,
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Color(
-                    int.parse(personality.colorTheme.substring(1), radix: 16) |
-                        0xFF000000,
-                  ),
-                  borderRadius: BorderRadius.circular(DesignTokens.radiusM),
-                ),
-                child: Center(
-                  child: Text(
-                    personality.icon,
-                    style: const TextStyle(fontSize: 24),
-                  ),
-                ),
-              ),
-              const SizedBox(width: DesignTokens.spaceM),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      personality.name,
-                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: DesignTokens.spaceXS),
-                    Text(
-                      personality.description,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Theme.of(
-                          context,
-                        ).colorScheme.onSurface.withValues(alpha: 0.7),
-                      ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
-              ),
-              Icon(
-                Icons.arrow_forward_ios_rounded,
-                color: Color(
-                  int.parse(personality.colorTheme.substring(1), radix: 16) |
-                      0xFF000000,
-                ),
-                size: 16,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildConversationsList(
-    BuildContext context,
-    List<Conversation> conversations,
-  ) {
-    return RefreshIndicator(
-      onRefresh: () async {
-        await ref.read(chatProvider.notifier).refresh();
-      },
-      child: ListView.builder(
-        padding: const EdgeInsets.all(DesignTokens.spaceM),
-        itemCount: conversations.length,
-        itemBuilder: (context, index) {
-          final conversation = conversations[index];
-          return _buildConversationCard(context, conversation);
-        },
-      ),
-    );
-  }
-
-  Widget _buildConversationCard(
-    BuildContext context,
-    Conversation conversation,
-  ) {
-    final personality = ref.watch(
-      helpyPersonalityProvider(conversation.helpyPersonalityId),
-    );
-
-    return Container(
-      margin: const EdgeInsets.only(bottom: DesignTokens.spaceM),
-      child: GlassmorphicCard(
-        onTap: () => _openConversation(conversation),
-        child: Row(
-          children: [
-            // Personality avatar
-            Container(
-              width: 60,
-              height: 60,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: personality != null
-                      ? [
-                          Color(
-                            int.parse(
-                                  personality.colorTheme.substring(1),
-                                  radix: 16,
-                                ) |
-                                0xFF000000,
-                          ),
-                          Color(
-                            int.parse(
-                                  personality.colorTheme.substring(1),
-                                  radix: 16,
-                                ) |
-                                0xFF000000,
-                          ).withValues(alpha: 0.8),
-                        ]
-                      : [DesignTokens.primary, DesignTokens.accent],
-                ),
-                borderRadius: BorderRadius.circular(DesignTokens.radiusL),
-              ),
-              child: Center(
-                child: Text(
-                  personality?.icon ?? '🤖',
-                  style: const TextStyle(fontSize: 28),
-                ),
-              ),
-            ),
-            const SizedBox(width: DesignTokens.spaceM),
-
-            // Conversation info
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          conversation.displayTitle,
-                          style: Theme.of(context).textTheme.titleMedium
-                              ?.copyWith(fontWeight: FontWeight.bold),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      if (conversation.lastMessageTime != null)
-                        Text(
-                          conversation.formattedLastMessageTime,
-                          style: Theme.of(context).textTheme.bodySmall
-                              ?.copyWith(
-                                color: Theme.of(
-                                  context,
-                                ).colorScheme.onSurface.withValues(alpha: 0.6),
-                              ),
-                        ),
-                    ],
-                  ),
-                  const SizedBox(height: DesignTokens.spaceXS),
-                  if (conversation.lastMessagePreview != null)
-                    Text(
-                      conversation.lastMessagePreview!,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Theme.of(
-                          context,
-                        ).colorScheme.onSurface.withValues(alpha: 0.7),
-                      ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                ],
-              ),
-            ),
-
-            // Unread badge and actions
-            Column(
-              children: [
-                if (conversation.hasUnreadMessages)
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: DesignTokens.spaceS,
-                      vertical: DesignTokens.spaceXS,
-                    ),
-                    decoration: BoxDecoration(
-                      color: DesignTokens.accent,
-                      borderRadius: BorderRadius.circular(DesignTokens.radiusS),
-                    ),
-                    child: Text(
-                      '${conversation.unreadCount}',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                const SizedBox(height: DesignTokens.spaceS),
-                PopupMenuButton<String>(
-                  onSelected: (value) =>
-                      _handleConversationAction(conversation, value),
-                  itemBuilder: (context) => [
-                    const PopupMenuItem(
-                      value: 'mark_read',
-                      child: Row(
-                        children: [
-                          Icon(Icons.mark_email_read_rounded),
-                          SizedBox(width: 8),
-                          Text('Mark as Read'),
-                        ],
-                      ),
-                    ),
-                    const PopupMenuItem(
-                      value: 'archive',
-                      child: Row(
-                        children: [
-                          Icon(Icons.archive_rounded),
-                          SizedBox(width: 8),
-                          Text('Archive'),
-                        ],
-                      ),
-                    ),
-                    const PopupMenuItem(
-                      value: 'delete',
-                      child: Row(
-                        children: [
-                          Icon(Icons.delete_rounded, color: DesignTokens.error),
-                          SizedBox(width: 8),
-                          Text(
-                            'Delete',
-                            style: TextStyle(color: DesignTokens.error),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                  child: Icon(
-                    Icons.more_vert_rounded,
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.onSurface.withValues(alpha: 0.6),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
     );
   }
 
@@ -548,177 +120,56 @@ class _ChatListScreenState extends ConsumerState<ChatListScreen>
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (context) => Container(
-        height: MediaQuery.of(context).size.height * 0.7,
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface,
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(DesignTokens.radiusXL),
-            topRight: Radius.circular(DesignTokens.radiusXL),
-          ),
-        ),
-        child: Column(
-          children: [
-            // Handle bar
-            Container(
-              margin: const EdgeInsets.only(top: DesignTokens.spaceM),
-              width: 40,
-              height: 4,
-              decoration: BoxDecoration(
-                color: Theme.of(
-                  context,
-                ).colorScheme.outline.withValues(alpha: 0.3),
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
-
-            // Header
-            Padding(
-              padding: const EdgeInsets.all(DesignTokens.spaceL),
-              child: Text(
-                'Choose Your Helpy Personality',
-                style: Theme.of(
-                  context,
-                ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
-              ),
-            ),
-
-            // Personalities list
-            Expanded(
-              child: ListView.builder(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: DesignTokens.spaceL,
-                ),
-                itemCount: personalities.length,
-                itemBuilder: (context, index) {
-                  final personality = personalities[index];
-                  return _buildPersonalitySelectionCard(context, personality);
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildPersonalitySelectionCard(
-    BuildContext context,
-    HelpyPersonality personality,
-  ) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: DesignTokens.spaceM),
-      child: GestureDetector(
-        onTap: () {
-          Navigator.pop(context);
-          _startNewChat(personality);
-        },
-        child: GlassmorphicCard(
-          child: Row(
-            children: [
-              Container(
-                width: 60,
-                height: 60,
-                decoration: BoxDecoration(
-                  color: Color(
-                    int.parse(personality.colorTheme.substring(1), radix: 16) |
-                        0xFF000000,
-                  ),
-                  borderRadius: BorderRadius.circular(DesignTokens.radiusL),
-                ),
-                child: Center(
-                  child: Text(
-                    personality.icon,
-                    style: const TextStyle(fontSize: 28),
-                  ),
-                ),
-              ),
-              const SizedBox(width: DesignTokens.spaceM),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      personality.name,
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: DesignTokens.spaceXS),
-                    Text(
-                      personality.description,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Theme.of(
-                          context,
-                        ).colorScheme.onSurface.withValues(alpha: 0.7),
-                      ),
-                    ),
-                    if (personality.specializations.isNotEmpty) ...[
-                      const SizedBox(height: DesignTokens.spaceS),
-                      Wrap(
-                        spacing: DesignTokens.spaceXS,
-                        children: personality.specializations
-                            .take(3)
-                            .map(
-                              (spec) => Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: DesignTokens.spaceS,
-                                  vertical: DesignTokens.spaceXS,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Color(
-                                    int.parse(
-                                          personality.colorTheme.substring(1),
-                                          radix: 16,
-                                        ) |
-                                        0xFF000000,
-                                  ).withValues(alpha: 0.1),
-                                  borderRadius: BorderRadius.circular(
-                                    DesignTokens.radiusS,
-                                  ),
-                                ),
-                                child: Text(
-                                  spec,
-                                  style: Theme.of(context).textTheme.bodySmall
-                                      ?.copyWith(
-                                        color: Color(
-                                          int.parse(
-                                                personality.colorTheme
-                                                    .substring(1),
-                                                radix: 16,
-                                              ) |
-                                              0xFF000000,
-                                        ),
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                ),
-                              ),
-                            )
-                            .toList(),
-                      ),
-                    ],
-                  ],
-                ),
-              ),
-              Icon(
-                Icons.arrow_forward_ios_rounded,
-                color: Color(
-                  int.parse(personality.colorTheme.substring(1), radix: 16) |
-                      0xFF000000,
-                ),
-              ),
-            ],
-          ),
-        ),
+      builder: (context) => ChatListNewChatOptions(
+        personalities: personalities,
+        onPersonalitySelected: _startNewChat,
       ),
     );
   }
 
   void _startNewChat(HelpyPersonality personality) async {
     final user = ref.read(currentUserProvider);
-    if (user == null) return;
+    if (user == null) {
+      debugPrint('Cannot start chat: No current user');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Please sign in to start a chat'),
+            backgroundColor: DesignTokens.error,
+          ),
+        );
+      }
+      return;
+    }
 
     try {
+      debugPrint(
+        'Creating conversation for user ${user.id} with personality ${personality.id}',
+      );
+
+      // Show loading indicator
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Row(
+              children: [
+                SizedBox(
+                  width: 16,
+                  height: 16,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                  ),
+                ),
+                SizedBox(width: 12),
+                Text('Creating chat...'),
+              ],
+            ),
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
+
       final conversation = await ref
           .read(chatProvider.notifier)
           .createConversation(
@@ -728,15 +179,52 @@ class _ChatListScreenState extends ConsumerState<ChatListScreen>
             type: ConversationType.general,
           );
 
+      debugPrint('Conversation created with ID: ${conversation.id}');
+      debugPrint('Conversation title: ${conversation.displayTitle}');
+      debugPrint('Conversation type: ${conversation.type}');
+
       if (mounted) {
-        context.go('/chat/${conversation.id}');
+        final routePath = '/chat/${conversation.id}';
+        debugPrint('Navigating to: $routePath');
+        debugPrint(
+          'Current location: ${GoRouter.of(context).routerDelegate.currentConfiguration.uri.path}',
+        );
+
+        // Clear any existing snackbars
+        ScaffoldMessenger.of(context).clearSnackBars();
+
+        // Navigate to chat
+        context.go(routePath);
+
+        // Add a small delay and check if navigation succeeded
+        Future.delayed(Duration(milliseconds: 500), () {
+          if (mounted) {
+            final currentPath = GoRouter.of(
+              context,
+            ).routerDelegate.currentConfiguration.uri.path;
+            debugPrint('Navigation result - Current path: $currentPath');
+            if (currentPath != routePath) {
+              debugPrint(
+                'WARNING: Navigation may have failed. Expected: $routePath, Actual: $currentPath',
+              );
+            }
+          }
+        });
       }
-    } catch (e) {
+    } catch (e, stackTrace) {
+      debugPrint('Failed to start chat: $e');
+      debugPrint('Stack trace: $stackTrace');
       if (mounted) {
+        ScaffoldMessenger.of(context).clearSnackBars();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed to start chat: $e'),
+            content: Text('Failed to start chat: ${e.toString()}'),
             backgroundColor: DesignTokens.error,
+            action: SnackBarAction(
+              label: 'Retry',
+              textColor: Colors.white,
+              onPressed: () => _startNewChat(personality),
+            ),
           ),
         );
       }
@@ -744,7 +232,54 @@ class _ChatListScreenState extends ConsumerState<ChatListScreen>
   }
 
   void _openConversation(Conversation conversation) {
-    context.go('/chat/${conversation.id}');
+    final routePath = '/chat/${conversation.id}';
+    debugPrint('Opening conversation: ${conversation.id}');
+    debugPrint('Conversation title: ${conversation.displayTitle}');
+    debugPrint('Navigation path: $routePath');
+    debugPrint(
+      'Current location: ${GoRouter.of(context).routerDelegate.currentConfiguration.uri.path}',
+    );
+
+    try {
+      context.go(routePath);
+
+      // Add a small delay and check if navigation succeeded
+      Future.delayed(Duration(milliseconds: 500), () {
+        if (mounted) {
+          final currentPath = GoRouter.of(
+            context,
+          ).routerDelegate.currentConfiguration.uri.path;
+          debugPrint('Navigation result - Current path: $currentPath');
+          if (currentPath != routePath) {
+            debugPrint(
+              'WARNING: Navigation may have failed. Expected: $routePath, Actual: $currentPath',
+            );
+            // Show error to user
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Failed to open chat. Please try again.'),
+                backgroundColor: DesignTokens.error,
+                action: SnackBarAction(
+                  label: 'Retry',
+                  textColor: Colors.white,
+                  onPressed: () => _openConversation(conversation),
+                ),
+              ),
+            );
+          }
+        }
+      });
+    } catch (e) {
+      debugPrint('Error during navigation: $e');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Navigation error: ${e.toString()}'),
+            backgroundColor: DesignTokens.error,
+          ),
+        );
+      }
+    }
   }
 
   void _handleConversationAction(
@@ -760,7 +295,11 @@ class _ChatListScreenState extends ConsumerState<ChatListScreen>
       case 'archive':
         // TODO: Implement archive functionality
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Archive feature coming soon!')),
+          SnackBar(
+            content: Text(
+              AppLocalizations.of(context)!.archiveFeatureComingSoon,
+            ),
+          ),
         );
         break;
       case 'delete':
@@ -770,17 +309,19 @@ class _ChatListScreenState extends ConsumerState<ChatListScreen>
   }
 
   void _showDeleteConfirmation(Conversation conversation) {
+    final l10n = AppLocalizations.of(context)!;
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Delete Conversation'),
+        title: Text(l10n.deleteConversation),
         content: Text(
-          'Are you sure you want to delete "${conversation.displayTitle}"? This action cannot be undone.',
+          l10n.deleteConversationConfirm(conversation.displayTitle),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child: Text(l10n.cancel),
           ),
           TextButton(
             onPressed: () async {
@@ -791,14 +332,16 @@ class _ChatListScreenState extends ConsumerState<ChatListScreen>
                     .deleteConversation(conversation.id);
                 if (mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Conversation deleted')),
+                    SnackBar(content: Text(l10n.conversationDeleted)),
                   );
                 }
               } catch (e) {
                 if (mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text('Failed to delete conversation: $e'),
+                      content: Text(
+                        l10n.failedToDeleteConversation(e.toString()),
+                      ),
                       backgroundColor: DesignTokens.error,
                     ),
                   );
@@ -806,7 +349,7 @@ class _ChatListScreenState extends ConsumerState<ChatListScreen>
               }
             },
             style: TextButton.styleFrom(foregroundColor: DesignTokens.error),
-            child: const Text('Delete'),
+            child: Text(l10n.delete),
           ),
         ],
       ),

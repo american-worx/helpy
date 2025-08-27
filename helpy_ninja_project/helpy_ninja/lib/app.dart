@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:helpy_ninja/l10n/app_localizations.dart';
 
 import 'config/config.dart';
 import 'config/routes.dart';
 import 'data/providers/providers.dart';
-import 'generated/l10n/app_localizations.dart';
 
 /// Main Helpy Ninja application widget
 class HelpyNinjaApp extends ConsumerWidget {

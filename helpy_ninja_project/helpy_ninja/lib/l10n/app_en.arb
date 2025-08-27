@@ -91,5 +91,455 @@
   "online": "Online",
   "@online": {
     "description": "Online status indicator"
+  },
+  "startYourLearningJourney": "Start Your Learning Journey!",
+  "@startYourLearningJourney": {
+    "description": "Heading text for empty chat state"
+  },
+  "chooseHelpyPersonality": "Choose a Helpy personality to begin chatting and get personalized help with your studies.",
+  "@chooseHelpyPersonality": {
+    "description": "Description text for selecting a Helpy personality to chat with"
+  },
+  "chooseYourHelpy": "Choose Your Helpy",
+  "@chooseYourHelpy": {
+    "description": "Section title for personality selection"
+  },
+  "seeAllPersonalities": "See All Personalities",
+  "@seeAllPersonalities": {
+    "description": "Button text to view all available Helpy personalities"
+  },
+  "startFirstChat": "Start First Chat",
+  "@startFirstChat": {
+    "description": "Button text to begin first conversation"
+  },
+  "oopsSomethingWentWrong": "Oops! Something went wrong",
+  "@oopsSomethingWentWrong": {
+    "description": "Error state heading message"
+  },
+  "tryAgain": "Try Again",
+  "@tryAgain": {
+    "description": "Button text to retry failed action"
+  },
+  "conversationNotFound": "Conversation not found",
+  "@conversationNotFound": {
+    "description": "Error message when conversation cannot be found"
+  },
+  "failedToLoadMessages": "Failed to load messages",
+  "@failedToLoadMessages": {
+    "description": "Error message when messages fail to load"
+  },
+  "retry": "Retry",
+  "@retry": {
+    "description": "Button text to retry loading"
+  },
+  "newChat": "New Chat",
+  "@newChat": {
+    "description": "Button text to start new chat"
+  },
+  "chooseYourHelpyPersonality": "Choose Your Helpy Personality",
+  "@chooseYourHelpyPersonality": {
+    "description": "Modal title for personality selection"
+  },
+  "unreadMessages": "unread messages",
+  "@unreadMessages": {
+    "description": "Text for unread message count"
+  },
+  "markAsRead": "Mark as Read",
+  "@markAsRead": {
+    "description": "Menu option to mark conversation as read"
+  },
+  "archive": "Archive",
+  "@archive": {
+    "description": "Menu option to archive conversation"
+  },
+  "delete": "Delete",
+  "@delete": {
+    "description": "Menu option to delete conversation"
+  },
+  "archiveFeatureComingSoon": "Archive feature coming soon!",
+  "@archiveFeatureComingSoon": {
+    "description": "Message shown when archive feature is not yet available"
+  },
+  "deleteConversation": "Delete Conversation",
+  "@deleteConversation": {
+    "description": "Dialog title for conversation deletion"
+  },
+  "deleteConversationConfirm": "Are you sure you want to delete \"{title}\"? This action cannot be undone.",
+  "@deleteConversationConfirm": {
+    "description": "Confirmation message for deleting conversation",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "description": "The title of the conversation to delete"
+      }
+    }
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Button text to cancel action"
+  },
+  "conversationDeleted": "Conversation deleted",
+  "@conversationDeleted": {
+    "description": "Success message when conversation is deleted"
+  },
+  "failedToDeleteConversation": "Failed to delete conversation: {error}",
+  "@failedToDeleteConversation": {
+    "description": "Error message when conversation deletion fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "description": "The error message"
+      }
+    }
+  },
+  "failedToStartChat": "Failed to start chat: {error}",
+  "@failedToStartChat": {
+    "description": "Error message when starting new chat fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "description": "The error message"
+      }
+    }
+  },
+  "chooseYourSubjects": "Choose Your Subjects",
+  "@chooseYourSubjects": {
+    "description": "Title for subject selection screen"
+  },
+  "stepXOfY": "Step {step} of {total}",
+  "@stepXOfY": {
+    "description": "Progress indicator text",
+    "placeholders": {
+      "step": {
+        "type": "int",
+        "description": "Current step number"
+      },
+      "total": {
+        "type": "int",
+        "description": "Total number of steps"
+      }
+    }
+  },
+  "subjectsSelected": "{count} subjects selected",
+  "@subjectsSelected": {
+    "description": "Count of selected subjects",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "description": "Number of subjects selected"
+      }
+    }
+  },
+  "pleaseSelectAtLeastOneSubject": "Please select at least one subject",
+  "@pleaseSelectAtLeastOneSubject": {
+    "description": "Validation message for subject selection"
+  },
+  "continueToHelpySetup": "Continue to Helpy Setup",
+  "@continueToHelpySetup": {
+    "description": "Button text to proceed to Helpy customization"
+  },
+  "errorSavingSubjects": "Error saving subjects: {error}",
+  "@errorSavingSubjects": {
+    "description": "Error message when saving subjects fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "description": "The error message"
+      }
+    }
+  },
+  "mathematics": "Mathematics",
+  "@mathematics": {
+    "description": "Mathematics subject name"
+  },
+  "physics": "Physics",
+  "@physics": {
+    "description": "Physics subject name"
+  },
+  "chemistry": "Chemistry",
+  "@chemistry": {
+    "description": "Chemistry subject name"
+  },
+  "biology": "Biology",
+  "@biology": {
+    "description": "Biology subject name"
+  },
+  "computerScience": "Computer Science",
+  "@computerScience": {
+    "description": "Computer Science subject name"
+  },
+  "english": "English",
+  "@english": {
+    "description": "English subject name"
+  },
+  "vietnamese": "Vietnamese",
+  "@vietnamese": {
+    "description": "Vietnamese subject name"
+  },
+  "french": "French",
+  "@french": {
+    "description": "French subject name"
+  },
+  "spanish": "Spanish",
+  "@spanish": {
+    "description": "Spanish subject name"
+  },
+  "history": "History",
+  "@history": {
+    "description": "History subject name"
+  },
+  "geography": "Geography",
+  "@geography": {
+    "description": "Geography subject name"
+  },
+  "economics": "Economics",
+  "@economics": {
+    "description": "Economics subject name"
+  },
+  "visualArts": "Visual Arts",
+  "@visualArts": {
+    "description": "Visual Arts subject name"
+  },
+  "music": "Music",
+  "@music": {
+    "description": "Music subject name"
+  },
+  "stem": "STEM",
+  "@stem": {
+    "description": "STEM category name"
+  },
+  "languages": "Languages",
+  "@languages": {
+    "description": "Languages category name"
+  },
+  "socialStudies": "Social Studies",
+  "@socialStudies": {
+    "description": "Social Studies category name"
+  },
+  "arts": "Arts",
+  "@arts": {
+    "description": "Arts category name"
+  },
+  "goodMorning": "Good morning",
+  "@goodMorning": {
+    "description": "Morning greeting"
+  },
+  "goodAfternoon": "Good afternoon",
+  "@goodAfternoon": {
+    "description": "Afternoon greeting"
+  },
+  "goodEvening": "Good evening",
+  "@goodEvening": {
+    "description": "Evening greeting"
+  },
+  "readyToContinueLearning": "Ready to continue your learning journey?",
+  "@readyToContinueLearning": {
+    "description": "Motivational message in dashboard header"
+  },
+  "daysSingular": "day",
+  "@daysSingular": {
+    "description": "Singular form of day"
+  },
+  "daysPlural": "days",
+  "@daysPlural": {
+    "description": "Plural form of days"
+  },
+  "streak": "streak!",
+  "@streak": {
+    "description": "Streak indicator text"
+  },
+  "yourProgress": "Your Progress",
+  "@yourProgress": {
+    "description": "Progress section title"
+  },
+  "trackYourLearningJourney": "Track your learning journey",
+  "@trackYourLearningJourney": {
+    "description": "Progress section subtitle"
+  },
+  "loadingProgressData": "Loading progress data...",
+  "@loadingProgressData": {
+    "description": "Loading message for progress data"
+  },
+  "pleaseEnterYourEmail": "Please enter your email",
+  "@pleaseEnterYourEmail": {
+    "description": "Email validation message"
+  },
+  "pleaseEnterValidEmail": "Please enter a valid email",
+  "@pleaseEnterValidEmail": {
+    "description": "Email format validation message"
+  },
+  "errorSavingProfile": "Error saving profile: {error}",
+  "@errorSavingProfile": {
+    "description": "Error message when saving profile fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "description": "The error message"
+      }
+    }
+  },
+  "keepUpTheGreatWork": "Keep up the great work!",
+  "@keepUpTheGreatWork": {
+    "description": "Encouragement message for progress"
+  },
+  "lessonsCompleted": "Lessons Completed",
+  "@lessonsCompleted": {
+    "description": "Label for completed lessons count"
+  },
+  "achievements": "Achievements",
+  "@achievements": {
+    "description": "Label for achievements section"
+  },
+  "studyTime": "Study Time",
+  "@studyTime": {
+    "description": "Label for total study time"
+  },
+  "weeklyGoal": "Weekly Goal",
+  "@weeklyGoal": {
+    "description": "Label for weekly learning goal"
+  },
+  "onTrack": "On Track",
+  "@onTrack": {
+    "description": "Status indicating user is meeting their goal"
+  },
+  "behindGoal": "Behind Goal",
+  "@behindGoal": {
+    "description": "Status indicating user is behind their goal"
+  },
+  "readyToContinueLearning": "Ready to continue learning?",
+  "@readyToContinueLearning": {
+    "description": "Welcome message asking if user is ready to learn"
+  },
+  "continueLearningComingSoon": "Continue learning functionality coming soon!",
+  "@continueLearningComingSoon": {
+    "description": "Message shown when continue learning feature is not yet available"
+  },
+  "practiceQuizComingSoon": "Practice quiz functionality coming soon!",
+  "@practiceQuizComingSoon": {
+    "description": "Message shown when practice quiz feature is not yet available"
+  },
+  "studyGroupsComingSoon": "Study groups functionality coming soon!",
+  "@studyGroupsComingSoon": {
+    "description": "Message shown when study groups feature is not yet available"
+  },
+  "fullActivityHistoryComingSoon": "Full activity history coming soon!",
+  "@fullActivityHistoryComingSoon": {
+    "description": "Message shown when full activity history feature is not yet available"
+  },
+  "viewAllActivitiesComingSoon": "View all activities coming soon!",
+  "@viewAllActivitiesComingSoon": {
+    "description": "Message shown when view all activities feature is not yet available"
+  },
+  "justNow": "Just now",
+  "@justNow": {
+    "description": "Text for very recent timestamp"
+  },
+  "minutesAgo": "{minutes} min ago",
+  "@minutesAgo": {
+    "description": "Text for minutes ago timestamp",
+    "placeholders": {
+      "minutes": {
+        "type": "int",
+        "description": "Number of minutes"
+      }
+    }
+  },
+  "hoursAgo": "{hours} hours ago",
+  "@hoursAgo": {
+    "description": "Text for hours ago timestamp",
+    "placeholders": {
+      "hours": {
+        "type": "int",
+        "description": "Number of hours"
+      }
+    }
+  },
+  "daysAgo": "{days} days ago",
+  "@daysAgo": {
+    "description": "Text for days ago timestamp",
+    "placeholders": {
+      "days": {
+        "type": "int",
+        "description": "Number of days"
+      }
+    }
+  },
+  "percentComplete": "{percent}% complete",
+  "@percentComplete": {
+    "description": "Text for progress percentage",
+    "placeholders": {
+      "percent": {
+        "type": "int",
+        "description": "Progress percentage"
+      }
+    }
+  },
+  "quickActions": "Quick Actions",
+  "@quickActions": {
+    "description": "Title for quick actions section"
+  },
+  "getStartedWithTheseActions": "Get started with these actions",
+  "@getStartedWithTheseActions": {
+    "description": "Subtitle for quick actions section"
+  },
+  "startNewChat": "Start New Chat",
+  "@startNewChat": {
+    "description": "Button text to start a new chat"
+  },
+  "browseSubjects": "Browse Subjects",
+  "@browseSubjects": {
+    "description": "Button text to browse subjects"
+  },
+  "continueLearning": "Continue Learning",
+  "@continueLearning": {
+    "description": "Button text to continue learning"
+  },
+  "practiceQuiz": "Practice Quiz",
+  "@practiceQuiz": {
+    "description": "Button text for practice quiz"
+  },
+  "myProgress": "My Progress",
+  "@myProgress": {
+    "description": "Button text for progress tracking"
+  },
+  "studyGroups": "Study Groups",
+  "@studyGroups": {
+    "description": "Button text for study groups"
+  },
+  "recentActivity": "Recent Activity",
+  "@recentActivity": {
+    "description": "Title for recent activity section"
+  },
+  "noRecentActivityYet": "No recent activity yet",
+  "@noRecentActivityYet": {
+    "description": "Message shown when there is no recent activity"
+  },
+  "startLearningToSeeProgress": "Start learning to see your progress here",
+  "@startLearningToSeeProgress": {
+    "description": "Encouragement message when no activity is present"
+  },
+  "yourLearningTimeline": "Your learning timeline",
+  "@yourLearningTimeline": {
+    "description": "Subtitle for recent activity section"
+  },
+  "viewAll": "View All",
+  "@viewAll": {
+    "description": "Button text to view all items"
+  },
+  "view": "View",
+  "@view": {
+    "description": "Button text to view items"
+  },
+  "moreActivities": "more activities",
+  "@moreActivities": {
+    "description": "Text for additional activities count"
+  },
+  "subjectProgress": "Subject Progress",
+  "@subjectProgress": {
+    "description": "Title for subject progress section"
+  },
+  "yourProgressInDifferentSubjects": "Your progress in different subjects",
+  "@yourProgressInDifferentSubjects": {
+    "description": "Subtitle for subject progress section"
   }
 }

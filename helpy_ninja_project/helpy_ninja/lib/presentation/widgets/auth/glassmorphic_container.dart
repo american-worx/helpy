@@ -83,12 +83,15 @@ class GlassmorphicCard extends StatelessWidget {
     );
 
     if (onTap != null) {
-      return Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(DesignTokens.radiusM),
-          child: container,
+      return MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: onTap,
+            borderRadius: BorderRadius.circular(DesignTokens.radiusM),
+            child: container,
+          ),
         ),
       );
     }

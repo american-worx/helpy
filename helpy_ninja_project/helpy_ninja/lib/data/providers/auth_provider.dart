@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:logger/logger.dart';
 
 import '../../config/constants.dart';
 import '../../domain/entities/user.dart';
@@ -43,7 +45,19 @@ class AuthState {
 
 /// Authentication state notifier
 class AuthNotifier extends StateNotifier<AuthState> {
+  final Logger _logger = Logger(
+    printer: PrettyPrinter(
+      methodCount: 0,
+      errorMethodCount: 5,
+      lineLength: 100,
+      colors: false,
+      printEmojis: false,
+      dateTimeFormat: DateTimeFormat.onlyTimeAndSinceStart,
+    ),
+  );
+
   AuthNotifier() : super(const AuthState()) {
+    _logger.d('AuthNotifier initialized');
     _initializeAuth();
   }
 
@@ -51,30 +65,67 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   /// Initialize authentication state from local storage
   Future<void> _initializeAuth() async {
+    _logger.d('Initializing authentication state');
     state = state.copyWith(status: AuthStatus.loading);
 
     try {
       _authBox = await Hive.openBox('auth');
+      _logger.d('Auth box opened successfully');
 
-      // Check if user has completed onboarding
+      // DEVELOPMENT: Auto-authenticate with mock user if auth is disabled
+      if (!AppConstants.enableAuthDuringDevelopment) {
+        _logger.d('Development mode: Auto-authenticating with mock user');
+        final mockUser = User(
+          id: 'dev_user_001',
+          email: 'dev@helpy.ninja',
+          name: 'Developer User',
+          profileImageUrl: null,
+          preferences: const UserPreferences(),
+          createdAt: DateTime.now(),
+        );
+
+        // Store mock token and mark onboarding as complete
+        await _authBox.put(AppConstants.userTokenKey, 'dev_mock_token');
+        await _authBox.put(AppConstants.onboardingCompleteKey, true);
+        _logger.d('Stored mock token and marked onboarding as complete');
+
+        state = state.copyWith(
+          status: AuthStatus.authenticated,
+          user: mockUser,
+          isFirstTime: false,
+        );
+        _logger.d('Development user authenticated successfully');
+        return;
+      }
+
+      // PRODUCTION: Check if user has completed onboarding
       final hasCompletedOnboarding = _authBox.get(
         AppConstants.onboardingCompleteKey,
         defaultValue: false,
       );
+      _logger.d(
+        'Onboarding status: ${hasCompletedOnboarding ? 'completed' : 'not completed'}',
+      );
 
       // Check for stored user token
       final token = _authBox.get(AppConstants.userTokenKey);
+      _logger.d('Token found: ${token != null}');
 
       if (token != null && hasCompletedOnboarding) {
         // Validate token and restore user session
+        _logger.d('Valid token found, restoring user session');
         await _restoreUserSession(token);
       } else {
         state = state.copyWith(
           status: AuthStatus.unauthenticated,
           isFirstTime: !hasCompletedOnboarding,
         );
+        _logger.d(
+          'User is unauthenticated, first time: ${!hasCompletedOnboarding}',
+        );
       }
     } catch (e) {
+      _logger.e('Failed to initialize authentication: $e');
       state = state.copyWith(
         status: AuthStatus.error,
         error: 'Failed to initialize authentication: $e',
@@ -84,6 +135,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   /// Restore user session from stored token
   Future<void> _restoreUserSession(String token) async {
+    _logger.d('Restoring user session from token');
     try {
       // TODO: Validate token with backend
       // For now, create a mock user
@@ -101,9 +153,13 @@ class AuthNotifier extends StateNotifier<AuthState> {
         user: user,
         isFirstTime: false,
       );
+      _logger.d('User session restored successfully');
     } catch (e) {
+      _logger.e('Failed to restore user session: $e');
       // Clear invalid token
       await _authBox.delete(AppConstants.userTokenKey);
+      _logger.d('Invalid token cleared from storage');
+
       state = state.copyWith(
         status: AuthStatus.unauthenticated,
         error: 'Session expired. Please login again.',
@@ -113,11 +169,13 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   /// Sign in with email and password
   Future<void> signInWithEmail(String email, String password) async {
+    _logger.d('Signing in with email: $email');
     state = state.copyWith(status: AuthStatus.loading, error: null);
 
     try {
       // TODO: Implement actual authentication with backend
       await Future.delayed(const Duration(seconds: 2)); // Simulate API call
+      _logger.d('API call simulated for sign in');
 
       // Mock successful authentication
       final user = User(
@@ -133,13 +191,18 @@ class AuthNotifier extends StateNotifier<AuthState> {
       const mockToken = 'mock_jwt_token_123';
       await _authBox.put(AppConstants.userTokenKey, mockToken);
       await _authBox.put(AppConstants.onboardingCompleteKey, true);
+      _logger.d(
+        'Authentication token stored and onboarding marked as complete',
+      );
 
       state = state.copyWith(
         status: AuthStatus.authenticated,
         user: user,
         isFirstTime: false,
       );
+      _logger.d('User signed in successfully');
     } catch (e) {
+      _logger.e('Sign in failed: $e');
       state = state.copyWith(
         status: AuthStatus.error,
         error: 'Login failed: $e',
@@ -153,11 +216,13 @@ class AuthNotifier extends StateNotifier<AuthState> {
     String password,
     String name,
   ) async {
+    _logger.d('Signing up with email: $email, name: $name');
     state = state.copyWith(status: AuthStatus.loading, error: null);
 
     try {
       // TODO: Implement actual registration with backend
       await Future.delayed(const Duration(seconds: 2)); // Simulate API call
+      _logger.d('API call simulated for sign up');
 
       // Mock successful registration
       final user = User(
@@ -172,13 +237,16 @@ class AuthNotifier extends StateNotifier<AuthState> {
       // Store authentication token
       const mockToken = 'mock_jwt_token_456';
       await _authBox.put(AppConstants.userTokenKey, mockToken);
+      _logger.d('Authentication token stored');
 
       state = state.copyWith(
         status: AuthStatus.authenticated,
         user: user,
         isFirstTime: true, // New user needs onboarding
       );
+      _logger.d('User signed up successfully, requires onboarding');
     } catch (e) {
+      _logger.e('Sign up failed: $e');
       state = state.copyWith(
         status: AuthStatus.error,
         error: 'Registration failed: $e',
@@ -188,16 +256,20 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   /// Complete onboarding process
   Future<void> completeOnboarding() async {
+    _logger.d('Completing onboarding process');
     await _authBox.put(AppConstants.onboardingCompleteKey, true);
     state = state.copyWith(isFirstTime: false);
+    _logger.d('Onboarding completed successfully');
   }
 
   /// Sign out
   Future<void> signOut() async {
+    _logger.d('Signing out user');
     try {
       // Clear stored authentication data
       await _authBox.delete(AppConstants.userTokenKey);
       await _authBox.delete(AppConstants.onboardingCompleteKey);
+      _logger.d('Authentication data cleared from storage');
 
       state = state.copyWith(
         status: AuthStatus.unauthenticated,
@@ -205,7 +277,9 @@ class AuthNotifier extends StateNotifier<AuthState> {
         error: null,
         isFirstTime: true,
       );
+      _logger.d('User signed out successfully');
     } catch (e) {
+      _logger.e('Failed to sign out: $e');
       state = state.copyWith(
         status: AuthStatus.error,
         error: 'Failed to sign out: $e',
@@ -215,14 +289,18 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   /// Clear error state
   void clearError() {
+    _logger.d('Clearing error state');
     state = state.copyWith(error: null);
+    _logger.d('Error state cleared');
   }
 
   /// Update user profile
   Future<void> updateUserProfile(User updatedUser) async {
+    _logger.d('Updating user profile for userId: ${updatedUser.id}');
     if (state.user != null) {
       state = state.copyWith(user: updatedUser);
       // TODO: Sync with backend
+      _logger.d('User profile updated in state');
     }
   }
 
@@ -232,6 +310,10 @@ class AuthNotifier extends StateNotifier<AuthState> {
     String? email,
     UserPreferences? preferences,
   }) async {
+    _logger.d(
+      'Updating profile data during onboarding - hasName: ${name != null}, hasEmail: ${email != null}, hasPreferences: ${preferences != null}',
+    );
+
     if (state.user != null) {
       final updatedUser = state.user!.copyWith(
         name: name ?? state.user!.name,
@@ -241,9 +323,11 @@ class AuthNotifier extends StateNotifier<AuthState> {
       );
 
       state = state.copyWith(user: updatedUser);
+      _logger.d('User profile updated during onboarding');
 
       // Store updated profile data
       await _authBox.put('user_profile', updatedUser.toJson());
+      _logger.d('User profile stored to local storage');
 
       // TODO: Sync with backend
     } else {
@@ -257,9 +341,11 @@ class AuthNotifier extends StateNotifier<AuthState> {
       );
 
       state = state.copyWith(status: AuthStatus.authenticated, user: tempUser);
+      _logger.d('Temporary user created for onboarding');
 
       // Store profile data
       await _authBox.put('user_profile', tempUser.toJson());
+      _logger.d('Temporary user profile stored to local storage');
     }
   }
 }

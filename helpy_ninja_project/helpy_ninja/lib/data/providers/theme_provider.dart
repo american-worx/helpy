@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:logger/logger.dart';
 
 import '../../config/constants.dart';
 import '../../config/theme.dart';
@@ -53,7 +54,19 @@ class ThemeState {
 
 /// Theme state notifier
 class ThemeNotifier extends StateNotifier<ThemeState> {
+  final Logger _logger = Logger(
+    printer: PrettyPrinter(
+      methodCount: 0,
+      errorMethodCount: 5,
+      lineLength: 100,
+      colors: false,
+      printEmojis: false,
+      dateTimeFormat: DateTimeFormat.onlyTimeAndSinceStart,
+    ),
+  );
+
   ThemeNotifier() : super(const ThemeState()) {
+    _logger.d('ThemeNotifier initialized');
     _initializeTheme();
   }
 
@@ -61,12 +74,15 @@ class ThemeNotifier extends StateNotifier<ThemeState> {
 
   /// Initialize theme from storage or user preferences
   Future<void> _initializeTheme() async {
+    _logger.d('Initializing theme');
     try {
       _themeBox = await Hive.openBox('theme');
+      _logger.d('Theme box opened successfully');
 
       // Get stored theme preference
       final storedTheme = _themeBox.get(AppConstants.themeKey);
       AppThemeMode themeMode = AppThemeMode.dark; // Default
+      _logger.d('Stored theme value: $storedTheme');
 
       if (storedTheme != null) {
         themeMode = AppThemeMode.values.firstWhere(
@@ -76,7 +92,9 @@ class ThemeNotifier extends StateNotifier<ThemeState> {
       }
 
       state = state.copyWith(themeMode: themeMode);
+      _logger.d('Theme initialized: ${themeMode.toString()}');
     } catch (e) {
+      _logger.e('Failed to initialize theme: ${e.toString()}');
       // If initialization fails, keep default dark theme
       debugPrint('Failed to initialize theme: $e');
     }
@@ -84,35 +102,49 @@ class ThemeNotifier extends StateNotifier<ThemeState> {
 
   /// Update system brightness (called from app lifecycle)
   void updateSystemBrightness(Brightness brightness) {
+    _logger.d('Updating system brightness: ${brightness.toString()}');
     final isSystemDarkMode = brightness == Brightness.dark;
     if (state.isSystemDarkMode != isSystemDarkMode) {
       state = state.copyWith(isSystemDarkMode: isSystemDarkMode);
+      _logger.d('System brightness updated, isDarkMode: $isSystemDarkMode');
     }
   }
 
   /// Set theme mode
   Future<void> setThemeMode(AppThemeMode themeMode) async {
+    _logger.d('Setting theme mode: ${themeMode.toString()}');
     try {
       await _themeBox.put(AppConstants.themeKey, themeMode.name);
+      _logger.d('Theme preference saved to storage: ${themeMode.name}');
       state = state.copyWith(themeMode: themeMode);
+      _logger.d('Theme mode updated in state: ${themeMode.toString()}');
     } catch (e) {
+      _logger.e('Failed to save theme preference: ${e.toString()}');
       debugPrint('Failed to save theme preference: $e');
     }
   }
 
   /// Toggle between light and dark (for quick toggle)
   Future<void> toggleTheme() async {
+    _logger.d('Toggling theme, currentMode: ${state.themeMode.toString()}');
     final newMode = state.themeMode == AppThemeMode.dark
         ? AppThemeMode.light
         : AppThemeMode.dark;
+    _logger.d('New theme mode selected: ${newMode.toString()}');
     await setThemeMode(newMode);
   }
 
   /// Sync theme with user preferences
   void syncWithUserPreferences(bool isDarkMode) {
+    _logger.d('Syncing theme with user preferences, isDarkMode: $isDarkMode');
     final newMode = isDarkMode ? AppThemeMode.dark : AppThemeMode.light;
     if (state.themeMode != newMode) {
+      _logger.d(
+        'Theme mode changed, updating - oldMode: ${state.themeMode.toString()}, newMode: ${newMode.toString()}',
+      );
       setThemeMode(newMode);
+    } else {
+      _logger.d('Theme mode unchanged, no update needed');
     }
   }
 }

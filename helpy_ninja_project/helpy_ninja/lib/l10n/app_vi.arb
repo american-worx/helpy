@@ -91,5 +91,455 @@
   "online": "Trực tuyến",
   "@online": {
     "description": "Online status indicator"
+  },
+  "startYourLearningJourney": "Bắt đầu hành trình học tập!",
+  "@startYourLearningJourney": {
+    "description": "Heading text for empty chat state"
+  },
+  "chooseHelpyPersonality": "Chọn một phong cách Helpy để bắt đầu trò chuyện và nhận được sự hỗ trợ cá nhân hóa cho việc học của bạn.",
+  "@chooseHelpyPersonality": {
+    "description": "Description text for selecting a Helpy personality to chat with"
+  },
+  "chooseYourHelpy": "Chọn Helpy của bạn",
+  "@chooseYourHelpy": {
+    "description": "Section title for personality selection"
+  },
+  "seeAllPersonalities": "Xem tất cả phong cách",
+  "@seeAllPersonalities": {
+    "description": "Button text to view all available Helpy personalities"
+  },
+  "startFirstChat": "Bắt đầu cuộc trò chuyện đầu tiên",
+  "@startFirstChat": {
+    "description": "Button text to begin first conversation"
+  },
+  "oopsSomethingWentWrong": "Ồ! Có lỗi xảy ra",
+  "@oopsSomethingWentWrong": {
+    "description": "Error state heading message"
+  },
+  "tryAgain": "Thử lại",
+  "@tryAgain": {
+    "description": "Button text to retry failed action"
+  },
+  "conversationNotFound": "Không tìm thấy cuộc trò chuyện",
+  "@conversationNotFound": {
+    "description": "Error message when conversation cannot be found"
+  },
+  "failedToLoadMessages": "Không thể tải tin nhắn",
+  "@failedToLoadMessages": {
+    "description": "Error message when messages fail to load"
+  },
+  "retry": "Thử lại",
+  "@retry": {
+    "description": "Button text to retry loading"
+  },
+  "newChat": "Trò chuyện mới",
+  "@newChat": {
+    "description": "Button text to start new chat"
+  },
+  "chooseYourHelpyPersonality": "Chọn tính cách Helpy của bạn",
+  "@chooseYourHelpyPersonality": {
+    "description": "Modal title for personality selection"
+  },
+  "unreadMessages": "tin nhắn chưa đọc",
+  "@unreadMessages": {
+    "description": "Text for unread message count"
+  },
+  "markAsRead": "Đánh dấu đã đọc",
+  "@markAsRead": {
+    "description": "Menu option to mark conversation as read"
+  },
+  "archive": "Lưu trữ",
+  "@archive": {
+    "description": "Menu option to archive conversation"
+  },
+  "delete": "Xóa",
+  "@delete": {
+    "description": "Menu option to delete conversation"
+  },
+  "archiveFeatureComingSoon": "Tính năng lưu trữ sắp ra mắt!",
+  "@archiveFeatureComingSoon": {
+    "description": "Message shown when archive feature is not yet available"
+  },
+  "deleteConversation": "Xóa cuộc hội thoại",
+  "@deleteConversation": {
+    "description": "Dialog title for conversation deletion"
+  },
+  "deleteConversationConfirm": "Bạn có chắc chắn muốn xóa \"{title}\"? Hành động này không thể hoàn tác.",
+  "@deleteConversationConfirm": {
+    "description": "Confirmation message for deleting conversation",
+    "placeholders": {
+      "title": {
+        "type": "String",
+        "description": "The title of the conversation to delete"
+      }
+    }
+  },
+  "cancel": "Hủy",
+  "@cancel": {
+    "description": "Button text to cancel action"
+  },
+  "conversationDeleted": "Đã xóa cuộc hội thoại",
+  "@conversationDeleted": {
+    "description": "Success message when conversation is deleted"
+  },
+  "failedToDeleteConversation": "Không thể xóa cuộc hội thoại: {error}",
+  "@failedToDeleteConversation": {
+    "description": "Error message when conversation deletion fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "description": "The error message"
+      }
+    }
+  },
+  "failedToStartChat": "Không thể bắt đầu trò chuyện: {error}",
+  "@failedToStartChat": {
+    "description": "Error message when starting new chat fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "description": "The error message"
+      }
+    }
+  },
+  "chooseYourSubjects": "Chọn môn học của bạn",
+  "@chooseYourSubjects": {
+    "description": "Title for subject selection screen"
+  },
+  "stepXOfY": "Bước {step} trong tổng số {total}",
+  "@stepXOfY": {
+    "description": "Progress indicator text",
+    "placeholders": {
+      "step": {
+        "type": "int",
+        "description": "Current step number"
+      },
+      "total": {
+        "type": "int",
+        "description": "Total number of steps"
+      }
+    }
+  },
+  "subjectsSelected": "{count} môn học đã chọn",
+  "@subjectsSelected": {
+    "description": "Count of selected subjects",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "description": "Number of subjects selected"
+      }
+    }
+  },
+  "pleaseSelectAtLeastOneSubject": "Vui lòng chọn ít nhất một môn học",
+  "@pleaseSelectAtLeastOneSubject": {
+    "description": "Validation message for subject selection"
+  },
+  "continueToHelpySetup": "Tiếp tục thiết lập Helpy",
+  "@continueToHelpySetup": {
+    "description": "Button text to proceed to Helpy customization"
+  },
+  "errorSavingSubjects": "Lỗi khi lưu môn học: {error}",
+  "@errorSavingSubjects": {
+    "description": "Error message when saving subjects fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "description": "The error message"
+      }
+    }
+  },
+  "mathematics": "Toán học",
+  "@mathematics": {
+    "description": "Mathematics subject name"
+  },
+  "physics": "Vật lý",
+  "@physics": {
+    "description": "Physics subject name"
+  },
+  "chemistry": "Hóa học",
+  "@chemistry": {
+    "description": "Chemistry subject name"
+  },
+  "biology": "Sinh học",
+  "@biology": {
+    "description": "Biology subject name"
+  },
+  "computerScience": "Khoa học máy tính",
+  "@computerScience": {
+    "description": "Computer Science subject name"
+  },
+  "english": "Tiếng Anh",
+  "@english": {
+    "description": "English subject name"
+  },
+  "vietnamese": "Tiếng Việt",
+  "@vietnamese": {
+    "description": "Vietnamese subject name"
+  },
+  "french": "Tiếng Pháp",
+  "@french": {
+    "description": "French subject name"
+  },
+  "spanish": "Tiếng Tây Ban Nha",
+  "@spanish": {
+    "description": "Spanish subject name"
+  },
+  "history": "Lịch sử",
+  "@history": {
+    "description": "History subject name"
+  },
+  "geography": "Địa lý",
+  "@geography": {
+    "description": "Geography subject name"
+  },
+  "economics": "Kinh tế",
+  "@economics": {
+    "description": "Economics subject name"
+  },
+  "visualArts": "Mỹ thuật",
+  "@visualArts": {
+    "description": "Visual Arts subject name"
+  },
+  "music": "Âm nhạc",
+  "@music": {
+    "description": "Music subject name"
+  },
+  "stem": "STEM",
+  "@stem": {
+    "description": "STEM category name"
+  },
+  "languages": "Ngôn ngữ",
+  "@languages": {
+    "description": "Languages category name"
+  },
+  "socialStudies": "Khoa học xã hội",
+  "@socialStudies": {
+    "description": "Social Studies category name"
+  },
+  "arts": "Nghệ thuật",
+  "@arts": {
+    "description": "Arts category name"
+  },
+  "goodMorning": "Chào buổi sáng",
+  "@goodMorning": {
+    "description": "Morning greeting"
+  },
+  "goodAfternoon": "Chào buổi chiều",
+  "@goodAfternoon": {
+    "description": "Afternoon greeting"
+  },
+  "goodEvening": "Chào buổi tối",
+  "@goodEvening": {
+    "description": "Evening greeting"
+  },
+  "readyToContinueLearning": "Sẵn sàng tiếp tục hành trình học tập của bạn?",
+  "@readyToContinueLearning": {
+    "description": "Motivational message in dashboard header"
+  },
+  "daysSingular": "ngày",
+  "@daysSingular": {
+    "description": "Singular form of day"
+  },
+  "daysPlural": "ngày",
+  "@daysPlural": {
+    "description": "Plural form of days"
+  },
+  "streak": "liên tiếp!",
+  "@streak": {
+    "description": "Streak indicator text"
+  },
+  "yourProgress": "Tiến độ của bạn",
+  "@yourProgress": {
+    "description": "Progress section title"
+  },
+  "trackYourLearningJourney": "Theo dõi hành trình học tập của bạn",
+  "@trackYourLearningJourney": {
+    "description": "Progress section subtitle"
+  },
+  "loadingProgressData": "Đang tải dữ liệu tiến độ...",
+  "@loadingProgressData": {
+    "description": "Loading message for progress data"
+  },
+  "pleaseEnterYourEmail": "Vui lòng nhập email của bạn",
+  "@pleaseEnterYourEmail": {
+    "description": "Email validation message"
+  },
+  "pleaseEnterValidEmail": "Vui lòng nhập email hợp lệ",
+  "@pleaseEnterValidEmail": {
+    "description": "Email format validation message"
+  },
+  "errorSavingProfile": "Lỗi khi lưu hồ sơ: {error}",
+  "@errorSavingProfile": {
+    "description": "Error message when saving profile fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "description": "The error message"
+      }
+    }
+  },
+  "keepUpTheGreatWork": "Tiếp tục phát huy nhé!",
+  "@keepUpTheGreatWork": {
+    "description": "Lời khuyến khích cho tiến độ học tập"
+  },
+  "lessonsCompleted": "Bài Học Đã Hoàn Thành",
+  "@lessonsCompleted": {
+    "description": "Nhãn cho số bài học đã hoàn thành"
+  },
+  "achievements": "Thành Tích",
+  "@achievements": {
+    "description": "Nhãn cho phần thành tích"
+  },
+  "studyTime": "Thời Gian Học",
+  "@studyTime": {
+    "description": "Nhãn cho tổng thời gian học"
+  },
+  "weeklyGoal": "Mục Tiêu Tuần",
+  "@weeklyGoal": {
+    "description": "Nhãn cho mục tiêu học tập hàng tuần"
+  },
+  "onTrack": "Đúng Tiến Độ",
+  "@onTrack": {
+    "description": "Trạng thái cho thấy người dùng đang đạt mục tiêu"
+  },
+  "behindGoal": "Chậm Tiến Độ",
+  "@behindGoal": {
+    "description": "Trạng thái cho thấy người dùng chưa đạt mục tiêu"
+  },
+  "readyToContinueLearning": "Sẵn sàng tiếp tục học chưa?",
+  "@readyToContinueLearning": {
+    "description": "Thông điệp chào hỏi hỏi người dùng có sẵn sàng học không"
+  },
+  "continueLearningComingSoon": "Chức năng tiếp tục học sẽ sớm ra mắt!",
+  "@continueLearningComingSoon": {
+    "description": "Thông báo khi chức năng tiếp tục học chưa khả dụng"
+  },
+  "practiceQuizComingSoon": "Chức năng luyện tập câu hỏi sẽ sớm ra mắt!",
+  "@practiceQuizComingSoon": {
+    "description": "Thông báo khi chức năng luyện tập câu hỏi chưa khả dụng"
+  },
+  "studyGroupsComingSoon": "Chức năng nhóm học tập sẽ sớm ra mắt!",
+  "@studyGroupsComingSoon": {
+    "description": "Thông báo khi chức năng nhóm học tập chưa khả dụng"
+  },
+  "fullActivityHistoryComingSoon": "Lịch sử hoạt động đầy đủ sẽ sớm ra mắt!",
+  "@fullActivityHistoryComingSoon": {
+    "description": "Thông báo khi chức năng lịch sử hoạt động đầy đủ chưa khả dụng"
+  },
+  "viewAllActivitiesComingSoon": "Xem tất cả hoạt động sẽ sớm ra mắt!",
+  "@viewAllActivitiesComingSoon": {
+    "description": "Thông báo khi chức năng xem tất cả hoạt động chưa khả dụng"
+  },
+  "justNow": "Vừa xong",
+  "@justNow": {
+    "description": "Văn bản cho dấu thời gian rất gần"
+  },
+  "minutesAgo": "{minutes} phút trước",
+  "@minutesAgo": {
+    "description": "Văn bản cho dấu thời gian theo phút",
+    "placeholders": {
+      "minutes": {
+        "type": "int",
+        "description": "Số phút"
+      }
+    }
+  },
+  "hoursAgo": "{hours} giờ trước",
+  "@hoursAgo": {
+    "description": "Văn bản cho dấu thời gian theo giờ",
+    "placeholders": {
+      "hours": {
+        "type": "int",
+        "description": "Số giờ"
+      }
+    }
+  },
+  "daysAgo": "{days} ngày trước",
+  "@daysAgo": {
+    "description": "Văn bản cho dấu thời gian theo ngày",
+    "placeholders": {
+      "days": {
+        "type": "int",
+        "description": "Số ngày"
+      }
+    }
+  },
+  "percentComplete": "{percent}% hoàn thành",
+  "@percentComplete": {
+    "description": "Văn bản cho phần trăm tiến độ",
+    "placeholders": {
+      "percent": {
+        "type": "int",
+        "description": "Phần trăm tiến độ"
+      }
+    }
+  },
+  "quickActions": "Hành Động Nhanh",
+  "@quickActions": {
+    "description": "Tiêu đề cho phần hành động nhanh"
+  },
+  "getStartedWithTheseActions": "Bắt đầu với những hành động này",
+  "@getStartedWithTheseActions": {
+    "description": "Phụ đề cho phần hành động nhanh"
+  },
+  "startNewChat": "Bắt Đầu Trò Chuyện Mới",
+  "@startNewChat": {
+    "description": "Văn bản nút để bắt đầu trò chuyện mới"
+  },
+  "browseSubjects": "Duyệt Môn Học",
+  "@browseSubjects": {
+    "description": "Văn bản nút để duyệt môn học"
+  },
+  "continueLearning": "Tiếp Tục Học",
+  "@continueLearning": {
+    "description": "Văn bản nút để tiếp tục học"
+  },
+  "practiceQuiz": "Luyện Tập Câu Hỏi",
+  "@practiceQuiz": {
+    "description": "Văn bản nút cho luyện tập câu hỏi"
+  },
+  "myProgress": "Tiến Độ Của Tôi",
+  "@myProgress": {
+    "description": "Văn bản nút cho theo dõi tiến độ"
+  },
+  "studyGroups": "Nhóm Học Tập",
+  "@studyGroups": {
+    "description": "Văn bản nút cho nhóm học tập"
+  },
+  "recentActivity": "Hoạt Động Gần Đây",
+  "@recentActivity": {
+    "description": "Tiêu đề cho phần hoạt động gần đây"
+  },
+  "noRecentActivityYet": "Chưa có hoạt động gần đây",
+  "@noRecentActivityYet": {
+    "description": "Thông báo khi chưa có hoạt động gần đây"
+  },
+  "startLearningToSeeProgress": "Bắt đầu học để xem tiến độ của bạn ở đây",
+  "@startLearningToSeeProgress": {
+    "description": "Thông điệp khuyến khích khi chưa có hoạt động"
+  },
+  "yourLearningTimeline": "Dòng thời gian học tập của bạn",
+  "@yourLearningTimeline": {
+    "description": "Phụ đề cho phần hoạt động gần đây"
+  },
+  "viewAll": "Xem Tất Cả",
+  "@viewAll": {
+    "description": "Văn bản nút để xem tất cả"
+  },
+  "view": "Xem",
+  "@view": {
+    "description": "Văn bản nút để xem"
+  },
+  "moreActivities": "hoạt động khác",
+  "@moreActivities": {
+    "description": "Văn bản cho số lượng hoạt động bổ sung"
+  },
+  "subjectProgress": "Tiến Độ Môn Học",
+  "@subjectProgress": {
+    "description": "Tiêu đề cho phần tiến độ môn học"
+  },
+  "yourProgressInDifferentSubjects": "Tiến độ của bạn trong các môn học khác nhau",
+  "@yourProgressInDifferentSubjects": {
+    "description": "Phụ đề cho phần tiến độ môn học"
   }
 }
