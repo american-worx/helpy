@@ -394,10 +394,7 @@
   "@studyTime": {
     "description": "Nhãn cho tổng thời gian học"
   },
-  "weeklyGoal": "Mục Tiêu Tuần",
-  "@weeklyGoal": {
-    "description": "Nhãn cho mục tiêu học tập hàng tuần"
-  },
+
   "onTrack": "Đúng Tiến Độ",
   "@onTrack": {
     "description": "Trạng thái cho thấy người dùng đang đạt mục tiêu"
@@ -406,10 +403,7 @@
   "@behindGoal": {
     "description": "Trạng thái cho thấy người dùng chưa đạt mục tiêu"
   },
-  "readyToContinueLearning": "Sẵn sàng tiếp tục học chưa?",
-  "@readyToContinueLearning": {
-    "description": "Thông điệp chào hỏi hỏi người dùng có sẵn sàng học không"
-  },
+ 
   "continueLearningComingSoon": "Chức năng tiếp tục học sẽ sớm ra mắt!",
   "@continueLearningComingSoon": {
     "description": "Thông báo khi chức năng tiếp tục học chưa khả dụng"
@@ -490,10 +484,7 @@
   "@browseSubjects": {
     "description": "Văn bản nút để duyệt môn học"
   },
-  "continueLearning": "Tiếp Tục Học",
-  "@continueLearning": {
-    "description": "Văn bản nút để tiếp tục học"
-  },
+ 
   "practiceQuiz": "Luyện Tập Câu Hỏi",
   "@practiceQuiz": {
     "description": "Văn bản nút cho luyện tập câu hỏi"
@@ -534,10 +525,7 @@
   "@moreActivities": {
     "description": "Văn bản cho số lượng hoạt động bổ sung"
   },
-  "subjectProgress": "Tiến Độ Môn Học",
-  "@subjectProgress": {
-    "description": "Tiêu đề cho phần tiến độ môn học"
-  },
+
   "yourProgressInDifferentSubjects": "Tiến độ của bạn trong các môn học khác nhau",
   "@yourProgressInDifferentSubjects": {
     "description": "Subtitle for subject progress section"
@@ -759,5 +747,425 @@
   "days": "Ngày",
   "@days": {
     "description": "Plural form of day"
+  },
+  "groupSessions": "Phiên Học Nhóm",
+  "@groupSessions": {
+    "description": "Title for group sessions screen"
+  },
+  "createGroupSession": "Tạo Phiên Học Nhóm",
+  "@createGroupSession": {
+    "description": "Button text to create a new group session"
+  },
+  "joinGroupSession": "Tham gia Phiên Học Nhóm",
+  "@joinGroupSession": {
+    "description": "Button text to join an existing group session"
+  },
+  "leaveGroupSession": "Rời khỏi Phiên Học Nhóm",
+  "@leaveGroupSession": {
+    "description": "Button text to leave a group session"
+  },
+  "groupSessionName": "Tên Phiên Học Nhóm",
+  "@groupSessionName": {
+    "description": "Label for group session name input"
+  },
+  "participants": "Người tham gia",
+  "@participants": {
+    "description": "Label for participants list"
+  },
+  "helpyParticipants": "Helpy tham gia",
+  "@helpyParticipants": {
+    "description": "Label for Helpy participants list"
+  },
+  "sendMessageToGroup": "Gửi tin nhắn đến nhóm",
+  "@sendMessageToGroup": {
+    "description": "Placeholder text for group message input"
+  },
+  "groupSessionCreated": "Phiên học nhóm đã được tạo thành công",
+  "@groupSessionCreated": {
+    "description": "Success message when group session is created"
+  },
+  "groupSessionJoined": "Đã tham gia phiên học nhóm thành công",
+  "@groupSessionJoined": {
+    "description": "Success message when user joins a group session"
+  },
+  "groupSessionLeft": "Đã rời khỏi phiên học nhóm thành công",
+  "@groupSessionLeft": {
+    "description": "Success message when user leaves a group session"
+  },
+  "failedToCreateGroupSession": "Không thể tạo phiên học nhóm: {error}",
+  "@failedToCreateGroupSession": {
+    "description": "Error message when group session creation fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "description": "The error message"
+      }
+    }
+  },
+  "failedToJoinGroupSession": "Không thể tham gia phiên học nhóm: {error}",
+  "@failedToJoinGroupSession": {
+    "description": "Error message when joining group session fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "description": "The error message"
+      }
+    }
+  },
+  "failedToLeaveGroupSession": "Không thể rời khỏi phiên học nhóm: {error}",
+  "@failedToLeaveGroupSession": {
+    "description": "Error message when leaving group session fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "description": "The error message"
+      }
+    }
+  },
+  "groupSessionNotFound": "Không tìm thấy phiên học nhóm",
+  "@groupSessionNotFound": {
+    "description": "Error message when group session cannot be found"
+  },
+  "active": "Hoạt động",
+  "@active": {
+    "description": "Status for active participant"
+  },
+  "inactive": "Không hoạt động",
+  "@inactive": {
+    "description": "Status for inactive participant"
+  },
+  "left": "Đã rời đi",
+  "@left": {
+    "description": "Status for participant who left"
+  },
+  "disconnected": "Mất kết nối",
+  "@disconnected": {
+    "description": "Status for disconnected participant"
+  },
+  "groupSessionActive": "Phiên Học Nhóm Đang Hoạt Động",
+  "@groupSessionActive": {
+    "description": "Status text for active group session"
+  },
+  "groupSessionPaused": "Phiên Học Nhóm Tạm Dừng",
+  "@groupSessionPaused": {
+    "description": "Status text for paused group session"
+  },
+  "groupSessionCompleted": "Phiên Học Nhóm Đã Hoàn Thành",
+  "@groupSessionCompleted": {
+    "description": "Status text for completed group session"
+  },
+  "groupSessionCancelled": "Phiên Học Nhóm Đã Bị Hủy",
+  "@groupSessionCancelled": {
+    "description": "Status text for cancelled group session"
+  },
+  "noGroupSessions": "Chưa có phiên học nhóm nào",
+  "@noGroupSessions": {
+    "description": "Message shown when there are no group sessions"
+  },
+  
+  "startGroupSession": "Bắt đầu một phiên học nhóm để hợp tác với các học sinh và Helpy khác!",
+  "@startGroupSession": {
+    "description": "Encouragement message to start first group session"
+  },
+  "groupMessageSent": "Tin nhắn nhóm đã được gửi",
+  "@groupMessageSent": {
+    "description": "Success message when group message is sent"
+  },
+  "failedToSendGroupMessage": "Không thể gửi tin nhắn nhóm: {error}",
+  "@failedToSendGroupMessage": {
+    "description": "Error message when group message fails to send",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "description": "The error message"
+      }
+    }
+  },
+  "groupTyping": "{name} đang nhập...",
+  "@groupTyping": {
+    "description": "Indicator text when someone is typing in group chat",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "description": "The name of the person typing"
+      }
+    }
+  },
+  "multipleGroupTyping": "{count} người đang nhập...",
+  "@multipleGroupTyping": {
+    "description": "Indicator text when multiple people are typing in group chat",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "description": "The number of people typing"
+      }
+    }
+  },
+  "changeHelpy": "Thay đổi Helpy",
+  "@changeHelpy": {
+    "description": "Button text to change Helpy"
+  },
+  "completeLesson": "Hoàn thành bài học",
+  "@completeLesson": {
+    "description": "Button text to complete lesson"
+  },
+  "correct": "Đúng",
+  "@correct": {
+    "description": "Label for correct answer"
+  },
+  "correctAnswer": "Câu trả lời đúng",
+  "@correctAnswer": {
+    "description": "Label for correct answer"
+  },
+  "correctAnswers": "Câu trả lời đúng",
+  "@correctAnswers": {
+    "description": "Label for number of correct answers"
+  },
+  "encouraging": "Khuyến khích",
+  "@encouraging": {
+    "description": "Encouraging Helpy personality"
+  },
+  "failedToChangeHelpy": "Không thể thay đổi Helpy: {error}",
+  "@failedToChangeHelpy": {
+    "description": "Error message when changing Helpy fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "description": "The error message"
+      }
+    }
+  },
+  "failedToLoadConversations": "Không thể tải cuộc trò chuyện: {error}",
+  "@failedToLoadConversations": {
+    "description": "Error message when conversations fail to load",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "description": "The error message"
+      }
+    }
+  },
+  "failedToLoadHelpy": "Không thể tải Helpy: {error}",
+  "@failedToLoadHelpy": {
+    "description": "Error message when Helpy fails to load",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "description": "The error message"
+      }
+    }
+  },
+  "failedToSendMessage": "Không thể gửi tin nhắn: {error}",
+  "@failedToSendMessage": {
+    "description": "Error message when message fails to send",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "description": "The error message"
+      }
+    }
+  },
+  "friendly": "Thân thiện",
+  "@friendly": {
+    "description": "Friendly Helpy personality"
+  },
+  "greatJob": "Làm tốt lắm!",
+  "@greatJob": {
+    "description": "Encouragement message for good quiz performance"
+  },
+  "helpyChanged": "Helpy đã được thay đổi thành công",
+  "@helpyChanged": {
+    "description": "Success message when Helpy is changed"
+  },
+  "helpyNotFound": "Không tìm thấy Helpy",
+  "@helpyNotFound": {
+    "description": "Error message when Helpy cannot be found"
+  },
+  "helpyOffline": "Helpy đang ngoại tuyến",
+  "@helpyOffline": {
+    "description": "Status text for offline Helpy"
+  },
+  "helpyOnline": "Helpy đang trực tuyến",
+  "@helpyOnline": {
+    "description": "Status text for online Helpy"
+  },
+  "helpyPersonality": "Tính cách Helpy",
+  "@helpyPersonality": {
+    "description": "Title for Helpy personality selection"
+  },
+  "helpyThinking": "Helpy đang suy nghĩ...",
+  "@helpyThinking": {
+    "description": "Indicator text when Helpy is processing"
+  },
+  "helpyTyping": "Helpy đang nhập...",
+  "@helpyTyping": {
+    "description": "Indicator text when Helpy is typing"
+  },
+  "incorrect": "Sai",
+  "@incorrect": {
+    "description": "Label for incorrect answer"
+  },
+  "incorrectAnswers": "Câu trả lời sai",
+  "@incorrectAnswers": {
+    "description": "Label for number of incorrect answers"
+  },
+  "keepPracticing": "Tiếp tục luyện tập!",
+  "@keepPracticing": {
+    "description": "Encouragement message for improvement needed"
+  },
+  "lastSeen": "Lần cuối thấy {time}",
+  "@lastSeen": {
+    "description": "Status text showing when user was last seen",
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "description": "Formatted time string"
+      }
+    }
+  },
+  "lessonCompleted": "Bài học đã hoàn thành",
+  "@lessonCompleted": {
+    "description": "Message shown when lesson is completed"
+  },
+  "lessonViewer": "Trình xem bài học",
+  "@lessonViewer": {
+    "description": "Title for lesson viewer screen"
+  },
+  "messageDelivered": "Tin nhắn đã được gửi",
+  "@messageDelivered": {
+    "description": "Status message when message is delivered"
+  },
+  "messageFailed": "Tin nhắn thất bại",
+  "@messageFailed": {
+    "description": "Error message when message fails"
+  },
+  "messageRead": "Tin nhắn đã đọc",
+  "@messageRead": {
+    "description": "Status message when message is read"
+  },
+  "messageSent": "Tin nhắn đã gửi",
+  "@messageSent": {
+    "description": "Success message when message is sent"
+  },
+  "needMoreStudy": "Cần học thêm!",
+  "@needMoreStudy": {
+    "description": "Encouragement message for significant improvement needed"
+  },
+  "nextSection": "Phần tiếp theo",
+  "@nextSection": {
+    "description": "Button text to go to next lesson section"
+  },
+  "noConversationsYet": "Chưa có cuộc trò chuyện nào",
+  "@noConversationsYet": {
+    "description": "Message shown when user has no conversations"
+  },
+  "oF": "trong số",
+  "@oF": {
+    "description": "Preposition for section numbering"
+  },
+  "onlineNow": "Đang trực tuyến",
+  "@onlineNow": {
+    "description": "Status text for online users"
+  },
+  "patient": "Kiên nhẫn",
+  "@patient": {
+    "description": "Patient Helpy personality"
+  },
+  "perfectScore": "Điểm tuyệt đối!",
+  "@perfectScore": {
+    "description": "Message for perfect quiz score"
+  },
+  "playful": "Vui nhộn",
+  "@playful": {
+    "description": "Playful Helpy personality"
+  },
+  "previousSection": "Phần trước",
+  "@previousSection": {
+    "description": "Button text to go to previous lesson section"
+  },
+  "professional": "Chuyên nghiệp",
+  "@professional": {
+    "description": "Professional Helpy personality"
+  },
+  "quizCompleted": "Bài kiểm tra đã hoàn thành",
+  "@quizCompleted": {
+    "description": "Message shown when quiz is completed"
+  },
+  "quizFeedback": "Phản hồi bài kiểm tra",
+  "@quizFeedback": {
+    "description": "Title for quiz feedback section"
+  },
+  "quizResults": "Kết quả bài kiểm tra",
+  "@quizResults": {
+    "description": "Title for quiz results screen"
+  },
+  "quizScore": "Điểm bài kiểm tra",
+  "@quizScore": {
+    "description": "Title for quiz score section"
+  },
+  "retakeQuiz": "Làm lại bài kiểm tra",
+  "@retakeQuiz": {
+    "description": "Button text to retake quiz"
+  },
+  "reviewAnswers": "Xem lại câu trả lời",
+  "@reviewAnswers": {
+    "description": "Button text to review quiz answers"
+  },
+  "section": "Phần",
+  "@section": {
+    "description": "Label for lesson section"
+  },
+  "selectHelpy": "Chọn Helpy",
+  "@selectHelpy": {
+    "description": "Button text to select Helpy"
+  },
+  "sendMessage": "Gửi tin nhắn",
+  "@sendMessage": {
+    "description": "Button text to send message"
+  },
+  "startAConversation": "Bắt đầu một cuộc trò chuyện với Helpy của bạn để bắt đầu học!",
+  "@startAConversation": {
+    "description": "Encouragement message to start first conversation"
+  },
+  "takeQuiz": "Làm bài kiểm tra",
+  "@takeQuiz": {
+    "description": "Button text to start quiz"
+  },
+  "time": "Thời gian",
+  "@time": {
+    "description": "Label for time"
+  },
+  "timeTaken": "Thời gian thực hiện",
+  "@timeTaken": {
+    "description": "Label for time taken to complete quiz"
+  },
+  "totalQuestions": "Tổng số câu hỏi",
+  "@totalQuestions": {
+    "description": "Label for total number of questions"
+  },
+  "typeYourMessage": "Nhập tin nhắn của bạn...",
+  "@typeYourMessage": {
+    "description": "Placeholder text for message input"
+  },
+  "typing": "đang nhập...",
+  "@typing": {
+    "description": "Indicator text when someone is typing"
+  },
+  "unanswered": "Chưa trả lời",
+  "@unanswered": {
+    "description": "Label for unanswered questions"
+  },
+  "wise": "Thông thái",
+  "@wise": {
+    "description": "Wise Helpy personality"
+  },
+  "yourAnswer": "Câu trả lời của bạn",
+  "@yourAnswer": {
+    "description": "Label for user's answer"
+  },
+  "trackYourLearningTimeline": "Dòng thời gian học tập của bạn",
+  "@trackYourLearningTimeline": {
+    "description": "Subtitle for recent activity section"
   }
+ 
 }

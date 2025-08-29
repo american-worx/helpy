@@ -153,253 +153,197 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get chooseYourSubjects => 'Choose Your Subjects';
-
-  @override
-  String stepXOfY(int step, int total) {
-    return 'Step $step of $total';
+  String failedToLoadConversations(String error) {
+    return 'Failed to load conversations: $error';
   }
 
   @override
-  String subjectsSelected(int count) {
-    return '$count subjects selected';
+  String get noConversationsYet => 'No conversations yet';
+
+  @override
+  String get startAConversation => 'Start a conversation with your Helpy to begin learning!';
+
+  @override
+  String get sendMessage => 'Send Message';
+
+  @override
+  String get typeYourMessage => 'Type your message...';
+
+  @override
+  String failedToSendMessage(String error) {
+    return 'Failed to send message: $error';
   }
 
   @override
-  String get pleaseSelectAtLeastOneSubject => 'Please select at least one subject';
+  String get messageSent => 'Message sent';
 
   @override
-  String get continueToHelpySetup => 'Continue to Helpy Setup';
+  String get messageFailed => 'Message failed';
 
   @override
-  String errorSavingSubjects(String error) {
-    return 'Error saving subjects: $error';
+  String get messageDelivered => 'Message delivered';
+
+  @override
+  String get messageRead => 'Message read';
+
+  @override
+  String get typing => 'typing...';
+
+  @override
+  String get onlineNow => 'Online now';
+
+  @override
+  String lastSeen(String time) {
+    return 'Last seen $time';
   }
 
   @override
-  String get mathematics => 'Mathematics';
+  String get helpyThinking => 'Helpy is thinking...';
 
   @override
-  String get physics => 'Physics';
+  String get helpyTyping => 'Helpy is typing...';
 
   @override
-  String get chemistry => 'Chemistry';
+  String get helpyOnline => 'Helpy is online';
 
   @override
-  String get biology => 'Biology';
+  String get helpyOffline => 'Helpy is offline';
 
   @override
-  String get computerScience => 'Computer Science';
-
-  @override
-  String get english => 'English';
-
-  @override
-  String get vietnamese => 'Vietnamese';
-
-  @override
-  String get french => 'French';
-
-  @override
-  String get spanish => 'Spanish';
-
-  @override
-  String get history => 'History';
-
-  @override
-  String get geography => 'Geography';
-
-  @override
-  String get economics => 'Economics';
-
-  @override
-  String get visualArts => 'Visual Arts';
-
-  @override
-  String get music => 'Music';
-
-  @override
-  String get stem => 'STEM';
-
-  @override
-  String get languages => 'Languages';
-
-  @override
-  String get socialStudies => 'Social Studies';
-
-  @override
-  String get arts => 'Arts';
-
-  @override
-  String get goodMorning => 'Good morning';
-
-  @override
-  String get goodAfternoon => 'Good afternoon';
-
-  @override
-  String get goodEvening => 'Good evening';
-
-  @override
-  String get readyToContinueLearning => 'Ready to continue learning?';
-
-  @override
-  String get daysSingular => 'day';
-
-  @override
-  String get daysPlural => 'days';
-
-  @override
-  String get streak => 'streak!';
-
-  @override
-  String get yourProgress => 'Your Progress';
-
-  @override
-  String get trackYourLearningJourney => 'Track your learning journey';
-
-  @override
-  String get loadingProgressData => 'Loading progress data...';
-
-  @override
-  String get pleaseEnterYourEmail => 'Please enter your email';
-
-  @override
-  String get pleaseEnterValidEmail => 'Please enter a valid email';
-
-  @override
-  String errorSavingProfile(String error) {
-    return 'Error saving profile: $error';
+  String failedToLoadHelpy(String error) {
+    return 'Failed to load Helpy: $error';
   }
 
   @override
-  String get keepUpTheGreatWork => 'Keep up the great work!';
+  String get helpyNotFound => 'Helpy not found';
 
   @override
-  String get lessonsCompleted => 'Lessons Completed';
+  String get selectHelpy => 'Select Helpy';
 
   @override
-  String get achievements => 'Achievements';
+  String get changeHelpy => 'Change Helpy';
 
   @override
-  String get studyTime => 'Study Time';
+  String get helpyChanged => 'Helpy changed successfully';
 
   @override
-  String get weeklyGoal => 'Weekly Goal';
-
-  @override
-  String get onTrack => 'On Track';
-
-  @override
-  String get behindGoal => 'Behind Goal';
-
-  @override
-  String get continueLearningComingSoon => 'Continue learning functionality coming soon!';
-
-  @override
-  String get practiceQuizComingSoon => 'Practice quiz functionality coming soon!';
-
-  @override
-  String get studyGroupsComingSoon => 'Study groups functionality coming soon!';
-
-  @override
-  String get fullActivityHistoryComingSoon => 'Full activity history coming soon!';
-
-  @override
-  String get viewAllActivitiesComingSoon => 'View all activities coming soon!';
-
-  @override
-  String get justNow => 'Just now';
-
-  @override
-  String minutesAgo(int minutes) {
-    return '$minutes min ago';
+  String failedToChangeHelpy(String error) {
+    return 'Failed to change Helpy: $error';
   }
 
   @override
-  String hoursAgo(int hours) {
-    return '$hours hours ago';
-  }
+  String get helpyPersonality => 'Helpy Personality';
 
   @override
-  String daysAgo(int days) {
-    return '$days days ago';
-  }
+  String get friendly => 'Friendly';
 
   @override
-  String percentComplete(int percent) {
-    return '$percent% complete';
-  }
+  String get professional => 'Professional';
 
   @override
-  String get quickActions => 'Quick Actions';
+  String get playful => 'Playful';
 
   @override
-  String get getStartedWithTheseActions => 'Get started with these actions';
+  String get wise => 'Wise';
 
   @override
-  String get startNewChat => 'Start New Chat';
+  String get encouraging => 'Encouraging';
 
   @override
-  String get browseSubjects => 'Browse Subjects';
+  String get patient => 'Patient';
 
   @override
-  String get continueLearning => 'Continue Learning';
+  String get lessonViewer => 'Lesson Viewer';
 
   @override
-  String get practiceQuiz => 'Practice Quiz';
+  String get nextSection => 'Next Section';
 
   @override
-  String get myProgress => 'My Progress';
+  String get previousSection => 'Previous Section';
 
   @override
-  String get studyGroups => 'Study Groups';
+  String get section => 'Section';
 
   @override
-  String get recentActivity => 'Recent Activity';
+  String get oF => 'of';
 
   @override
-  String get noRecentActivityYet => 'No recent activity yet';
+  String get completeLesson => 'Complete Lesson';
 
   @override
-  String get startLearningToSeeProgress => 'Start learning to see your progress here';
+  String get takeQuiz => 'Take Quiz';
 
   @override
-  String get yourLearningTimeline => 'Your learning timeline';
+  String get lessonCompleted => 'Lesson Completed';
 
   @override
-  String get viewAll => 'View All';
+  String get quizResults => 'Quiz Results';
 
   @override
-  String get view => 'View';
+  String get reviewAnswers => 'Review Answers';
 
   @override
-  String get moreActivities => 'more activities';
+  String get retakeQuiz => 'Retake Quiz';
 
   @override
-  String get subjectProgress => 'Subject Progress';
+  String get quizCompleted => 'Quiz Completed';
 
   @override
-  String get yourProgressInDifferentSubjects => 'Your progress in different subjects';
+  String get correct => 'Correct';
 
   @override
-  String lessonStartFailed(String error) {
-    return 'Failed to start lesson: $error';
-  }
+  String get incorrect => 'Incorrect';
 
   @override
-  String get lessonBookmarked => 'Lesson bookmarked!';
+  String get yourAnswer => 'Your Answer';
 
   @override
-  String get lessonSharing => 'Sharing lesson...';
+  String get correctAnswer => 'Correct Answer';
 
   @override
-  String get lessonReportSubmitted => 'Report submitted';
+  String get quizScore => 'Quiz Score';
+
+  @override
+  String get totalQuestions => 'Total Questions';
+
+  @override
+  String get correctAnswers => 'Correct Answers';
+
+  @override
+  String get incorrectAnswers => 'Incorrect Answers';
+
+  @override
+  String get unanswered => 'Unanswered';
+
+  @override
+  String get timeTaken => 'Time Taken';
+
+  @override
+  String get quizFeedback => 'Quiz Feedback';
+
+  @override
+  String get greatJob => 'Great Job!';
+
+  @override
+  String get keepPracticing => 'Keep Practicing!';
+
+  @override
+  String get needMoreStudy => 'Need More Study!';
+
+  @override
+  String get perfectScore => 'Perfect Score!';
+
+  @override
+  String get lessonReportSubmitted => 'Lesson report submitted successfully';
 
   @override
   String get lessonComplete => 'Lesson Complete!';
 
   @override
   String get lessonCompleteMessage => 'Congratulations! You have successfully completed this lesson.';
+
+  @override
+  String get continueLearning => 'Continue Learning';
 
   @override
   String get lessonNotFound => 'Lesson not found';
@@ -441,7 +385,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get weeklyProgress => 'Weekly Progress';
 
   @override
+  String get weeklyGoal => 'Weekly Goal';
+
+  @override
   String get averagePerDay => 'Average Per Day';
+
+  @override
+  String get subjectProgress => 'Subject Progress';
 
   @override
   String lessonsCount(String count) {
@@ -519,4 +469,340 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get days => 'Days';
+
+  @override
+  String get groupSessions => 'Group Sessions';
+
+  @override
+  String get createGroupSession => 'Create Group Session';
+
+  @override
+  String get joinGroupSession => 'Join Group Session';
+
+  @override
+  String get leaveGroupSession => 'Leave Group Session';
+
+  @override
+  String get groupSessionName => 'Group Session Name';
+
+  @override
+  String get participants => 'Participants';
+
+  @override
+  String get helpyParticipants => 'Helpy Participants';
+
+  @override
+  String get sendMessageToGroup => 'Send Message to Group';
+
+  @override
+  String get groupSessionCreated => 'Group session created successfully';
+
+  @override
+  String get groupSessionJoined => 'Joined group session successfully';
+
+  @override
+  String get groupSessionLeft => 'Left group session successfully';
+
+  @override
+  String failedToCreateGroupSession(String error) {
+    return 'Failed to create group session: $error';
+  }
+
+  @override
+  String failedToJoinGroupSession(String error) {
+    return 'Failed to join group session: $error';
+  }
+
+  @override
+  String failedToLeaveGroupSession(String error) {
+    return 'Failed to leave group session: $error';
+  }
+
+  @override
+  String get groupSessionNotFound => 'Group session not found';
+
+  @override
+  String get active => 'Active';
+
+  @override
+  String get inactive => 'Inactive';
+
+  @override
+  String get left => 'Left';
+
+  @override
+  String get disconnected => 'Disconnected';
+
+  @override
+  String get groupSessionActive => 'Group Session Active';
+
+  @override
+  String get groupSessionPaused => 'Group Session Paused';
+
+  @override
+  String get groupSessionCompleted => 'Group Session Completed';
+
+  @override
+  String get groupSessionCancelled => 'Group Session Cancelled';
+
+  @override
+  String get noGroupSessions => 'No group sessions yet';
+
+  @override
+  String get startGroupSession => 'Start a group session to collaborate with other students and Helpys!';
+
+  @override
+  String get groupMessageSent => 'Group message sent';
+
+  @override
+  String failedToSendGroupMessage(String error) {
+    return 'Failed to send group message: $error';
+  }
+
+  @override
+  String groupTyping(String name) {
+    return '$name is typing...';
+  }
+
+  @override
+  String multipleGroupTyping(int count) {
+    return '$count people are typing...';
+  }
+
+  @override
+  String get achievements => 'Achievements';
+
+  @override
+  String get arts => 'Arts';
+
+  @override
+  String get behindGoal => 'Behind Goal';
+
+  @override
+  String get biology => 'Biology';
+
+  @override
+  String get browseSubjects => 'Browse Subjects';
+
+  @override
+  String get chemistry => 'Chemistry';
+
+  @override
+  String get chooseYourSubjects => 'Choose Your Subjects';
+
+  @override
+  String get computerScience => 'Computer Science';
+
+  @override
+  String get continueLearningComingSoon => 'Continue learning feature coming soon!';
+
+  @override
+  String get continueToHelpySetup => 'Continue to Helpy Setup';
+
+  @override
+  String daysAgo(int days) {
+    return '$days days ago';
+  }
+
+  @override
+  String get daysPlural => 'days';
+
+  @override
+  String get daysSingular => 'day';
+
+  @override
+  String get economics => 'Economics';
+
+  @override
+  String get english => 'English';
+
+  @override
+  String errorSavingProfile(String error) {
+    return 'Error saving profile: $error';
+  }
+
+  @override
+  String errorSavingSubjects(String error) {
+    return 'Error saving subjects: $error';
+  }
+
+  @override
+  String get french => 'French';
+
+  @override
+  String get fullActivityHistoryComingSoon => 'Full activity history coming soon!';
+
+  @override
+  String get geography => 'Geography';
+
+  @override
+  String get getStartedWithTheseActions => 'Get started with these actions';
+
+  @override
+  String get goodAfternoon => 'Good afternoon';
+
+  @override
+  String get goodEvening => 'Good evening';
+
+  @override
+  String get goodMorning => 'Good morning';
+
+  @override
+  String get history => 'History';
+
+  @override
+  String hoursAgo(int hours) {
+    return '$hours hours ago';
+  }
+
+  @override
+  String get justNow => 'Just now';
+
+  @override
+  String get keepUpTheGreatWork => 'Keep up the great work!';
+
+  @override
+  String get languages => 'Languages';
+
+  @override
+  String get lessonBookmarked => 'Lesson bookmarked!';
+
+  @override
+  String get lessonSharing => 'Sharing lesson...';
+
+  @override
+  String lessonStartFailed(String error) {
+    return 'Failed to start lesson: $error';
+  }
+
+  @override
+  String get lessonsCompleted => 'Lessons Completed';
+
+  @override
+  String get loadingProgressData => 'Loading progress data...';
+
+  @override
+  String get mathematics => 'Mathematics';
+
+  @override
+  String minutesAgo(int minutes) {
+    return '$minutes minutes ago';
+  }
+
+  @override
+  String get moreActivities => 'more activities';
+
+  @override
+  String get music => 'Music';
+
+  @override
+  String get myProgress => 'My Progress';
+
+  @override
+  String get noRecentActivityYet => 'No recent activity yet';
+
+  @override
+  String get onTrack => 'On Track';
+
+  @override
+  String percentComplete(int percent) {
+    return '$percent% complete';
+  }
+
+  @override
+  String get physics => 'Physics';
+
+  @override
+  String get pleaseEnterValidEmail => 'Please enter a valid email';
+
+  @override
+  String get pleaseEnterYourEmail => 'Please enter your email';
+
+  @override
+  String get pleaseSelectAtLeastOneSubject => 'Please select at least one subject';
+
+  @override
+  String get practiceQuiz => 'Practice Quiz';
+
+  @override
+  String get practiceQuizComingSoon => 'Practice quiz feature coming soon!';
+
+  @override
+  String get quickActions => 'Quick Actions';
+
+  @override
+  String get readyToContinueLearning => 'Ready to continue learning?';
+
+  @override
+  String get recentActivity => 'Recent Activity';
+
+  @override
+  String get socialStudies => 'Social Studies';
+
+  @override
+  String get spanish => 'Spanish';
+
+  @override
+  String get startLearningToSeeProgress => 'Start learning to see your progress here';
+
+  @override
+  String get startNewChat => 'Start New Chat';
+
+  @override
+  String get stem => 'STEM';
+
+  @override
+  String stepXOfY(int step, int total) {
+    return 'Step $step of $total';
+  }
+
+  @override
+  String get streak => 'streak!';
+
+  @override
+  String get studyGroups => 'Study Groups';
+
+  @override
+  String get studyGroupsComingSoon => 'Study groups feature coming soon!';
+
+  @override
+  String get studyTime => 'Study Time';
+
+  @override
+  String subjectsSelected(int count) {
+    return '$count subjects selected';
+  }
+
+  @override
+  String get time => 'Time';
+
+  @override
+  String get trackYourLearningJourney => 'Track your learning journey';
+
+  @override
+  String get trackYourLearningTimeline => 'Track your learning timeline';
+
+  @override
+  String get vietnamese => 'Vietnamese';
+
+  @override
+  String get view => 'View';
+
+  @override
+  String get viewAll => 'View All';
+
+  @override
+  String get viewAllActivitiesComingSoon => 'View all activities coming soon!';
+
+  @override
+  String get visualArts => 'Visual Arts';
+
+  @override
+  String get yourLearningTimeline => 'Your Learning Timeline';
+
+  @override
+  String get yourProgress => 'Your Progress';
+
+  @override
+  String get yourProgressInDifferentSubjects => 'Your progress in different subjects';
 }

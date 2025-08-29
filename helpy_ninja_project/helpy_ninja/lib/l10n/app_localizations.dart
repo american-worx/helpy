@@ -371,454 +371,352 @@ abstract class AppLocalizations {
   /// **'Failed to start chat: {error}'**
   String failedToStartChat(String error);
 
-  /// Title for subject selection screen
+  /// Error message when conversations fail to load
   ///
   /// In en, this message translates to:
-  /// **'Choose Your Subjects'**
-  String get chooseYourSubjects;
+  /// **'Failed to load conversations: {error}'**
+  String failedToLoadConversations(String error);
 
-  /// Progress indicator text
+  /// Message shown when user has no conversations
   ///
   /// In en, this message translates to:
-  /// **'Step {step} of {total}'**
-  String stepXOfY(int step, int total);
+  /// **'No conversations yet'**
+  String get noConversationsYet;
 
-  /// Count of selected subjects
+  /// Encouragement message to start first conversation
   ///
   /// In en, this message translates to:
-  /// **'{count} subjects selected'**
-  String subjectsSelected(int count);
+  /// **'Start a conversation with your Helpy to begin learning!'**
+  String get startAConversation;
 
-  /// Validation message for subject selection
+  /// Button text to send message
   ///
   /// In en, this message translates to:
-  /// **'Please select at least one subject'**
-  String get pleaseSelectAtLeastOneSubject;
+  /// **'Send Message'**
+  String get sendMessage;
 
-  /// Button text to proceed to Helpy customization
+  /// Placeholder text for message input
   ///
   /// In en, this message translates to:
-  /// **'Continue to Helpy Setup'**
-  String get continueToHelpySetup;
+  /// **'Type your message...'**
+  String get typeYourMessage;
 
-  /// Error message when saving subjects fails
+  /// Error message when message fails to send
   ///
   /// In en, this message translates to:
-  /// **'Error saving subjects: {error}'**
-  String errorSavingSubjects(String error);
+  /// **'Failed to send message: {error}'**
+  String failedToSendMessage(String error);
 
-  /// Mathematics subject name
+  /// Success message when message is sent
   ///
   /// In en, this message translates to:
-  /// **'Mathematics'**
-  String get mathematics;
+  /// **'Message sent'**
+  String get messageSent;
 
-  /// Physics subject name
+  /// Error message when message fails
   ///
   /// In en, this message translates to:
-  /// **'Physics'**
-  String get physics;
+  /// **'Message failed'**
+  String get messageFailed;
 
-  /// Chemistry subject name
+  /// Status message when message is delivered
   ///
   /// In en, this message translates to:
-  /// **'Chemistry'**
-  String get chemistry;
+  /// **'Message delivered'**
+  String get messageDelivered;
 
-  /// Biology subject name
+  /// Status message when message is read
   ///
   /// In en, this message translates to:
-  /// **'Biology'**
-  String get biology;
+  /// **'Message read'**
+  String get messageRead;
 
-  /// Computer Science subject name
+  /// Indicator text when someone is typing
   ///
   /// In en, this message translates to:
-  /// **'Computer Science'**
-  String get computerScience;
+  /// **'typing...'**
+  String get typing;
 
-  /// English subject name
+  /// Status text for online users
   ///
   /// In en, this message translates to:
-  /// **'English'**
-  String get english;
+  /// **'Online now'**
+  String get onlineNow;
 
-  /// Vietnamese subject name
+  /// Status text showing when user was last seen
   ///
   /// In en, this message translates to:
-  /// **'Vietnamese'**
-  String get vietnamese;
+  /// **'Last seen {time}'**
+  String lastSeen(String time);
 
-  /// French subject name
+  /// Indicator text when Helpy is processing
   ///
   /// In en, this message translates to:
-  /// **'French'**
-  String get french;
+  /// **'Helpy is thinking...'**
+  String get helpyThinking;
 
-  /// Spanish subject name
+  /// Indicator text when Helpy is typing
   ///
   /// In en, this message translates to:
-  /// **'Spanish'**
-  String get spanish;
+  /// **'Helpy is typing...'**
+  String get helpyTyping;
 
-  /// History subject name
+  /// Status text for online Helpy
   ///
   /// In en, this message translates to:
-  /// **'History'**
-  String get history;
+  /// **'Helpy is online'**
+  String get helpyOnline;
 
-  /// Geography subject name
+  /// Status text for offline Helpy
   ///
   /// In en, this message translates to:
-  /// **'Geography'**
-  String get geography;
+  /// **'Helpy is offline'**
+  String get helpyOffline;
 
-  /// Economics subject name
+  /// Error message when Helpy fails to load
   ///
   /// In en, this message translates to:
-  /// **'Economics'**
-  String get economics;
+  /// **'Failed to load Helpy: {error}'**
+  String failedToLoadHelpy(String error);
 
-  /// Visual Arts subject name
+  /// Error message when Helpy cannot be found
   ///
   /// In en, this message translates to:
-  /// **'Visual Arts'**
-  String get visualArts;
+  /// **'Helpy not found'**
+  String get helpyNotFound;
 
-  /// Music subject name
+  /// Button text to select Helpy
   ///
   /// In en, this message translates to:
-  /// **'Music'**
-  String get music;
+  /// **'Select Helpy'**
+  String get selectHelpy;
 
-  /// STEM category name
+  /// Button text to change Helpy
   ///
   /// In en, this message translates to:
-  /// **'STEM'**
-  String get stem;
+  /// **'Change Helpy'**
+  String get changeHelpy;
 
-  /// Languages category name
+  /// Success message when Helpy is changed
   ///
   /// In en, this message translates to:
-  /// **'Languages'**
-  String get languages;
+  /// **'Helpy changed successfully'**
+  String get helpyChanged;
 
-  /// Social Studies category name
+  /// Error message when changing Helpy fails
   ///
   /// In en, this message translates to:
-  /// **'Social Studies'**
-  String get socialStudies;
+  /// **'Failed to change Helpy: {error}'**
+  String failedToChangeHelpy(String error);
 
-  /// Arts category name
+  /// Title for Helpy personality selection
   ///
   /// In en, this message translates to:
-  /// **'Arts'**
-  String get arts;
+  /// **'Helpy Personality'**
+  String get helpyPersonality;
 
-  /// Morning greeting
+  /// Friendly Helpy personality
   ///
   /// In en, this message translates to:
-  /// **'Good morning'**
-  String get goodMorning;
+  /// **'Friendly'**
+  String get friendly;
 
-  /// Afternoon greeting
+  /// Professional Helpy personality
   ///
   /// In en, this message translates to:
-  /// **'Good afternoon'**
-  String get goodAfternoon;
+  /// **'Professional'**
+  String get professional;
 
-  /// Evening greeting
+  /// Playful Helpy personality
   ///
   /// In en, this message translates to:
-  /// **'Good evening'**
-  String get goodEvening;
+  /// **'Playful'**
+  String get playful;
 
-  /// Welcome message asking if user is ready to learn
+  /// Wise Helpy personality
   ///
   /// In en, this message translates to:
-  /// **'Ready to continue learning?'**
-  String get readyToContinueLearning;
+  /// **'Wise'**
+  String get wise;
 
-  /// Singular form of day
+  /// Encouraging Helpy personality
   ///
   /// In en, this message translates to:
-  /// **'day'**
-  String get daysSingular;
+  /// **'Encouraging'**
+  String get encouraging;
 
-  /// Plural form of days
+  /// Patient Helpy personality
   ///
   /// In en, this message translates to:
-  /// **'days'**
-  String get daysPlural;
+  /// **'Patient'**
+  String get patient;
 
-  /// Streak indicator text
+  /// Title for lesson viewer screen
   ///
   /// In en, this message translates to:
-  /// **'streak!'**
-  String get streak;
+  /// **'Lesson Viewer'**
+  String get lessonViewer;
 
-  /// Progress section title
+  /// Button text to go to next lesson section
   ///
   /// In en, this message translates to:
-  /// **'Your Progress'**
-  String get yourProgress;
+  /// **'Next Section'**
+  String get nextSection;
 
-  /// Progress section subtitle
+  /// Button text to go to previous lesson section
   ///
   /// In en, this message translates to:
-  /// **'Track your learning journey'**
-  String get trackYourLearningJourney;
+  /// **'Previous Section'**
+  String get previousSection;
 
-  /// Loading message for progress data
+  /// Label for lesson section
   ///
   /// In en, this message translates to:
-  /// **'Loading progress data...'**
-  String get loadingProgressData;
+  /// **'Section'**
+  String get section;
 
-  /// Email validation message
+  /// Preposition for section numbering
   ///
   /// In en, this message translates to:
-  /// **'Please enter your email'**
-  String get pleaseEnterYourEmail;
+  /// **'of'**
+  String get oF;
 
-  /// Email format validation message
+  /// Button text to complete lesson
   ///
   /// In en, this message translates to:
-  /// **'Please enter a valid email'**
-  String get pleaseEnterValidEmail;
+  /// **'Complete Lesson'**
+  String get completeLesson;
 
-  /// Error message when saving profile fails
+  /// Button text to start quiz
   ///
   /// In en, this message translates to:
-  /// **'Error saving profile: {error}'**
-  String errorSavingProfile(String error);
+  /// **'Take Quiz'**
+  String get takeQuiz;
 
-  /// Encouragement message for progress
+  /// Message shown when lesson is completed
   ///
   /// In en, this message translates to:
-  /// **'Keep up the great work!'**
-  String get keepUpTheGreatWork;
+  /// **'Lesson Completed'**
+  String get lessonCompleted;
 
-  /// Label for completed lessons count
+  /// Title for quiz results screen
   ///
   /// In en, this message translates to:
-  /// **'Lessons Completed'**
-  String get lessonsCompleted;
+  /// **'Quiz Results'**
+  String get quizResults;
 
-  /// Label for achievements section
+  /// Button text to review quiz answers
   ///
   /// In en, this message translates to:
-  /// **'Achievements'**
-  String get achievements;
+  /// **'Review Answers'**
+  String get reviewAnswers;
 
-  /// Label for total study time
+  /// Button text to retake quiz
   ///
   /// In en, this message translates to:
-  /// **'Study Time'**
-  String get studyTime;
+  /// **'Retake Quiz'**
+  String get retakeQuiz;
 
-  /// Label for weekly goal
+  /// Message shown when quiz is completed
   ///
   /// In en, this message translates to:
-  /// **'Weekly Goal'**
-  String get weeklyGoal;
+  /// **'Quiz Completed'**
+  String get quizCompleted;
 
-  /// Status indicating user is meeting their goal
+  /// Label for correct answer
   ///
   /// In en, this message translates to:
-  /// **'On Track'**
-  String get onTrack;
+  /// **'Correct'**
+  String get correct;
 
-  /// Status indicating user is behind their goal
+  /// Label for incorrect answer
   ///
   /// In en, this message translates to:
-  /// **'Behind Goal'**
-  String get behindGoal;
+  /// **'Incorrect'**
+  String get incorrect;
 
-  /// Message shown when continue learning feature is not yet available
+  /// Label for user's answer
   ///
   /// In en, this message translates to:
-  /// **'Continue learning functionality coming soon!'**
-  String get continueLearningComingSoon;
+  /// **'Your Answer'**
+  String get yourAnswer;
 
-  /// Message shown when practice quiz feature is not yet available
+  /// Label for correct answer
   ///
   /// In en, this message translates to:
-  /// **'Practice quiz functionality coming soon!'**
-  String get practiceQuizComingSoon;
+  /// **'Correct Answer'**
+  String get correctAnswer;
 
-  /// Message shown when study groups feature is not yet available
+  /// Title for quiz score section
   ///
   /// In en, this message translates to:
-  /// **'Study groups functionality coming soon!'**
-  String get studyGroupsComingSoon;
+  /// **'Quiz Score'**
+  String get quizScore;
 
-  /// Message shown when full activity history feature is not yet available
+  /// Label for total number of questions
   ///
   /// In en, this message translates to:
-  /// **'Full activity history coming soon!'**
-  String get fullActivityHistoryComingSoon;
+  /// **'Total Questions'**
+  String get totalQuestions;
 
-  /// Message shown when view all activities feature is not yet available
+  /// Label for number of correct answers
   ///
   /// In en, this message translates to:
-  /// **'View all activities coming soon!'**
-  String get viewAllActivitiesComingSoon;
+  /// **'Correct Answers'**
+  String get correctAnswers;
 
-  /// Text for very recent timestamp
+  /// Label for number of incorrect answers
   ///
   /// In en, this message translates to:
-  /// **'Just now'**
-  String get justNow;
+  /// **'Incorrect Answers'**
+  String get incorrectAnswers;
 
-  /// Text for minutes ago timestamp
+  /// Label for unanswered questions
   ///
   /// In en, this message translates to:
-  /// **'{minutes} min ago'**
-  String minutesAgo(int minutes);
+  /// **'Unanswered'**
+  String get unanswered;
 
-  /// Text for hours ago timestamp
+  /// Label for time taken to complete quiz
   ///
   /// In en, this message translates to:
-  /// **'{hours} hours ago'**
-  String hoursAgo(int hours);
+  /// **'Time Taken'**
+  String get timeTaken;
 
-  /// Text for days ago timestamp
+  /// Title for quiz feedback section
   ///
   /// In en, this message translates to:
-  /// **'{days} days ago'**
-  String daysAgo(int days);
+  /// **'Quiz Feedback'**
+  String get quizFeedback;
 
-  /// Text for progress percentage
+  /// Encouragement message for good quiz performance
   ///
   /// In en, this message translates to:
-  /// **'{percent}% complete'**
-  String percentComplete(int percent);
+  /// **'Great Job!'**
+  String get greatJob;
 
-  /// Title for quick actions section
+  /// Encouragement message for improvement needed
   ///
   /// In en, this message translates to:
-  /// **'Quick Actions'**
-  String get quickActions;
+  /// **'Keep Practicing!'**
+  String get keepPracticing;
 
-  /// Subtitle for quick actions section
+  /// Encouragement message for significant improvement needed
   ///
   /// In en, this message translates to:
-  /// **'Get started with these actions'**
-  String get getStartedWithTheseActions;
+  /// **'Need More Study!'**
+  String get needMoreStudy;
 
-  /// Button text to start a new chat
+  /// Message for perfect quiz score
   ///
   /// In en, this message translates to:
-  /// **'Start New Chat'**
-  String get startNewChat;
-
-  /// Button text to browse subjects
-  ///
-  /// In en, this message translates to:
-  /// **'Browse Subjects'**
-  String get browseSubjects;
-
-  /// Button text to continue learning after completing a lesson
-  ///
-  /// In en, this message translates to:
-  /// **'Continue Learning'**
-  String get continueLearning;
-
-  /// Button text for practice quiz
-  ///
-  /// In en, this message translates to:
-  /// **'Practice Quiz'**
-  String get practiceQuiz;
-
-  /// Button text for progress tracking
-  ///
-  /// In en, this message translates to:
-  /// **'My Progress'**
-  String get myProgress;
-
-  /// Button text for study groups
-  ///
-  /// In en, this message translates to:
-  /// **'Study Groups'**
-  String get studyGroups;
-
-  /// Title for recent activity section
-  ///
-  /// In en, this message translates to:
-  /// **'Recent Activity'**
-  String get recentActivity;
-
-  /// Message shown when there is no recent activity
-  ///
-  /// In en, this message translates to:
-  /// **'No recent activity yet'**
-  String get noRecentActivityYet;
-
-  /// Encouragement message when no activity is present
-  ///
-  /// In en, this message translates to:
-  /// **'Start learning to see your progress here'**
-  String get startLearningToSeeProgress;
-
-  /// Subtitle for recent activity section
-  ///
-  /// In en, this message translates to:
-  /// **'Your learning timeline'**
-  String get yourLearningTimeline;
-
-  /// Button text to view all items
-  ///
-  /// In en, this message translates to:
-  /// **'View All'**
-  String get viewAll;
-
-  /// Button text to view items
-  ///
-  /// In en, this message translates to:
-  /// **'View'**
-  String get view;
-
-  /// Text for additional activities count
-  ///
-  /// In en, this message translates to:
-  /// **'more activities'**
-  String get moreActivities;
-
-  /// Title for subject progress section
-  ///
-  /// In en, this message translates to:
-  /// **'Subject Progress'**
-  String get subjectProgress;
-
-  /// Subtitle for subject progress section
-  ///
-  /// In en, this message translates to:
-  /// **'Your progress in different subjects'**
-  String get yourProgressInDifferentSubjects;
-
-  /// Error message when lesson fails to start
-  ///
-  /// In en, this message translates to:
-  /// **'Failed to start lesson: {error}'**
-  String lessonStartFailed(String error);
-
-  /// Success message when lesson is bookmarked
-  ///
-  /// In en, this message translates to:
-  /// **'Lesson bookmarked!'**
-  String get lessonBookmarked;
-
-  /// Message shown when sharing a lesson
-  ///
-  /// In en, this message translates to:
-  /// **'Sharing lesson...'**
-  String get lessonSharing;
+  /// **'Perfect Score!'**
+  String get perfectScore;
 
   /// Message shown when lesson report is submitted
   ///
   /// In en, this message translates to:
-  /// **'Report submitted'**
+  /// **'Lesson report submitted successfully'**
   String get lessonReportSubmitted;
 
   /// Title for lesson completion dialog
@@ -832,6 +730,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Congratulations! You have successfully completed this lesson.'**
   String get lessonCompleteMessage;
+
+  /// Button text to continue learning after completing a lesson
+  ///
+  /// In en, this message translates to:
+  /// **'Continue Learning'**
+  String get continueLearning;
 
   /// Error message when lesson is not found
   ///
@@ -899,11 +803,23 @@ abstract class AppLocalizations {
   /// **'Weekly Progress'**
   String get weeklyProgress;
 
+  /// Label for weekly goal
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly Goal'**
+  String get weeklyGoal;
+
   /// Label for daily average
   ///
   /// In en, this message translates to:
   /// **'Average Per Day'**
   String get averagePerDay;
+
+  /// Title for subject progress section
+  ///
+  /// In en, this message translates to:
+  /// **'Subject Progress'**
+  String get subjectProgress;
 
   /// Label for lesson count
   ///
@@ -1054,6 +970,618 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Days'**
   String get days;
+
+  /// Title for group sessions screen
+  ///
+  /// In en, this message translates to:
+  /// **'Group Sessions'**
+  String get groupSessions;
+
+  /// Button text to create a new group session
+  ///
+  /// In en, this message translates to:
+  /// **'Create Group Session'**
+  String get createGroupSession;
+
+  /// Button text to join an existing group session
+  ///
+  /// In en, this message translates to:
+  /// **'Join Group Session'**
+  String get joinGroupSession;
+
+  /// Button text to leave a group session
+  ///
+  /// In en, this message translates to:
+  /// **'Leave Group Session'**
+  String get leaveGroupSession;
+
+  /// Label for group session name input
+  ///
+  /// In en, this message translates to:
+  /// **'Group Session Name'**
+  String get groupSessionName;
+
+  /// Label for participants list
+  ///
+  /// In en, this message translates to:
+  /// **'Participants'**
+  String get participants;
+
+  /// Label for Helpy participants list
+  ///
+  /// In en, this message translates to:
+  /// **'Helpy Participants'**
+  String get helpyParticipants;
+
+  /// Placeholder text for group message input
+  ///
+  /// In en, this message translates to:
+  /// **'Send Message to Group'**
+  String get sendMessageToGroup;
+
+  /// Success message when group session is created
+  ///
+  /// In en, this message translates to:
+  /// **'Group session created successfully'**
+  String get groupSessionCreated;
+
+  /// Success message when user joins a group session
+  ///
+  /// In en, this message translates to:
+  /// **'Joined group session successfully'**
+  String get groupSessionJoined;
+
+  /// Success message when user leaves a group session
+  ///
+  /// In en, this message translates to:
+  /// **'Left group session successfully'**
+  String get groupSessionLeft;
+
+  /// Error message when group session creation fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to create group session: {error}'**
+  String failedToCreateGroupSession(String error);
+
+  /// Error message when joining group session fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to join group session: {error}'**
+  String failedToJoinGroupSession(String error);
+
+  /// Error message when leaving group session fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to leave group session: {error}'**
+  String failedToLeaveGroupSession(String error);
+
+  /// Error message when group session cannot be found
+  ///
+  /// In en, this message translates to:
+  /// **'Group session not found'**
+  String get groupSessionNotFound;
+
+  /// Status for active participant
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get active;
+
+  /// Status for inactive participant
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get inactive;
+
+  /// Status for participant who left
+  ///
+  /// In en, this message translates to:
+  /// **'Left'**
+  String get left;
+
+  /// Status for disconnected participant
+  ///
+  /// In en, this message translates to:
+  /// **'Disconnected'**
+  String get disconnected;
+
+  /// Status text for active group session
+  ///
+  /// In en, this message translates to:
+  /// **'Group Session Active'**
+  String get groupSessionActive;
+
+  /// Status text for paused group session
+  ///
+  /// In en, this message translates to:
+  /// **'Group Session Paused'**
+  String get groupSessionPaused;
+
+  /// Status text for completed group session
+  ///
+  /// In en, this message translates to:
+  /// **'Group Session Completed'**
+  String get groupSessionCompleted;
+
+  /// Status text for cancelled group session
+  ///
+  /// In en, this message translates to:
+  /// **'Group Session Cancelled'**
+  String get groupSessionCancelled;
+
+  /// Message shown when there are no group sessions
+  ///
+  /// In en, this message translates to:
+  /// **'No group sessions yet'**
+  String get noGroupSessions;
+
+  /// Encouragement message to start first group session
+  ///
+  /// In en, this message translates to:
+  /// **'Start a group session to collaborate with other students and Helpys!'**
+  String get startGroupSession;
+
+  /// Success message when group message is sent
+  ///
+  /// In en, this message translates to:
+  /// **'Group message sent'**
+  String get groupMessageSent;
+
+  /// Error message when group message fails to send
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to send group message: {error}'**
+  String failedToSendGroupMessage(String error);
+
+  /// Indicator text when someone is typing in group chat
+  ///
+  /// In en, this message translates to:
+  /// **'{name} is typing...'**
+  String groupTyping(String name);
+
+  /// Indicator text when multiple people are typing in group chat
+  ///
+  /// In en, this message translates to:
+  /// **'{count} people are typing...'**
+  String multipleGroupTyping(int count);
+
+  /// Label for achievements section
+  ///
+  /// In en, this message translates to:
+  /// **'Achievements'**
+  String get achievements;
+
+  /// Arts subject name
+  ///
+  /// In en, this message translates to:
+  /// **'Arts'**
+  String get arts;
+
+  /// Status for being behind goal
+  ///
+  /// In en, this message translates to:
+  /// **'Behind Goal'**
+  String get behindGoal;
+
+  /// Biology subject name
+  ///
+  /// In en, this message translates to:
+  /// **'Biology'**
+  String get biology;
+
+  /// Button text to browse subjects
+  ///
+  /// In en, this message translates to:
+  /// **'Browse Subjects'**
+  String get browseSubjects;
+
+  /// Chemistry subject name
+  ///
+  /// In en, this message translates to:
+  /// **'Chemistry'**
+  String get chemistry;
+
+  /// Title for subject selection screen
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Your Subjects'**
+  String get chooseYourSubjects;
+
+  /// Computer Science subject name
+  ///
+  /// In en, this message translates to:
+  /// **'Computer Science'**
+  String get computerScience;
+
+  /// Message shown when continue learning feature is not yet available
+  ///
+  /// In en, this message translates to:
+  /// **'Continue learning feature coming soon!'**
+  String get continueLearningComingSoon;
+
+  /// Button text to proceed to Helpy customization
+  ///
+  /// In en, this message translates to:
+  /// **'Continue to Helpy Setup'**
+  String get continueToHelpySetup;
+
+  /// Text for timestamp in days
+  ///
+  /// In en, this message translates to:
+  /// **'{days} days ago'**
+  String daysAgo(int days);
+
+  /// Plural form of days
+  ///
+  /// In en, this message translates to:
+  /// **'days'**
+  String get daysPlural;
+
+  /// Singular form of day
+  ///
+  /// In en, this message translates to:
+  /// **'day'**
+  String get daysSingular;
+
+  /// Economics subject name
+  ///
+  /// In en, this message translates to:
+  /// **'Economics'**
+  String get economics;
+
+  /// English subject name
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get english;
+
+  /// Error message when saving profile fails
+  ///
+  /// In en, this message translates to:
+  /// **'Error saving profile: {error}'**
+  String errorSavingProfile(String error);
+
+  /// Error message when saving subjects fails
+  ///
+  /// In en, this message translates to:
+  /// **'Error saving subjects: {error}'**
+  String errorSavingSubjects(String error);
+
+  /// French subject name
+  ///
+  /// In en, this message translates to:
+  /// **'French'**
+  String get french;
+
+  /// Message shown when full activity history is not yet available
+  ///
+  /// In en, this message translates to:
+  /// **'Full activity history coming soon!'**
+  String get fullActivityHistoryComingSoon;
+
+  /// Geography subject name
+  ///
+  /// In en, this message translates to:
+  /// **'Geography'**
+  String get geography;
+
+  /// Subtitle for quick actions section
+  ///
+  /// In en, this message translates to:
+  /// **'Get started with these actions'**
+  String get getStartedWithTheseActions;
+
+  /// Afternoon greeting
+  ///
+  /// In en, this message translates to:
+  /// **'Good afternoon'**
+  String get goodAfternoon;
+
+  /// Evening greeting
+  ///
+  /// In en, this message translates to:
+  /// **'Good evening'**
+  String get goodEvening;
+
+  /// Morning greeting
+  ///
+  /// In en, this message translates to:
+  /// **'Good morning'**
+  String get goodMorning;
+
+  /// History subject name
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get history;
+
+  /// Text for timestamp in hours
+  ///
+  /// In en, this message translates to:
+  /// **'{hours} hours ago'**
+  String hoursAgo(int hours);
+
+  /// Text for very recent timestamp
+  ///
+  /// In en, this message translates to:
+  /// **'Just now'**
+  String get justNow;
+
+  /// Encouragement message for learning progress
+  ///
+  /// In en, this message translates to:
+  /// **'Keep up the great work!'**
+  String get keepUpTheGreatWork;
+
+  /// Languages category name
+  ///
+  /// In en, this message translates to:
+  /// **'Languages'**
+  String get languages;
+
+  /// Success message when lesson is bookmarked
+  ///
+  /// In en, this message translates to:
+  /// **'Lesson bookmarked!'**
+  String get lessonBookmarked;
+
+  /// Message shown when sharing a lesson
+  ///
+  /// In en, this message translates to:
+  /// **'Sharing lesson...'**
+  String get lessonSharing;
+
+  /// Error message when lesson fails to start
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to start lesson: {error}'**
+  String lessonStartFailed(String error);
+
+  /// Label for completed lessons count
+  ///
+  /// In en, this message translates to:
+  /// **'Lessons Completed'**
+  String get lessonsCompleted;
+
+  /// Loading message for progress data
+  ///
+  /// In en, this message translates to:
+  /// **'Loading progress data...'**
+  String get loadingProgressData;
+
+  /// Mathematics subject name
+  ///
+  /// In en, this message translates to:
+  /// **'Mathematics'**
+  String get mathematics;
+
+  /// Text for timestamp in minutes
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} minutes ago'**
+  String minutesAgo(int minutes);
+
+  /// Text for additional activity count
+  ///
+  /// In en, this message translates to:
+  /// **'more activities'**
+  String get moreActivities;
+
+  /// Music subject name
+  ///
+  /// In en, this message translates to:
+  /// **'Music'**
+  String get music;
+
+  /// Button text for progress tracking
+  ///
+  /// In en, this message translates to:
+  /// **'My Progress'**
+  String get myProgress;
+
+  /// Message shown when there is no recent activity
+  ///
+  /// In en, this message translates to:
+  /// **'No recent activity yet'**
+  String get noRecentActivityYet;
+
+  /// Status for being on track with goals
+  ///
+  /// In en, this message translates to:
+  /// **'On Track'**
+  String get onTrack;
+
+  /// Text for percentage completion
+  ///
+  /// In en, this message translates to:
+  /// **'{percent}% complete'**
+  String percentComplete(int percent);
+
+  /// Physics subject name
+  ///
+  /// In en, this message translates to:
+  /// **'Physics'**
+  String get physics;
+
+  /// Email format validation message
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email'**
+  String get pleaseEnterValidEmail;
+
+  /// Email validation message
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your email'**
+  String get pleaseEnterYourEmail;
+
+  /// Validation message for subject selection
+  ///
+  /// In en, this message translates to:
+  /// **'Please select at least one subject'**
+  String get pleaseSelectAtLeastOneSubject;
+
+  /// Button text for practice quiz
+  ///
+  /// In en, this message translates to:
+  /// **'Practice Quiz'**
+  String get practiceQuiz;
+
+  /// Message shown when practice quiz feature is not yet available
+  ///
+  /// In en, this message translates to:
+  /// **'Practice quiz feature coming soon!'**
+  String get practiceQuizComingSoon;
+
+  /// Title for quick actions section
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Actions'**
+  String get quickActions;
+
+  /// Greeting message asking if user is ready to continue learning
+  ///
+  /// In en, this message translates to:
+  /// **'Ready to continue learning?'**
+  String get readyToContinueLearning;
+
+  /// Title for recent activity section
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Activity'**
+  String get recentActivity;
+
+  /// Social Studies category name
+  ///
+  /// In en, this message translates to:
+  /// **'Social Studies'**
+  String get socialStudies;
+
+  /// Spanish subject name
+  ///
+  /// In en, this message translates to:
+  /// **'Spanish'**
+  String get spanish;
+
+  /// Encouragement message to start learning
+  ///
+  /// In en, this message translates to:
+  /// **'Start learning to see your progress here'**
+  String get startLearningToSeeProgress;
+
+  /// Button text to start a new chat
+  ///
+  /// In en, this message translates to:
+  /// **'Start New Chat'**
+  String get startNewChat;
+
+  /// STEM category name
+  ///
+  /// In en, this message translates to:
+  /// **'STEM'**
+  String get stem;
+
+  /// Progress indicator text
+  ///
+  /// In en, this message translates to:
+  /// **'Step {step} of {total}'**
+  String stepXOfY(int step, int total);
+
+  /// Streak indicator text
+  ///
+  /// In en, this message translates to:
+  /// **'streak!'**
+  String get streak;
+
+  /// Button text for study groups
+  ///
+  /// In en, this message translates to:
+  /// **'Study Groups'**
+  String get studyGroups;
+
+  /// Message shown when study groups feature is not yet available
+  ///
+  /// In en, this message translates to:
+  /// **'Study groups feature coming soon!'**
+  String get studyGroupsComingSoon;
+
+  /// Label for study time
+  ///
+  /// In en, this message translates to:
+  /// **'Study Time'**
+  String get studyTime;
+
+  /// Count of selected subjects
+  ///
+  /// In en, this message translates to:
+  /// **'{count} subjects selected'**
+  String subjectsSelected(int count);
+
+  /// Label for time
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get time;
+
+  /// Subtitle for progress section
+  ///
+  /// In en, this message translates to:
+  /// **'Track your learning journey'**
+  String get trackYourLearningJourney;
+
+  /// Subtitle for recent activity section
+  ///
+  /// In en, this message translates to:
+  /// **'Track your learning timeline'**
+  String get trackYourLearningTimeline;
+
+  /// Vietnamese subject name
+  ///
+  /// In en, this message translates to:
+  /// **'Vietnamese'**
+  String get vietnamese;
+
+  /// Button text to view
+  ///
+  /// In en, this message translates to:
+  /// **'View'**
+  String get view;
+
+  /// Button text to view all
+  ///
+  /// In en, this message translates to:
+  /// **'View All'**
+  String get viewAll;
+
+  /// Message shown when view all activities feature is not yet available
+  ///
+  /// In en, this message translates to:
+  /// **'View all activities coming soon!'**
+  String get viewAllActivitiesComingSoon;
+
+  /// Visual Arts subject name
+  ///
+  /// In en, this message translates to:
+  /// **'Visual Arts'**
+  String get visualArts;
+
+  /// Subtitle for recent activity section
+  ///
+  /// In en, this message translates to:
+  /// **'Your Learning Timeline'**
+  String get yourLearningTimeline;
+
+  /// Title for progress section
+  ///
+  /// In en, this message translates to:
+  /// **'Your Progress'**
+  String get yourProgress;
+
+  /// Subtitle for subject progress section
+  ///
+  /// In en, this message translates to:
+  /// **'Your progress in different subjects'**
+  String get yourProgressInDifferentSubjects;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -26,7 +26,7 @@ class HelpyNinjaApp extends ConsumerWidget {
 
     return MaterialApp.router(
       // App configuration
-      title: AppConfig.appName,
+      title: "Helpy Ninja",
       debugShowCheckedModeBanner: AppConfig.isDebug,
 
       // Routing
@@ -44,10 +44,10 @@ class HelpyNinjaApp extends ConsumerWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: const [
-        Locale('en', 'US'), // English
-        Locale('vi', 'VN'), // Vietnamese
+        Locale('en'), // English
+        Locale('vi'), // Vietnamese
       ],
-      locale: const Locale('en', 'US'), // Default locale
+      locale: const Locale('en'), // Default locale
       // Builder for additional app-level configuration
       builder: (context, child) {
         return MediaQuery.withClampedTextScaling(

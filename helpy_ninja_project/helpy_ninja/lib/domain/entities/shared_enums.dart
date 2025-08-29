@@ -34,6 +34,22 @@ enum FocusLevel { focused, balanced, diverse }
 /// Message display styles
 enum MessageDisplayStyle { bubbles, compact, list, minimal }
 
+/// Group session status
+enum GroupSessionStatus {
+  active, // Session is active and ongoing
+  paused, // Session is temporarily paused
+  completed, // Session has been completed
+  cancelled, // Session was cancelled
+}
+
+/// Participant status in a group session
+enum ParticipantStatus {
+  active, // Participant is active in the session
+  inactive, // Participant is temporarily inactive
+  left, // Participant has left the session
+  disconnected, // Participant is disconnected
+}
+
 /// Message reaction class for emoji reactions
 class MessageReaction {
   final String emoji;
