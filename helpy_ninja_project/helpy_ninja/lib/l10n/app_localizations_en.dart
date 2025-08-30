@@ -153,6 +153,71 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get groupChatTitle => 'Group Chat';
+
+  @override
+  String get participantListTitle => 'Participants';
+
+  @override
+  String get sessionStatusActive => 'Active';
+
+  @override
+  String get sessionStatusPaused => 'Paused';
+
+  @override
+  String get sessionStatusCompleted => 'Completed';
+
+  @override
+  String get sessionStatusCancelled => 'Cancelled';
+
+  @override
+  String get helpyStatusOnline => 'Online';
+
+  @override
+  String get helpyStatusThinking => 'Thinking';
+
+  @override
+  String get helpyStatusResponding => 'Responding';
+
+  @override
+  String get helpyStatusOffline => 'Offline';
+
+  @override
+  String get participantStatusActive => 'Active';
+
+  @override
+  String get participantStatusInactive => 'Inactive';
+
+  @override
+  String get participantStatusLeft => 'Left';
+
+  @override
+  String get participantStatusDisconnected => 'Disconnected';
+
+  @override
+  String get addParticipants => 'Add Participants';
+
+  @override
+  String get addParticipant => 'Add Participant';
+
+  @override
+  String get inviteParticipants => 'Invite Participants';
+
+  @override
+  String get participantAdded => 'Participant added successfully';
+
+  @override
+  String failedToAddParticipant(String error) {
+    return 'Failed to add participant: $error';
+  }
+
+  @override
+  String get selectParticipants => 'Select Participants';
+
+  @override
+  String get noParticipantsToAdd => 'No participants to add';
+
+  @override
   String failedToLoadConversations(String error) {
     return 'Failed to load conversations: $error';
   }

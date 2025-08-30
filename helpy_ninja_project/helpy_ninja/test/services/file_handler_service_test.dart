@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:helpy_ninja/services/file_handler_service.dart';
-import 'package:helpy_ninja/domain/entities/chat_settings.dart';
 import 'package:helpy_ninja/domain/entities/shared_enums.dart';
 import 'package:helpy_ninja/domain/entities/message.dart';
 

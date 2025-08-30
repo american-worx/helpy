@@ -7,8 +7,6 @@ import 'package:logger/logger.dart';
 import '../../domain/entities/group_session.dart';
 import '../../domain/entities/message.dart';
 import '../../domain/entities/helpy_personality.dart';
-import '../../domain/entities/user.dart';
-import '../../services/websocket_service.dart';
 import 'group_session_state.dart';
 
 /// Group session notifier for managing group sessions and messages
@@ -371,6 +369,71 @@ class GroupSessionNotifier extends StateNotifier<GroupSessionState> {
       error: null, // Explicitly set to null
       lastUpdated: state.lastUpdated,
     );
+  }
+
+  /// Add a participant to a group session
+  Future<void> addParticipant({
+    required String sessionId,
+    required String participantId,
+    ParticipantStatus status = ParticipantStatus.active,
+  }) async {
+    _logger.d('Adding participant $participantId to session: $sessionId');
+    state = state.copyWith(isLoading: true, error: null);
+
+    try {
+      final sessionIndex = state.sessions.indexWhere((s) => s.id == sessionId);
+      if (sessionIndex == -1) {
+        throw Exception('Session not found: $sessionId');
+      }
+
+      final session = state.sessions[sessionIndex];
+
+      // Check if participant is already in the session
+      if (session.participantIds.contains(participantId)) {
+        _logger
+            .w('Participant $participantId is already in session $sessionId');
+        state = state.copyWith(isLoading: false);
+        return;
+      }
+
+      // Update participant lists and statuses
+      final updatedParticipantIds = [...session.participantIds, participantId];
+      final updatedParticipantStatuses = Map<String, ParticipantStatus>.from(
+        session.participantStatuses,
+      );
+      updatedParticipantStatuses[participantId] = status;
+
+      final updatedSession = session.copyWith(
+        participantIds: updatedParticipantIds,
+        participantStatuses: updatedParticipantStatuses,
+      );
+
+      // Save to storage
+      await _sessionsBox.put(sessionId, updatedSession.toJson());
+      _logger.d('Participant added to session in storage');
+
+      // Update state
+      final updatedSessions = [...state.sessions];
+      updatedSessions[sessionIndex] = updatedSession;
+
+      state = state.copyWith(
+        sessions: updatedSessions,
+        currentSession: updatedSession.id == state.currentSession?.id
+            ? updatedSession
+            : state.currentSession,
+        isLoading: false,
+        lastUpdated: DateTime.now(),
+      );
+
+      _logger.d('Participant added successfully');
+    } catch (e) {
+      _logger.e('Failed to add participant: $e');
+      state = state.copyWith(
+        isLoading: false,
+        error: 'Failed to add participant: $e',
+      );
+      rethrow;
+    }
   }
 
   /// Refresh group session data

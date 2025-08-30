@@ -1,9 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:path_provider/path_provider.dart';
 
 /// Test helper functions for setting up test environment
 class TestHelpers {
@@ -28,49 +26,49 @@ class TestHelpers {
     // Mock platform channels that might be called during testing
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(
-          const MethodChannel('plugins.flutter.io/shared_preferences'),
-          (MethodCall methodCall) async {
-            if (methodCall.method == 'getAll') {
-              return <String, dynamic>{}; // Return empty preferences
-            }
-            return null;
-          },
-        );
+      const MethodChannel('plugins.flutter.io/shared_preferences'),
+      (MethodCall methodCall) async {
+        if (methodCall.method == 'getAll') {
+          return <String, dynamic>{}; // Return empty preferences
+        }
+        return null;
+      },
+    );
 
     // Mock path provider
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(
-          const MethodChannel('plugins.flutter.io/path_provider'),
-          (MethodCall methodCall) async {
-            switch (methodCall.method) {
-              case 'getApplicationDocumentsDirectory':
-                return '/tmp/test_documents';
-              case 'getTemporaryDirectory':
-                return '/tmp/test_temp';
-              case 'getApplicationSupportDirectory':
-                return '/tmp/test_support';
-              case 'getLibraryDirectory':
-                return '/tmp/test_library';
-              case 'getExternalStorageDirectory':
-                return '/tmp/test_external';
-              case 'getExternalCacheDirectories':
-                return ['/tmp/test_external_cache'];
-              case 'getExternalStorageDirectories':
-                return ['/tmp/test_external_storage'];
-              default:
-                return null;
-            }
-          },
-        );
+      const MethodChannel('plugins.flutter.io/path_provider'),
+      (MethodCall methodCall) async {
+        switch (methodCall.method) {
+          case 'getApplicationDocumentsDirectory':
+            return '/tmp/test_documents';
+          case 'getTemporaryDirectory':
+            return '/tmp/test_temp';
+          case 'getApplicationSupportDirectory':
+            return '/tmp/test_support';
+          case 'getLibraryDirectory':
+            return '/tmp/test_library';
+          case 'getExternalStorageDirectory':
+            return '/tmp/test_external';
+          case 'getExternalCacheDirectories':
+            return ['/tmp/test_external_cache'];
+          case 'getExternalStorageDirectories':
+            return ['/tmp/test_external_storage'];
+          default:
+            return null;
+        }
+      },
+    );
 
     // Mock other platform channels as needed
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(
-          const MethodChannel('dexterous.com/flutter/local_notifications'),
-          (MethodCall methodCall) async {
-            return null;
-          },
-        );
+      const MethodChannel('dexterous.com/flutter/local_notifications'),
+      (MethodCall methodCall) async {
+        return null;
+      },
+    );
   }
 
   /// Complete test environment setup

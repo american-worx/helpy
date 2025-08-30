@@ -1,7 +1,6 @@
 import 'package:helpy_ninja/domain/entities/helpy_personality.dart';
 import 'package:helpy_ninja/domain/entities/message.dart';
 import 'package:helpy_ninja/domain/entities/shared_enums.dart';
-import 'package:helpy_ninja/domain/entities/user.dart';
 
 /// Group session entity representing a multi-agent chat session
 class GroupSession {

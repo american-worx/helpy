@@ -1,5 +1,3 @@
-import 'lesson.dart';
-
 /// Learning session entity representing a user's learning activity
 class LearningSession {
   final String id;
@@ -185,21 +183,18 @@ class LearningSession {
       completedAt: json['completedAt'] != null
           ? DateTime.parse(json['completedAt'])
           : null,
-      pausedAt: json['pausedAt'] != null
-          ? DateTime.parse(json['pausedAt'])
-          : null,
+      pausedAt:
+          json['pausedAt'] != null ? DateTime.parse(json['pausedAt']) : null,
       totalTimeSpent: Duration(seconds: json['totalTimeSpent'] ?? 0),
       progressPercentage: (json['progressPercentage'] ?? 0.0).toDouble(),
       currentSectionIndex: json['currentSectionIndex'] ?? 0,
       sessionData: Map<String, dynamic>.from(json['sessionData'] ?? {}),
-      events:
-          (json['events'] as List?)
+      events: (json['events'] as List?)
               ?.map((event) => SessionEvent.fromJson(event))
               .toList() ??
           [],
-      score: json['score'] != null
-          ? SessionScore.fromJson(json['score'])
-          : null,
+      score:
+          json['score'] != null ? SessionScore.fromJson(json['score']) : null,
       metadata: json['metadata'],
     );
   }

@@ -1,5 +1,3 @@
-import 'lesson.dart';
-
 /// Progress tracking entity for user learning advancement
 class UserProgress {
   final String id;
@@ -111,7 +109,6 @@ class UserProgress {
   /// Get progress to next level
   double get progressToNextLevel {
     final currentLevelProgress = (currentLevel - 1) * 10.0;
-    final nextLevelProgress = currentLevel * 10.0;
     final progressInLevel = completionPercentage - currentLevelProgress;
     return (progressInLevel / 10.0).clamp(0.0, 1.0);
   }
@@ -200,13 +197,11 @@ class UserProgress {
       averageScore: (json['averageScore'] ?? 0.0).toDouble(),
       completedLessons: List<String>.from(json['completedLessons'] ?? []),
       unlockedLessons: List<String>.from(json['unlockedLessons'] ?? []),
-      achievements:
-          (json['achievements'] as List?)
+      achievements: (json['achievements'] as List?)
               ?.map((a) => Achievement.fromJson(a))
               .toList() ??
           [],
-      skillProgress:
-          (json['skillProgress'] as Map?)?.map(
+      skillProgress: (json['skillProgress'] as Map?)?.map(
             (key, value) => MapEntry(key, SkillProgress.fromJson(value)),
           ) ??
           {},

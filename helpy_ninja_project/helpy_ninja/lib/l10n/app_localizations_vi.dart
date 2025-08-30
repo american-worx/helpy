@@ -153,6 +153,71 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
+  String get groupChatTitle => 'Trò chuyện nhóm';
+
+  @override
+  String get participantListTitle => 'Người tham gia';
+
+  @override
+  String get sessionStatusActive => 'Hoạt động';
+
+  @override
+  String get sessionStatusPaused => 'Tạm dừng';
+
+  @override
+  String get sessionStatusCompleted => 'Đã hoàn thành';
+
+  @override
+  String get sessionStatusCancelled => 'Đã hủy';
+
+  @override
+  String get helpyStatusOnline => 'Trực tuyến';
+
+  @override
+  String get helpyStatusThinking => 'Đang suy nghĩ';
+
+  @override
+  String get helpyStatusResponding => 'Đang phản hồi';
+
+  @override
+  String get helpyStatusOffline => 'Ngoại tuyến';
+
+  @override
+  String get participantStatusActive => 'Hoạt động';
+
+  @override
+  String get participantStatusInactive => 'Không hoạt động';
+
+  @override
+  String get participantStatusLeft => 'Đã rời đi';
+
+  @override
+  String get participantStatusDisconnected => 'Mất kết nối';
+
+  @override
+  String get addParticipants => 'Thêm người tham gia';
+
+  @override
+  String get addParticipant => 'Thêm người tham gia';
+
+  @override
+  String get inviteParticipants => 'Mời người tham gia';
+
+  @override
+  String get participantAdded => 'Đã thêm người tham gia thành công';
+
+  @override
+  String failedToAddParticipant(String error) {
+    return 'Không thể thêm người tham gia: $error';
+  }
+
+  @override
+  String get selectParticipants => 'Chọn người tham gia';
+
+  @override
+  String get noParticipantsToAdd => 'Không có người tham gia để thêm';
+
+  @override
   String failedToLoadConversations(String error) {
     return 'Không thể tải cuộc trò chuyện: $error';
   }

@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:helpy_ninja/domain/entities/group_session.dart';
-import 'package:helpy_ninja/domain/entities/helpy_personality.dart';
-import 'package:helpy_ninja/domain/entities/message.dart';
 
 /// Multi-agent coordinator for managing AI tutor interactions in group sessions
 class MultiAgentCoordinator {
@@ -24,7 +22,8 @@ class MultiAgentCoordinator {
   void addSession(GroupSession session) {
     _activeSessions[session.id] = session;
     _recentSpeakers[session.id] = <String>{};
-    _lastResponseTime[session.id] = DateTime.now();
+    _lastResponseTime[session.id] =
+        DateTime.now().subtract(Duration(seconds: minResponseInterval + 1));
     _responseQueues[session.id] = ResponseQueue(maxSize: maxQueueSize);
   }
 
@@ -73,12 +72,17 @@ class MultiAgentCoordinator {
   ) async {
     // Check if Helpy can respond
     if (!await canRespond(sessionId, helpyId)) {
+      debugPrint('Helpy $helpyId cannot respond');
       return false;
     }
 
-    // Add to response queue if needed
+    debugPrint('Helpy $helpyId can respond, checking queue status');
+
+    // Check if there are already queued responses or active responses
     final queue = _responseQueues[sessionId];
-    if (queue != null && queue.shouldQueue()) {
+    if (queue != null && !queue.isEmpty) {
+      debugPrint('Queue is not empty, adding Helpy $helpyId to queue');
+      // Add to response queue
       queue.add(
         ResponseRequest(
           helpyId: helpyId,
@@ -89,7 +93,26 @@ class MultiAgentCoordinator {
       return false; // Queued, not immediate permission
     }
 
-    // Grant permission
+    // Check if there's already an active response (recent speaker)
+    final recentSpeakers = _recentSpeakers[sessionId];
+    debugPrint('Recent speakers: ${recentSpeakers?.toList()}');
+    if (recentSpeakers != null && recentSpeakers.isNotEmpty) {
+      debugPrint('Recent speakers exist, adding Helpy $helpyId to queue');
+      // Add to response queue
+      if (queue != null) {
+        queue.add(
+          ResponseRequest(
+            helpyId: helpyId,
+            content: messageContent,
+            timestamp: DateTime.now(),
+          ),
+        );
+      }
+      return false; // Queued, not immediate permission
+    }
+
+    debugPrint('Granting immediate permission to Helpy $helpyId');
+    // Grant permission for immediate response
     _recordResponse(sessionId, helpyId);
     return true;
   }
@@ -214,7 +237,9 @@ class ResponseQueue {
 
   /// Check if new requests should be queued
   bool shouldQueue() {
-    return !isEmpty; // Queue if there are already pending requests
+    // For simplicity, we'll queue if there are any pending requests
+    // In a more sophisticated implementation, we might check for active responses
+    return !isEmpty;
   }
 }
 

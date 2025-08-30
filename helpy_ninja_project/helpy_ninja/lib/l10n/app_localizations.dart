@@ -371,6 +371,132 @@ abstract class AppLocalizations {
   /// **'Failed to start chat: {error}'**
   String failedToStartChat(String error);
 
+  /// Title for group chat screen
+  ///
+  /// In en, this message translates to:
+  /// **'Group Chat'**
+  String get groupChatTitle;
+
+  /// Title for participant list
+  ///
+  /// In en, this message translates to:
+  /// **'Participants'**
+  String get participantListTitle;
+
+  /// Status text for active session
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get sessionStatusActive;
+
+  /// Status text for paused session
+  ///
+  /// In en, this message translates to:
+  /// **'Paused'**
+  String get sessionStatusPaused;
+
+  /// Status text for completed session
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get sessionStatusCompleted;
+
+  /// Status text for cancelled session
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get sessionStatusCancelled;
+
+  /// Status text for online Helpy
+  ///
+  /// In en, this message translates to:
+  /// **'Online'**
+  String get helpyStatusOnline;
+
+  /// Status text for thinking Helpy
+  ///
+  /// In en, this message translates to:
+  /// **'Thinking'**
+  String get helpyStatusThinking;
+
+  /// Status text for responding Helpy
+  ///
+  /// In en, this message translates to:
+  /// **'Responding'**
+  String get helpyStatusResponding;
+
+  /// Status text for offline Helpy
+  ///
+  /// In en, this message translates to:
+  /// **'Offline'**
+  String get helpyStatusOffline;
+
+  /// Status text for active participant
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get participantStatusActive;
+
+  /// Status text for inactive participant
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get participantStatusInactive;
+
+  /// Status text for participant who left
+  ///
+  /// In en, this message translates to:
+  /// **'Left'**
+  String get participantStatusLeft;
+
+  /// Status text for disconnected participant
+  ///
+  /// In en, this message translates to:
+  /// **'Disconnected'**
+  String get participantStatusDisconnected;
+
+  /// Button text to add participants to group chat
+  ///
+  /// In en, this message translates to:
+  /// **'Add Participants'**
+  String get addParticipants;
+
+  /// Button text to add a single participant
+  ///
+  /// In en, this message translates to:
+  /// **'Add Participant'**
+  String get addParticipant;
+
+  /// Button text to invite participants to group chat
+  ///
+  /// In en, this message translates to:
+  /// **'Invite Participants'**
+  String get inviteParticipants;
+
+  /// Success message when participant is added
+  ///
+  /// In en, this message translates to:
+  /// **'Participant added successfully'**
+  String get participantAdded;
+
+  /// Error message when adding participant fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to add participant: {error}'**
+  String failedToAddParticipant(String error);
+
+  /// Title for participant selection screen
+  ///
+  /// In en, this message translates to:
+  /// **'Select Participants'**
+  String get selectParticipants;
+
+  /// Message shown when there are no participants to add
+  ///
+  /// In en, this message translates to:
+  /// **'No participants to add'**
+  String get noParticipantsToAdd;
+
   /// Error message when conversations fail to load
   ///
   /// In en, this message translates to:

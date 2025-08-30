@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../config/design_tokens.dart';
-import '../../../config/routes.dart';
 import '../../../data/providers/dashboard_provider.dart';
 import '../../../data/providers/providers.dart';
 import '../../../domain/entities/user.dart';
-import '../../../domain/entities/learning_stats.dart';
-import 'package:helpy_ninja/l10n/app_localizations.dart';
 import '../../widgets/navigation/modern_navigation.dart';
 import '../../widgets/layout/modern_layout.dart';
 import '../../widgets/dashboard/dashboard_components.dart';
@@ -100,11 +96,11 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
       body: dashboardState.isLoading
           ? const Center(child: CircularProgressIndicator())
           : dashboardState.error != null
-          ? ErrorStateWidget(
-              error: dashboardState.error!,
-              onRetry: () => ref.read(dashboardProvider.notifier).refresh(),
-            )
-          : _buildDashboardContent(context, dashboardState, user),
+              ? ErrorStateWidget(
+                  error: dashboardState.error!,
+                  onRetry: () => ref.read(dashboardProvider.notifier).refresh(),
+                )
+              : _buildDashboardContent(context, dashboardState, user),
     );
   }
 

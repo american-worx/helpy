@@ -1,5 +1,3 @@
-import 'message.dart';
-
 /// Conversation entity representing a chat session with Helpy
 class Conversation {
   final String id;

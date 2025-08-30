@@ -14,6 +14,7 @@ import '../presentation/screens/demo/component_demo_screen.dart';
 import '../presentation/screens/dashboard/dashboard_screen.dart';
 import '../presentation/screens/chat/chat_list_screen.dart' as chat_list;
 import '../presentation/screens/chat/chat_screen.dart' as chat;
+import '../presentation/screens/chat/group_chat_screen.dart';
 import '../config/constants.dart';
 
 // Import screens for learning session routes
@@ -188,21 +189,21 @@ class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('Welcome')),
-    body: Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text('Welcome to Helpy Ninja'),
-          const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () => context.go(AppRoutes.login),
-            child: const Text('Get Started'),
+        appBar: AppBar(title: const Text('Welcome')),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('Welcome to Helpy Ninja'),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () => context.go(AppRoutes.login),
+                child: const Text('Get Started'),
+              ),
+            ],
           ),
-        ],
-      ),
-    ),
-  );
+        ),
+      );
 }
 
 // DashboardScreen is now imported from ../presentation/screens/dashboard/dashboard_screen.dart
@@ -309,6 +310,13 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                 builder: (context, state) {
                   final chatId = state.pathParameters['id'];
                   return chat.ChatScreen(conversationId: chatId!);
+                },
+              ),
+              GoRoute(
+                path: 'group/:id',
+                builder: (context, state) {
+                  final sessionId = state.pathParameters['id'];
+                  return GroupChatScreen(sessionId: sessionId!);
                 },
               ),
             ],

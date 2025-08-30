@@ -5,8 +5,7 @@ import 'package:helpy_ninja/presentation/widgets/auth/glassmorphic_container.dar
 
 import '../../../../config/design_tokens.dart';
 import '../../../../domain/entities/conversation.dart';
-import '../../../../domain/entities/helpy_personality.dart';
-import '../../../../data/providers/providers.dart';
+
 import 'package:helpy_ninja/l10n/app_localizations.dart';
 
 /// Conversation card for chat list
@@ -81,7 +80,9 @@ class ChatListConversationCard extends ConsumerWidget {
                       Expanded(
                         child: Text(
                           conversation.displayTitle,
-                          style: Theme.of(context).textTheme.titleMedium
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium
                               ?.copyWith(fontWeight: FontWeight.bold),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -90,7 +91,9 @@ class ChatListConversationCard extends ConsumerWidget {
                       if (conversation.lastMessageTime != null)
                         Text(
                           conversation.formattedLastMessageTime,
-                          style: Theme.of(context).textTheme.bodySmall
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall
                               ?.copyWith(
                                 color: Theme.of(
                                   context,
@@ -104,10 +107,10 @@ class ChatListConversationCard extends ConsumerWidget {
                     Text(
                       conversation.lastMessagePreview!,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Theme.of(
-                          context,
-                        ).colorScheme.onSurface.withValues(alpha: 0.7),
-                      ),
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.onSurface.withValues(alpha: 0.7),
+                          ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),

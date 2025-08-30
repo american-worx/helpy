@@ -3,8 +3,7 @@ import 'package:helpy_ninja/data/providers/group_session_notifier.dart';
 import 'package:helpy_ninja/data/providers/group_session_state.dart';
 import 'package:helpy_ninja/domain/entities/group_session.dart';
 import 'package:helpy_ninja/domain/entities/helpy_personality.dart';
-import 'package:helpy_ninja/domain/entities/shared_enums.dart';
-import 'package:mockito/mockito.dart';
+
 import 'package:mockito/annotations.dart';
 import '../helpers/test_helpers.dart';
 

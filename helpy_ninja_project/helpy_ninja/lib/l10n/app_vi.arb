@@ -202,6 +202,96 @@
       }
     }
   },
+  "groupChatTitle": "Trò chuyện nhóm",
+  "@groupChatTitle": {
+    "description": "Title for group chat screen"
+  },
+  "participantListTitle": "Người tham gia",
+  "@participantListTitle": {
+    "description": "Title for participant list"
+  },
+  "sessionStatusActive": "Hoạt động",
+  "@sessionStatusActive": {
+    "description": "Status text for active session"
+  },
+  "sessionStatusPaused": "Tạm dừng",
+  "@sessionStatusPaused": {
+    "description": "Status text for paused session"
+  },
+  "sessionStatusCompleted": "Đã hoàn thành",
+  "@sessionStatusCompleted": {
+    "description": "Status text for completed session"
+  },
+  "sessionStatusCancelled": "Đã hủy",
+  "@sessionStatusCancelled": {
+    "description": "Status text for cancelled session"
+  },
+  "helpyStatusOnline": "Trực tuyến",
+  "@helpyStatusOnline": {
+    "description": "Status text for online Helpy"
+  },
+  "helpyStatusThinking": "Đang suy nghĩ",
+  "@helpyStatusThinking": {
+    "description": "Status text for thinking Helpy"
+  },
+  "helpyStatusResponding": "Đang phản hồi",
+  "@helpyStatusResponding": {
+    "description": "Status text for responding Helpy"
+  },
+  "helpyStatusOffline": "Ngoại tuyến",
+  "@helpyStatusOffline": {
+    "description": "Status text for offline Helpy"
+  },
+  "participantStatusActive": "Hoạt động",
+  "@participantStatusActive": {
+    "description": "Status text for active participant"
+  },
+  "participantStatusInactive": "Không hoạt động",
+  "@participantStatusInactive": {
+    "description": "Status text for inactive participant"
+  },
+  "participantStatusLeft": "Đã rời đi",
+  "@participantStatusLeft": {
+    "description": "Status text for participant who left"
+  },
+  "participantStatusDisconnected": "Mất kết nối",
+  "@participantStatusDisconnected": {
+    "description": "Status text for disconnected participant"
+  },
+  "addParticipants": "Thêm người tham gia",
+  "@addParticipants": {
+    "description": "Button text to add participants to group chat"
+  },
+  "addParticipant": "Thêm người tham gia",
+  "@addParticipant": {
+    "description": "Button text to add a single participant"
+  },
+  "inviteParticipants": "Mời người tham gia",
+  "@inviteParticipants": {
+    "description": "Button text to invite participants to group chat"
+  },
+  "participantAdded": "Đã thêm người tham gia thành công",
+  "@participantAdded": {
+    "description": "Success message when participant is added"
+  },
+  "failedToAddParticipant": "Không thể thêm người tham gia: {error}",
+  "@failedToAddParticipant": {
+    "description": "Error message when adding participant fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "description": "The error message"
+      }
+    }
+  },
+  "selectParticipants": "Chọn người tham gia",
+  "@selectParticipants": {
+    "description": "Title for participant selection screen"
+  },
+  "noParticipantsToAdd": "Không có người tham gia để thêm",
+  "@noParticipantsToAdd": {
+    "description": "Message shown when there are no participants to add"
+  },
   "chooseYourSubjects": "Chọn môn học của bạn",
   "@chooseYourSubjects": {
     "description": "Title for subject selection screen"
@@ -394,7 +484,6 @@
   "@studyTime": {
     "description": "Nhãn cho tổng thời gian học"
   },
-
   "onTrack": "Đúng Tiến Độ",
   "@onTrack": {
     "description": "Trạng thái cho thấy người dùng đang đạt mục tiêu"
@@ -403,7 +492,6 @@
   "@behindGoal": {
     "description": "Trạng thái cho thấy người dùng chưa đạt mục tiêu"
   },
- 
   "continueLearningComingSoon": "Chức năng tiếp tục học sẽ sớm ra mắt!",
   "@continueLearningComingSoon": {
     "description": "Thông báo khi chức năng tiếp tục học chưa khả dụng"
@@ -484,7 +572,6 @@
   "@browseSubjects": {
     "description": "Văn bản nút để duyệt môn học"
   },
- 
   "practiceQuiz": "Luyện Tập Câu Hỏi",
   "@practiceQuiz": {
     "description": "Văn bản nút cho luyện tập câu hỏi"
@@ -525,7 +612,6 @@
   "@moreActivities": {
     "description": "Văn bản cho số lượng hoạt động bổ sung"
   },
-
   "yourProgressInDifferentSubjects": "Tiến độ của bạn trong các môn học khác nhau",
   "@yourProgressInDifferentSubjects": {
     "description": "Subtitle for subject progress section"
@@ -862,7 +948,6 @@
   "@noGroupSessions": {
     "description": "Message shown when there are no group sessions"
   },
-  
   "startGroupSession": "Bắt đầu một phiên học nhóm để hợp tác với các học sinh và Helpy khác!",
   "@startGroupSession": {
     "description": "Encouragement message to start first group session"
@@ -1167,5 +1252,4 @@
   "@trackYourLearningTimeline": {
     "description": "Subtitle for recent activity section"
   }
- 
 }

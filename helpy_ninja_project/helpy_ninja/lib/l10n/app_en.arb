@@ -202,6 +202,96 @@
       }
     }
   },
+  "groupChatTitle": "Group Chat",
+  "@groupChatTitle": {
+    "description": "Title for group chat screen"
+  },
+  "participantListTitle": "Participants",
+  "@participantListTitle": {
+    "description": "Title for participant list"
+  },
+  "sessionStatusActive": "Active",
+  "@sessionStatusActive": {
+    "description": "Status text for active session"
+  },
+  "sessionStatusPaused": "Paused",
+  "@sessionStatusPaused": {
+    "description": "Status text for paused session"
+  },
+  "sessionStatusCompleted": "Completed",
+  "@sessionStatusCompleted": {
+    "description": "Status text for completed session"
+  },
+  "sessionStatusCancelled": "Cancelled",
+  "@sessionStatusCancelled": {
+    "description": "Status text for cancelled session"
+  },
+  "helpyStatusOnline": "Online",
+  "@helpyStatusOnline": {
+    "description": "Status text for online Helpy"
+  },
+  "helpyStatusThinking": "Thinking",
+  "@helpyStatusThinking": {
+    "description": "Status text for thinking Helpy"
+  },
+  "helpyStatusResponding": "Responding",
+  "@helpyStatusResponding": {
+    "description": "Status text for responding Helpy"
+  },
+  "helpyStatusOffline": "Offline",
+  "@helpyStatusOffline": {
+    "description": "Status text for offline Helpy"
+  },
+  "participantStatusActive": "Active",
+  "@participantStatusActive": {
+    "description": "Status text for active participant"
+  },
+  "participantStatusInactive": "Inactive",
+  "@participantStatusInactive": {
+    "description": "Status text for inactive participant"
+  },
+  "participantStatusLeft": "Left",
+  "@participantStatusLeft": {
+    "description": "Status text for participant who left"
+  },
+  "participantStatusDisconnected": "Disconnected",
+  "@participantStatusDisconnected": {
+    "description": "Status text for disconnected participant"
+  },
+  "addParticipants": "Add Participants",
+  "@addParticipants": {
+    "description": "Button text to add participants to group chat"
+  },
+  "addParticipant": "Add Participant",
+  "@addParticipant": {
+    "description": "Button text to add a single participant"
+  },
+  "inviteParticipants": "Invite Participants",
+  "@inviteParticipants": {
+    "description": "Button text to invite participants to group chat"
+  },
+  "participantAdded": "Participant added successfully",
+  "@participantAdded": {
+    "description": "Success message when participant is added"
+  },
+  "failedToAddParticipant": "Failed to add participant: {error}",
+  "@failedToAddParticipant": {
+    "description": "Error message when adding participant fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "description": "The error message"
+      }
+    }
+  },
+  "selectParticipants": "Select Participants",
+  "@selectParticipants": {
+    "description": "Title for participant selection screen"
+  },
+  "noParticipantsToAdd": "No participants to add",
+  "@noParticipantsToAdd": {
+    "description": "Message shown when there are no participants to add"
+  },
   "failedToLoadConversations": "Failed to load conversations: {error}",
   "@failedToLoadConversations": {
     "description": "Error message when conversations fail to load",

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:helpy_ninja/l10n/app_localizations.dart';
 import 'package:helpy_ninja/presentation/widgets/dashboard/components/subject_progress_item.dart';
 
-import '../../../../config/design_tokens.dart';
 import '../../../../domain/entities/learning_stats.dart';
 import '../../../widgets/layout/modern_layout.dart';
 
