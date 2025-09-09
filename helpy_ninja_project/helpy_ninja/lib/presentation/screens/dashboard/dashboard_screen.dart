@@ -23,8 +23,6 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
   late AnimationController _streakAnimationController;
   late Animation<double> _fadeAnimation;
   late Animation<double> _slideAnimation;
-  late Animation<double> _streakScaleAnimation;
-  late Future<void> _streakAnimationFuture;
 
   @override
   void initState() {
@@ -56,16 +54,9 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
       vsync: this,
     );
 
-    _streakScaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _streakAnimationController,
-        curve: Curves.elasticOut,
-      ),
-    );
-
     // Start animations
     _headerAnimationController.forward();
-    _streakAnimationFuture = Future.delayed(
+    Future.delayed(
       const Duration(milliseconds: 600),
       () {
         if (mounted) {

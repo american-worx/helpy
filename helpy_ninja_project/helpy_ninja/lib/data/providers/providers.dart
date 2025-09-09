@@ -13,6 +13,12 @@ export 'theme_provider.dart';
 // App state providers
 export 'app_state_provider.dart';
 
+// Group session providers
+export 'group_session_provider.dart';
+
+// WebSocket service provider
+export '../../services/websocket_service_provider.dart';
+
 // Future providers will be added here:
 // - Chat providers
 // - Learning session providers

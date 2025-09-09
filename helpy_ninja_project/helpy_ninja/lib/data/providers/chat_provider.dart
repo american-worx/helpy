@@ -155,7 +155,6 @@ class ChatNotifier extends StateNotifier<ChatState> {
         },
         createdAt: DateTime.now(),
       ),
-
       HelpyPersonality(
         id: 'helpy_professional',
         name: 'Professional Helpy',
@@ -187,7 +186,6 @@ class ChatNotifier extends StateNotifier<ChatState> {
         },
         createdAt: DateTime.now(),
       ),
-
       HelpyPersonality(
         id: 'helpy_playful',
         name: 'Playful Helpy',
@@ -217,7 +215,6 @@ class ChatNotifier extends StateNotifier<ChatState> {
         },
         createdAt: DateTime.now(),
       ),
-
       HelpyPersonality(
         id: 'helpy_wise',
         name: 'Wise Helpy',
@@ -501,46 +498,6 @@ class ChatNotifier extends StateNotifier<ChatState> {
     );
   }
 
-  /// Generate response content based on personality
-  String _generateResponseContent(
-    Message userMessage,
-    HelpyPersonality personality,
-  ) {
-    final content = userMessage.content.toLowerCase();
-
-    // Simple response generation based on personality type
-    if (content.contains('hello') || content.contains('hi')) {
-      return personality.getGreeting('default');
-    }
-
-    if (content.contains('help') || content.contains('?')) {
-      switch (personality.type) {
-        case PersonalityType.friendly:
-          return "I'd love to help you with that! 😊 Let me break it down for you step by step.";
-        case PersonalityType.professional:
-          return "I shall provide you with a systematic approach to address your inquiry.";
-        case PersonalityType.playful:
-          return "Ooh, a challenge! 🎯 Let's tackle this together like a boss level!";
-        case PersonalityType.wise:
-          return "Ah, an excellent question. Let us explore this matter thoughtfully.";
-        case PersonalityType.encouraging:
-          return "You've got this! 💪 I believe in you! Let me guide you through it.";
-        case PersonalityType.patient:
-          return "Take your time. I'm here to support you through this learning journey.";
-      }
-    }
-
-    // Default responses
-    final responses = [
-      "That's a great point! Tell me more about what you're thinking.",
-      "I understand what you're asking. Let me help you explore this further.",
-      "Interesting! Have you considered looking at it from this angle?",
-      "That's exactly the kind of question that leads to deeper understanding!",
-    ];
-
-    return responses[DateTime.now().millisecond % responses.length];
-  }
-
   /// Save message to storage
   Future<void> _saveMessage(Message message) async {
     await _messagesBox.put(message.id, message.toJson());
@@ -714,9 +671,8 @@ class ChatNotifier extends StateNotifier<ChatState> {
       _logger.d('All messages deleted');
 
       // Update state
-      final updatedConversations = state.conversations
-          .where((c) => c.id != conversationId)
-          .toList();
+      final updatedConversations =
+          state.conversations.where((c) => c.id != conversationId).toList();
 
       final updatedCurrentMessages = Map<String, List<Message>>.from(
         state.currentMessages,
@@ -828,9 +784,9 @@ final chatErrorProvider = Provider<String?>((ref) {
 /// Provider for messages in a specific conversation
 final conversationMessagesProvider =
     FutureProvider.family<List<Message>, String>((ref, conversationId) async {
-      final chatNotifier = ref.read(chatProvider.notifier);
-      return await chatNotifier.loadMessagesForConversation(conversationId);
-    });
+  final chatNotifier = ref.read(chatProvider.notifier);
+  return await chatNotifier.loadMessagesForConversation(conversationId);
+});
 
 /// Provider for a specific conversation
 final conversationProvider = Provider.family<Conversation?, String>((

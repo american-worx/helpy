@@ -41,8 +41,6 @@ class _SubjectCardState extends State<SubjectCard>
   late Animation<double> _scaleAnimation;
   late Animation<double> _elevationAnimation;
 
-  bool _isPressed = false;
-
   @override
   void initState() {
     super.initState();
@@ -146,7 +144,9 @@ class _SubjectCardState extends State<SubjectCard>
                               children: [
                                 Text(
                                   widget.title,
-                                  style: Theme.of(context).textTheme.titleMedium
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleMedium
                                       ?.copyWith(
                                         fontWeight: FontWeight.w600,
                                         color: widget.isSelected
@@ -158,7 +158,9 @@ class _SubjectCardState extends State<SubjectCard>
                                     widget.lessonCount > 0)
                                   Text(
                                     '${widget.completedLessons}/${widget.lessonCount} lessons',
-                                    style: Theme.of(context).textTheme.bodySmall
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall
                                         ?.copyWith(
                                           color: colorScheme.onSurface
                                               .withValues(alpha: 0.6),
@@ -175,8 +177,9 @@ class _SubjectCardState extends State<SubjectCard>
                       Text(
                         widget.description,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: colorScheme.onSurface.withValues(alpha: 0.8),
-                        ),
+                              color:
+                                  colorScheme.onSurface.withValues(alpha: 0.8),
+                            ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -205,7 +208,9 @@ class _SubjectCardState extends State<SubjectCard>
                           children: [
                             Text(
                               '${(widget.progress * 100).round()}% Complete',
-                              style: Theme.of(context).textTheme.bodySmall
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
                                   ?.copyWith(
                                     color: widget.color,
                                     fontWeight: FontWeight.w500,
@@ -232,14 +237,8 @@ class _SubjectCardState extends State<SubjectCard>
   }
 
   void _handleTap() {
-    setState(() {
-      _isPressed = true;
-    });
     _animationController.forward().then((_) {
       _animationController.reverse();
-      setState(() {
-        _isPressed = false;
-      });
     });
     widget.onTap?.call();
   }
@@ -302,13 +301,13 @@ class LessonCard extends StatelessWidget {
               isLocked
                   ? Icons.lock_outline
                   : isCompleted
-                  ? Icons.check_circle_outline
-                  : Icons.play_circle_outline,
+                      ? Icons.check_circle_outline
+                      : Icons.play_circle_outline,
               color: isLocked
                   ? colorScheme.outline
                   : isCompleted
-                  ? DesignTokens.success
-                  : DesignTokens.primary,
+                      ? DesignTokens.success
+                      : DesignTokens.primary,
               size: 28,
             ),
           ),
@@ -325,11 +324,11 @@ class LessonCard extends StatelessWidget {
                       child: Text(
                         title,
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: isLocked
-                              ? colorScheme.onSurface.withValues(alpha: 0.5)
-                              : colorScheme.onSurface,
-                        ),
+                              fontWeight: FontWeight.w600,
+                              color: isLocked
+                                  ? colorScheme.onSurface.withValues(alpha: 0.5)
+                                  : colorScheme.onSurface,
+                            ),
                       ),
                     ),
                     _buildDifficultyChip(context),
@@ -339,10 +338,10 @@ class LessonCard extends StatelessWidget {
                 Text(
                   description,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: colorScheme.onSurface.withValues(
-                      alpha: isLocked ? 0.4 : 0.7,
-                    ),
-                  ),
+                        color: colorScheme.onSurface.withValues(
+                          alpha: isLocked ? 0.4 : 0.7,
+                        ),
+                      ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -358,17 +357,17 @@ class LessonCard extends StatelessWidget {
                     Text(
                       duration,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: colorScheme.onSurface.withValues(alpha: 0.6),
-                      ),
+                            color: colorScheme.onSurface.withValues(alpha: 0.6),
+                          ),
                     ),
                     if (completionPercentage > 0 && !isCompleted) ...[
                       const Spacer(),
                       Text(
                         '${(completionPercentage * 100).round()}%',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: DesignTokens.primary,
-                          fontWeight: FontWeight.w500,
-                        ),
+                              color: DesignTokens.primary,
+                              fontWeight: FontWeight.w500,
+                            ),
                       ),
                     ],
                   ],
@@ -425,10 +424,10 @@ class LessonCard extends StatelessWidget {
       child: Text(
         difficulty,
         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-          color: chipColor,
-          fontWeight: FontWeight.w500,
-          fontSize: 10,
-        ),
+              color: chipColor,
+              fontWeight: FontWeight.w500,
+              fontSize: 10,
+            ),
       ),
     );
   }
@@ -486,23 +485,23 @@ class ProgressCard extends StatelessWidget {
           Text(
             value,
             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: color,
-            ),
+                  fontWeight: FontWeight.bold,
+                  color: color,
+                ),
           ),
           const SizedBox(height: DesignTokens.spaceXS),
           Text(
             title,
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
-              fontWeight: FontWeight.w600,
-              color: colorScheme.onSurface,
-            ),
+                  fontWeight: FontWeight.w600,
+                  color: colorScheme.onSurface,
+                ),
           ),
           Text(
             subtitle,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: colorScheme.onSurface.withValues(alpha: 0.6),
-            ),
+                  color: colorScheme.onSurface.withValues(alpha: 0.6),
+                ),
           ),
         ],
       ),
@@ -546,9 +545,9 @@ class ProgressCard extends StatelessWidget {
           Text(
             trendValue!,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: trendColor,
-              fontWeight: FontWeight.w500,
-            ),
+                  color: trendColor,
+                  fontWeight: FontWeight.w500,
+                ),
           ),
         ],
       ),
@@ -664,19 +663,19 @@ class _AchievementCardState extends State<AchievementCard>
               Text(
                 widget.title,
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: widget.isUnlocked
-                      ? colorScheme.onSurface
-                      : colorScheme.onSurface.withValues(alpha: 0.6),
-                ),
+                      fontWeight: FontWeight.w600,
+                      color: widget.isUnlocked
+                          ? colorScheme.onSurface
+                          : colorScheme.onSurface.withValues(alpha: 0.6),
+                    ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: DesignTokens.spaceXS),
               Text(
                 widget.description,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: colorScheme.onSurface.withValues(alpha: 0.6),
-                ),
+                      color: colorScheme.onSurface.withValues(alpha: 0.6),
+                    ),
                 textAlign: TextAlign.center,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
@@ -698,9 +697,9 @@ class _AchievementCardState extends State<AchievementCard>
                 Text(
                   '${widget.progress.toInt()}/${widget.maxProgress}',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: widget.color,
-                    fontWeight: FontWeight.w500,
-                  ),
+                        color: widget.color,
+                        fontWeight: FontWeight.w500,
+                      ),
                 ),
               ],
             ],

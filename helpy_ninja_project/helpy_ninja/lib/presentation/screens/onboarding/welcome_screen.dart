@@ -53,8 +53,8 @@ class _WelcomeOnboardingScreenState
 
     _slideAnimation =
         Tween<Offset>(begin: const Offset(0, 0.5), end: Offset.zero).animate(
-          CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic),
-        );
+      CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic),
+    );
 
     _logoScaleAnimation = Tween<double>(begin: 0.5, end: 1.0).animate(
       CurvedAnimation(parent: _logoController, curve: Curves.elasticOut),
@@ -90,7 +90,6 @@ class _WelcomeOnboardingScreenState
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
       body: Container(
@@ -165,7 +164,9 @@ class _WelcomeOnboardingScreenState
                         // App title
                         Text(
                           l10n.appTitle,
-                          style: Theme.of(context).textTheme.headlineLarge
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge
                               ?.copyWith(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -178,11 +179,11 @@ class _WelcomeOnboardingScreenState
                         // Subtitle
                         Text(
                           l10n.personalAITutor,
-                          style: Theme.of(context).textTheme.bodyLarge
-                              ?.copyWith(
-                                color: Colors.white.withValues(alpha: 0.8),
-                                height: 1.5,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                    color: Colors.white.withValues(alpha: 0.8),
+                                    height: 1.5,
+                                  ),
                           textAlign: TextAlign.center,
                         ),
                       ],
@@ -297,16 +298,16 @@ class _WelcomeOnboardingScreenState
                 Text(
                   title,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
                 ),
                 const SizedBox(height: DesignTokens.spaceXS),
                 Text(
                   description,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.white.withValues(alpha: 0.7),
-                  ),
+                        color: Colors.white.withValues(alpha: 0.7),
+                      ),
                 ),
               ],
             ),

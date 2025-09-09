@@ -187,3 +187,13 @@ class CompressionInfo {
   @override
   int get hashCode => Object.hash(originalSize, compressedSize, algorithm);
 }
+
+/// Message delivery status for WebSocket tracking
+enum MessageDeliveryStatus {
+  sending, // Message is being sent
+  sent, // Message sent to server
+  delivered, // Message delivered to recipients
+  read, // Message read by recipients
+  failed, // Message failed to send
+  acknowledged, // Message acknowledged by recipients
+}

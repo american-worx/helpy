@@ -311,10 +311,10 @@ class _ChatScreenState extends ConsumerState<ChatScreen>
             Text(
               personality.description,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(
-                  context,
-                ).colorScheme.onSurface.withValues(alpha: 0.7),
-              ),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onSurface.withValues(alpha: 0.7),
+                  ),
               textAlign: TextAlign.center,
             ),
             Space.l,
@@ -322,10 +322,10 @@ class _ChatScreenState extends ConsumerState<ChatScreen>
           Text(
             'Start the conversation by typing a message below!',
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              color: Theme.of(
-                context,
-              ).colorScheme.onSurface.withValues(alpha: 0.6),
-            ),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onSurface.withValues(alpha: 0.6),
+                ),
             textAlign: TextAlign.center,
           ),
         ],
@@ -356,10 +356,10 @@ class _ChatScreenState extends ConsumerState<ChatScreen>
           child: Text(
             _formatTimestamp(timestamp),
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: Theme.of(
-                context,
-              ).colorScheme.onSurface.withValues(alpha: 0.6),
-            ),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onSurface.withValues(alpha: 0.6),
+                ),
           ),
         ),
       ),
@@ -410,9 +410,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen>
     return Container(
       margin: const EdgeInsets.only(bottom: DesignTokens.spaceS),
       child: Row(
-        mainAxisAlignment: isFromUser
-            ? MainAxisAlignment.end
-            : MainAxisAlignment.start,
+        mainAxisAlignment:
+            isFromUser ? MainAxisAlignment.end : MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           // Helpy avatar (left side)
@@ -485,10 +484,10 @@ class _ChatScreenState extends ConsumerState<ChatScreen>
                   Text(
                     message.content,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: isFromUser
-                          ? Colors.white
-                          : Theme.of(context).colorScheme.onSurface,
-                    ),
+                          color: isFromUser
+                              ? Colors.white
+                              : Theme.of(context).colorScheme.onSurface,
+                        ),
                   ),
                   Space.xs,
                   Row(
@@ -498,13 +497,16 @@ class _ChatScreenState extends ConsumerState<ChatScreen>
                       Text(
                         message.formattedTime,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: isFromUser
-                              ? Colors.white.withValues(alpha: 0.7)
-                              : Theme.of(
-                                  context,
-                                ).colorScheme.onSurface.withValues(alpha: 0.5),
-                          fontSize: 11,
-                        ),
+                              color: isFromUser
+                                  ? Colors.white.withValues(alpha: 0.7)
+                                  : Theme.of(
+                                      context,
+                                    )
+                                      .colorScheme
+                                      .onSurface
+                                      .withValues(alpha: 0.5),
+                              fontSize: 11,
+                            ),
                       ),
                       if (isFromUser) ...[
                         const SizedBox(width: DesignTokens.spaceXS),
@@ -800,9 +802,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen>
     _inputAnimationController.reverse();
 
     try {
-      await ref
-          .read(chatProvider.notifier)
-          .sendMessage(
+      await ref.read(chatProvider.notifier).sendMessage(
             conversationId: widget.conversationId,
             senderId: user.id,
             senderName: user.name,
@@ -810,7 +810,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen>
           );
 
       // Refresh messages to show the new message
-      ref.refresh(conversationMessagesProvider(widget.conversationId));
+      // We intentionally ignore the result of refresh
+      final _ =
+          ref.refresh(conversationMessagesProvider(widget.conversationId));
 
       // Scroll to bottom
       _scrollToBottom();

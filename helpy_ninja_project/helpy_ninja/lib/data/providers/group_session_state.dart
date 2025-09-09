@@ -11,6 +11,7 @@ class GroupSessionState {
   final bool isInitialized;
   final String? error;
   final DateTime? lastUpdated;
+  final Map<String, Map<String, DateTime>> typingIndicators;
 
   const GroupSessionState({
     this.sessions = const [],
@@ -20,6 +21,7 @@ class GroupSessionState {
     this.isInitialized = false,
     this.error,
     this.lastUpdated,
+    this.typingIndicators = const {},
   });
 
   GroupSessionState copyWith({
@@ -30,6 +32,7 @@ class GroupSessionState {
     bool? isInitialized,
     String? error,
     DateTime? lastUpdated,
+    Map<String, Map<String, DateTime>>? typingIndicators,
   }) {
     return GroupSessionState(
       sessions: sessions ?? this.sessions,
@@ -39,6 +42,7 @@ class GroupSessionState {
       isInitialized: isInitialized ?? this.isInitialized,
       error: error ?? this.error,
       lastUpdated: lastUpdated ?? this.lastUpdated,
+      typingIndicators: typingIndicators ?? this.typingIndicators,
     );
   }
 
@@ -55,5 +59,16 @@ class GroupSessionState {
   /// Get total number of participants across all sessions
   int get totalParticipantCount {
     return sessions.fold(0, (sum, session) => sum + session.participantCount);
+  }
+
+  /// Get typing users for a specific session
+  List<String> getTypingUsers(String sessionId) {
+    final sessionTyping = typingIndicators[sessionId] ?? {};
+    // Filter out typing indicators older than 10 seconds
+    final now = DateTime.now();
+    return sessionTyping.entries
+        .where((entry) => now.difference(entry.value).inSeconds < 10)
+        .map((entry) => entry.key)
+        .toList();
   }
 }

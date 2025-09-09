@@ -7,7 +7,7 @@ import '../../../data/providers/group_session_provider.dart';
 import '../../../domain/entities/group_session.dart';
 import '../../../domain/entities/helpy_personality.dart';
 import '../../../domain/entities/message.dart';
-import '../../../domain/entities/shared_enums.dart';
+import '../../../services/websocket_service_provider.dart';
 import '../../widgets/navigation/modern_navigation.dart';
 import '../../widgets/chat/helpy_indicator.dart';
 import '../../widgets/chat/participant_list.dart';
@@ -16,6 +16,7 @@ import '../../widgets/chat/typing_indicator.dart';
 import '../../widgets/chat/ai_coordination_cue.dart';
 import '../../widgets/chat/add_participants_dialog.dart';
 import 'package:helpy_ninja/l10n/app_localizations.dart';
+import '../../../data/providers/group_session_state.dart';
 
 /// Group chat interface screen for multi-agent conversations
 class GroupChatScreen extends ConsumerStatefulWidget {
@@ -71,8 +72,12 @@ class _GroupChatScreenState extends ConsumerState<GroupChatScreen>
         });
         if (isComposing) {
           _inputAnimationController.forward();
+          // Send typing indicator when user starts typing
+          _sendTypingIndicator(true);
         } else {
           _inputAnimationController.reverse();
+          // Send typing indicator when user stops typing
+          _sendTypingIndicator(false);
         }
       }
     });
@@ -83,6 +88,16 @@ class _GroupChatScreenState extends ConsumerState<GroupChatScreen>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // No need to explicitly read the provider, it will be watched in build
     });
+  }
+
+  /// Send typing indicator through the group session notifier
+  void _sendTypingIndicator(bool isTyping) {
+    final groupSessionNotifier = ref.read(groupSessionProvider.notifier);
+    groupSessionNotifier.sendTypingIndicator(
+      sessionId: widget.sessionId,
+      userId: 'user', // TODO: Get actual user ID
+      isTyping: isTyping,
+    );
   }
 
   @override
@@ -98,6 +113,63 @@ class _GroupChatScreenState extends ConsumerState<GroupChatScreen>
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final session = ref.watch(specificGroupSessionProvider(widget.sessionId));
+
+    // Listen for WebSocket participant change events
+    ref.listen(websocketServiceProvider, (previous, next) {
+      if (next != null) {
+        next.participantChangeStream.listen((event) {
+          if (event.sessionId == widget.sessionId && mounted) {
+            // Refresh the session data to show the updated participants
+            final refreshResult =
+                ref.refresh(specificGroupSessionProvider(widget.sessionId));
+            // Use the result to avoid unused result warning
+            debugPrint(
+                'Session refreshed due to participant change: $refreshResult');
+          }
+        });
+      }
+    });
+
+    // Listen for incoming messages
+    ref.listen(websocketServiceProvider, (previous, next) {
+      if (next != null) {
+        next.messageStream.listen((message) {
+          if (message.conversationId == widget.sessionId && mounted) {
+            // Refresh the session data to show the new message
+            final refreshResult =
+                ref.refresh(specificGroupSessionProvider(widget.sessionId));
+            // Use the result to avoid unused result warning
+            debugPrint('Session refreshed due to new message: $refreshResult');
+
+            // Scroll to bottom to show new message
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (_scrollController.hasClients) {
+                _scrollController.animateTo(
+                  _scrollController.position.maxScrollExtent,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeOut,
+                );
+              }
+            });
+          }
+        });
+      }
+    });
+
+    // Listen for typing indicators
+    ref.listen(websocketServiceProvider, (previous, next) {
+      if (next != null) {
+        next.typingIndicatorStream.listen((event) {
+          if (event.sessionId == widget.sessionId && mounted) {
+            // Refresh the group session state to update typing indicators
+            final refreshResult = ref.refresh(groupSessionProvider);
+            // Use the result to avoid unused result warning
+            debugPrint(
+                'Group session state refreshed due to typing indicator: $refreshResult');
+          }
+        });
+      }
+    });
 
     return Scaffold(
       appBar: _buildAppBar(context, l10n),
@@ -173,8 +245,11 @@ class _GroupChatScreenState extends ConsumerState<GroupChatScreen>
     // Use the result to avoid unused result warning
     if (result == true && mounted) {
       // Refresh the session data to show the new participants
-      // Use the result of refresh to avoid unused result warning
-      final _ = ref.refresh(specificGroupSessionProvider(widget.sessionId));
+      // Assign the result to a variable to avoid unused result warning
+      final refreshResult =
+          ref.refresh(specificGroupSessionProvider(widget.sessionId));
+      // Use the result to avoid unused result warning
+      debugPrint('Session refreshed: $refreshResult');
     }
   }
 
@@ -203,89 +278,79 @@ class _GroupChatScreenState extends ConsumerState<GroupChatScreen>
       ),
       child: Row(
         children: [
-          // Enhanced session status indicator
-          SessionStatusIndicator(
-            status: session.status,
-            size: 12.0,
-            showText: true,
-          ),
-          const SizedBox(width: DesignTokens.spaceS),
-          // Participant count
-          Text(
-            '${session.participantCount} ${l10n.participantListTitle.toLowerCase()}',
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
-          const Spacer(),
-          // Helpy indicators with enhanced visualization
-          ...session.helpyParticipants.take(3).map((helpy) {
-            return Container(
-              margin: const EdgeInsets.only(left: DesignTokens.spaceXS),
-              child: HelpyIndicator(
-                helpy: helpy,
-                size: 24.0,
-                showStatus: true,
-                status: HelpyStatus
-                    .online, // In a real implementation, this would be dynamic
-              ),
-            );
-          }).toList(),
-          if (session.helpyParticipants.length > 3) ...[
-            const SizedBox(width: DesignTokens.spaceXS),
-            Container(
-              padding: const EdgeInsets.all(4),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primaryContainer,
-                shape: BoxShape.circle,
-              ),
-              child: Text(
-                '+${session.helpyParticipants.length - 3}',
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-              ),
+          // Session name and status
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  session.name,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+                const SizedBox(height: DesignTokens.spaceXS),
+                SessionStatusIndicator(
+                  status: session.status,
+                  size: 12.0,
+                  showText: true,
+                ),
+              ],
             ),
-          ],
+          ),
+          // Enhanced participant info with Helpy indicators
+          Container(
+            padding: const EdgeInsets.all(DesignTokens.spaceXS),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primaryContainer,
+              borderRadius: BorderRadius.circular(DesignTokens.radiusM),
+            ),
+            child: Row(
+              children: [
+                // Participant count
+                Text(
+                  '${session.participantCount} ${l10n.participantListTitle.toLowerCase()}',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                const SizedBox(width: DesignTokens.spaceXS),
+                // Helpy indicators with enhanced visualization
+                ...session.helpyParticipants.take(3).map((helpy) {
+                  return Container(
+                    margin: const EdgeInsets.only(left: DesignTokens.spaceXS),
+                    child: HelpyIndicator(
+                      helpy: helpy,
+                      size: 24.0,
+                      showStatus: true,
+                      status: HelpyStatus
+                          .online, // In a real implementation, this would be dynamic
+                    ),
+                  );
+                }).toList(),
+                if (session.helpyParticipants.length > 3) ...[
+                  const SizedBox(width: DesignTokens.spaceXS),
+                  Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primaryContainer,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Text(
+                      '+${session.helpyParticipants.length - 3}',
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
         ],
       ),
     );
   }
 
-  Color _getSessionStatusColor(GroupSessionStatus status) {
-    switch (status) {
-      case GroupSessionStatus.active:
-        return DesignTokens.success;
-      case GroupSessionStatus.paused:
-        return DesignTokens.warning;
-      case GroupSessionStatus.completed:
-        return DesignTokens.primary;
-      case GroupSessionStatus.cancelled:
-        return DesignTokens.error;
-    }
-  }
-
-  String _getSessionStatusText(
-      GroupSessionStatus status, AppLocalizations l10n) {
-    switch (status) {
-      case GroupSessionStatus.active:
-        return l10n.sessionStatusActive;
-      case GroupSessionStatus.paused:
-        return l10n.sessionStatusPaused;
-      case GroupSessionStatus.completed:
-        return l10n.sessionStatusCompleted;
-      case GroupSessionStatus.cancelled:
-        return l10n.sessionStatusCancelled;
-    }
-  }
-
-  Color _getHelpyColor(HelpyPersonality helpy) {
-    try {
-      return Color(
-          int.parse(helpy.colorTheme.substring(1), radix: 16) | 0xFF000000);
-    } catch (e) {
-      return DesignTokens.primary;
-    }
-  }
-
+  /// Build messages area with list of messages
   Widget _buildMessagesArea(
     BuildContext context,
     GroupSession? session,
@@ -321,6 +386,9 @@ class _GroupChatScreenState extends ConsumerState<GroupChatScreen>
       );
     }
 
+    // Get the group session state for typing indicators
+    final groupSessionState = ref.watch(groupSessionProvider);
+
     return Stack(
       children: [
         ListView.builder(
@@ -336,12 +404,31 @@ class _GroupChatScreenState extends ConsumerState<GroupChatScreen>
         Positioned(
           bottom: DesignTokens.spaceM,
           left: DesignTokens.spaceM,
-          child: TypingIndicator(
-            userName:
-                "Helpy", // In a real implementation, this would be dynamic
-          ),
+          child:
+              _buildTypingIndicator(context, session, groupSessionState, l10n),
         ),
       ],
+    );
+  }
+
+  Widget _buildTypingIndicator(
+    BuildContext context,
+    GroupSession session,
+    GroupSessionState groupSessionState,
+    AppLocalizations l10n,
+  ) {
+    final typingUsers = groupSessionState.getTypingUsers(session.id);
+
+    // Filter out typing indicators older than 10 seconds
+    if (typingUsers.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    // For now, we'll just show a generic typing indicator
+    // In a real implementation, we would show the actual user names
+    return TypingIndicator(
+      isMultiple: typingUsers.length > 1,
+      typingCount: typingUsers.length,
     );
   }
 
@@ -425,11 +512,6 @@ class _GroupChatScreenState extends ConsumerState<GroupChatScreen>
 
     // Default to first Helpy if not found
     return session.helpyParticipants.first;
-  }
-
-  Color _getSenderColor(Message message, GroupSession session) {
-    final sender = _getMessageSender(message, session);
-    return _getHelpyColor(sender);
   }
 
   String _formatTimestamp(DateTime timestamp) {
@@ -516,11 +598,52 @@ class _GroupChatScreenState extends ConsumerState<GroupChatScreen>
   void _sendMessage() {
     if (_messageController.text.trim().isEmpty) return;
 
-    // TODO: Implement actual message sending
+    final messageContent = _messageController.text.trim();
     _messageController.clear();
     setState(() {
       _isComposing = false;
     });
     _inputAnimationController.reverse();
+
+    // Send message through group session notifier
+    final session = ref.read(specificGroupSessionProvider(widget.sessionId));
+    if (session != null) {
+      // Get WebSocket service
+      final websocketService = ref.read(websocketServiceProvider);
+
+      // Create message
+      final message = Message(
+        id: 'msg_${DateTime.now().millisecondsSinceEpoch}',
+        conversationId: widget.sessionId,
+        senderId: 'user', // TODO: Get actual user ID
+        senderName: 'You', // TODO: Get actual user name
+        content: messageContent,
+        type: MessageType.text,
+        status: MessageStatus.sent,
+        timestamp: DateTime.now(),
+      );
+
+      // Send through WebSocket if connected
+      if (websocketService?.isConnected == true) {
+        websocketService?.sendMessage(message).catchError((error) {
+          debugPrint('Failed to send message via WebSocket: $error');
+          // Fallback to local storage if WebSocket fails
+          ref.read(groupSessionProvider.notifier).sendMessage(
+                sessionId: widget.sessionId,
+                senderId: message.senderId,
+                senderName: message.senderName,
+                content: message.content,
+              );
+        });
+      } else {
+        // Fallback to local storage if not connected
+        ref.read(groupSessionProvider.notifier).sendMessage(
+              sessionId: widget.sessionId,
+              senderId: message.senderId,
+              senderName: message.senderName,
+              content: message.content,
+            );
+      }
+    }
   }
 }

@@ -3,7 +3,6 @@ import 'package:helpy_ninja/presentation/widgets/auth/glassmorphic_container.dar
 
 import '../../../../config/design_tokens.dart';
 import '../../../../domain/entities/helpy_personality.dart';
-import 'package:helpy_ninja/l10n/app_localizations.dart';
 
 /// Personality selection card for new chat options
 class ChatListPersonalitySelectionCard extends StatelessWidget {
@@ -18,8 +17,6 @@ class ChatListPersonalitySelectionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-
     return Container(
       margin: const EdgeInsets.only(bottom: DesignTokens.spaceM),
       child: GestureDetector(
@@ -52,17 +49,17 @@ class ChatListPersonalitySelectionCard extends StatelessWidget {
                     Text(
                       personality.name,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                            fontWeight: FontWeight.bold,
+                          ),
                     ),
                     const SizedBox(height: DesignTokens.spaceXS),
                     Text(
                       personality.description,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Theme.of(
-                          context,
-                        ).colorScheme.onSurface.withValues(alpha: 0.7),
-                      ),
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.onSurface.withValues(alpha: 0.7),
+                          ),
                     ),
                     if (personality.specializations.isNotEmpty) ...[
                       const SizedBox(height: DesignTokens.spaceS),
@@ -90,7 +87,9 @@ class ChatListPersonalitySelectionCard extends StatelessWidget {
                                 ),
                                 child: Text(
                                   spec,
-                                  style: Theme.of(context).textTheme.bodySmall
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
                                       ?.copyWith(
                                         color: Color(
                                           int.parse(

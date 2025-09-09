@@ -72,8 +72,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
 
     _questionSlideAnimation =
         Tween<Offset>(begin: const Offset(1.0, 0.0), end: Offset.zero).animate(
-          CurvedAnimation(parent: _questionController, curve: Curves.easeOut),
-        );
+      CurvedAnimation(parent: _questionController, curve: Curves.easeOut),
+    );
 
     _loadQuestions();
     _startQuizSession();
@@ -90,9 +90,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
 
   void _loadQuestions() {
     final allQuestions = ref.read(learningSessionProvider).quizQuestions;
-    _questions = allQuestions
-        .where((q) => q.lessonId == widget.lessonId)
-        .toList();
+    _questions =
+        allQuestions.where((q) => q.lessonId == widget.lessonId).toList();
 
     if (_questions.isNotEmpty) {
       _questionStartTime = DateTime.now();
@@ -105,13 +104,12 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     if (user == null) return;
 
     try {
-      final session = await ref
-          .read(learningSessionProvider.notifier)
-          .startLearningSession(
-            userId: user.id,
-            lessonId: widget.lessonId,
-            type: SessionType.quiz,
-          );
+      final session =
+          await ref.read(learningSessionProvider.notifier).startLearningSession(
+                userId: user.id,
+                lessonId: widget.lessonId,
+                type: SessionType.quiz,
+              );
       setState(() {
         _currentSession = session;
       });
@@ -176,24 +174,6 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
     );
   }
 
-  PreferredSizeWidget _buildAppBar() {
-    final l10n = AppLocalizations.of(context)!;
-    return ModernAppBar(
-      title: l10n.quizPractice,
-      subtitle: '${_currentQuestionIndex + 1} of ${_questions.length}',
-      leading: IconButton(
-        onPressed: () => _handleBackPress(),
-        icon: const Icon(Icons.arrow_back_rounded),
-      ),
-      actions: [
-        IconButton(
-          onPressed: () => _showQuizSettings(),
-          icon: const Icon(Icons.settings_rounded),
-        ),
-      ],
-    );
-  }
-
   Widget _buildProgressHeader() {
     final l10n = AppLocalizations.of(context)!;
     final progress = (_currentQuestionIndex + 1) / _questions.length;
@@ -214,9 +194,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
               Text(
                 l10n.scoreLabel(_correctAnswers, _answers.length),
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: DesignTokens.primary,
-                  fontWeight: FontWeight.bold,
-                ),
+                      color: DesignTokens.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
             ],
           ),
@@ -269,15 +249,15 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                   child: Text(
                     question.difficulty.name.toUpperCase(),
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: Color(
-                        int.parse(
-                              question.difficultyColor.substring(1),
-                              radix: 16,
-                            ) |
-                            0xFF000000,
-                      ),
-                    ),
+                          fontWeight: FontWeight.bold,
+                          color: Color(
+                            int.parse(
+                                  question.difficultyColor.substring(1),
+                                  radix: 16,
+                                ) |
+                                0xFF000000,
+                          ),
+                        ),
                   ),
                 ),
                 const Spacer(),
@@ -319,9 +299,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                     Text(
                       l10n.explanation,
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: DesignTokens.primary,
-                      ),
+                            fontWeight: FontWeight.bold,
+                            color: DesignTokens.primary,
+                          ),
                     ),
                     Space.s,
                     Text(
@@ -390,8 +370,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                   color: backgroundColor,
                   borderRadius: BorderRadius.circular(DesignTokens.radiusM),
                   border: Border.all(
-                    color:
-                        borderColor ??
+                    color: borderColor ??
                         Theme.of(
                           context,
                         ).colorScheme.outline.withValues(alpha: 0.3),
@@ -410,11 +389,10 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                             : BoxShape.rectangle,
                         borderRadius:
                             question.type == QuestionType.multipleChoice
-                            ? BorderRadius.circular(4)
-                            : null,
+                                ? BorderRadius.circular(4)
+                                : null,
                         border: Border.all(
-                          color:
-                              borderColor ??
+                          color: borderColor ??
                               Theme.of(
                                 context,
                               ).colorScheme.outline.withValues(alpha: 0.5),
@@ -441,8 +419,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
                       child: Text(
                         option.text,
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          fontWeight: isSelected ? FontWeight.w600 : null,
-                        ),
+                              fontWeight: isSelected ? FontWeight.w600 : null,
+                            ),
                       ),
                     ),
 
@@ -495,19 +473,22 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
           color: showResult && isCorrect
               ? Colors.green.withValues(alpha: 0.1)
               : showResult && isSelected && !isCorrect
-              ? DesignTokens.error.withValues(alpha: 0.1)
-              : isSelected
-              ? DesignTokens.primary.withValues(alpha: 0.1)
-              : null,
+                  ? DesignTokens.error.withValues(alpha: 0.1)
+                  : isSelected
+                      ? DesignTokens.primary.withValues(alpha: 0.1)
+                      : null,
           borderRadius: BorderRadius.circular(DesignTokens.radiusL),
           border: Border.all(
             color: showResult && isCorrect
                 ? Colors.green
                 : showResult && isSelected && !isCorrect
-                ? DesignTokens.error
-                : isSelected
-                ? DesignTokens.primary
-                : Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+                    ? DesignTokens.error
+                    : isSelected
+                        ? DesignTokens.primary
+                        : Theme.of(context)
+                            .colorScheme
+                            .outline
+                            .withValues(alpha: 0.3),
             width: isSelected || (showResult && isCorrect) ? 2 : 1,
           ),
         ),
@@ -515,15 +496,15 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
           child: Text(
             option.text,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: showResult && isCorrect
-                  ? Colors.green
-                  : showResult && isSelected && !isCorrect
-                  ? DesignTokens.error
-                  : isSelected
-                  ? DesignTokens.primary
-                  : null,
-            ),
+                  fontWeight: FontWeight.bold,
+                  color: showResult && isCorrect
+                      ? Colors.green
+                      : showResult && isSelected && !isCorrect
+                          ? DesignTokens.error
+                          : isSelected
+                              ? DesignTokens.primary
+                              : null,
+                ),
           ),
         ),
       ),
@@ -571,23 +552,22 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
             flex: 2,
             child: !_isAnswered
                 ? GradientButton(
-                    onPressed: _selectedAnswers.isNotEmpty
-                        ? _submitAnswer
-                        : null,
+                    onPressed:
+                        _selectedAnswers.isNotEmpty ? _submitAnswer : null,
                     text: 'Submit Answer',
                     icon: Icons.send_rounded,
                   )
                 : _currentQuestionIndex < _questions.length - 1
-                ? GradientButton(
-                    onPressed: _nextQuestion,
-                    text: 'Next Question',
-                    icon: Icons.arrow_forward_rounded,
-                  )
-                : GradientButton(
-                    onPressed: _finishQuiz,
-                    text: 'Finish Quiz',
-                    icon: Icons.flag_rounded,
-                  ),
+                    ? GradientButton(
+                        onPressed: _nextQuestion,
+                        text: 'Next Question',
+                        icon: Icons.arrow_forward_rounded,
+                      )
+                    : GradientButton(
+                        onPressed: _finishQuiz,
+                        text: 'Finish Quiz',
+                        icon: Icons.flag_rounded,
+                      ),
           ),
         ],
       ),
@@ -623,12 +603,11 @@ class _QuizScreenState extends ConsumerState<QuizScreen>
       userId: ref.read(currentUserProvider)?.id ?? '',
       sessionId: _currentSession?.id ?? '',
       answerIds: _selectedAnswers,
-      textAnswer:
-          question.type == QuestionType.text ||
+      textAnswer: question.type == QuestionType.text ||
               question.type == QuestionType.shortAnswer
           ? _selectedAnswers.isNotEmpty
-                ? _selectedAnswers.first
-                : null
+              ? _selectedAnswers.first
+              : null
           : null,
       isCorrect: isCorrect,
       score: question.getPartialScore(_selectedAnswers) * question.points,

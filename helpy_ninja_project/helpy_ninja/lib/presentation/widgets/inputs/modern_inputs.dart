@@ -64,16 +64,15 @@ class _ModernTextFieldState extends State<ModernTextField>
       vsync: this,
     );
 
-    _borderColorAnimation =
-        ColorTween(
-          begin: Colors.transparent,
-          end: DesignTokens.primary,
-        ).animate(
-          CurvedAnimation(
-            parent: _animationController,
-            curve: Curves.easeOutCubic,
-          ),
-        );
+    _borderColorAnimation = ColorTween(
+      begin: Colors.transparent,
+      end: DesignTokens.primary,
+    ).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeOutCubic,
+      ),
+    );
 
     _labelScaleAnimation = Tween<double>(begin: 1.0, end: 0.85).animate(
       CurvedAnimation(parent: _animationController, curve: Curves.easeOutCubic),
@@ -118,15 +117,14 @@ class _ModernTextFieldState extends State<ModernTextField>
                 child: Text(
                   widget.label!,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: _hasError
-                        ? DesignTokens.error
-                        : _isFocused
-                        ? DesignTokens.primary
-                        : colorScheme.onSurface.withValues(alpha: 0.7),
-                    fontWeight: _isFocused
-                        ? FontWeight.w600
-                        : FontWeight.normal,
-                  ),
+                        color: _hasError
+                            ? DesignTokens.error
+                            : _isFocused
+                                ? DesignTokens.primary
+                                : colorScheme.onSurface.withValues(alpha: 0.7),
+                        fontWeight:
+                            _isFocused ? FontWeight.w600 : FontWeight.normal,
+                      ),
                 ),
               ),
               const SizedBox(height: DesignTokens.spaceS),
@@ -146,7 +144,7 @@ class _ModernTextFieldState extends State<ModernTextField>
                   color: _hasError
                       ? DesignTokens.error
                       : _borderColorAnimation.value ??
-                            colorScheme.outline.withValues(alpha: 0.3),
+                          colorScheme.outline.withValues(alpha: 0.3),
                   width: _isFocused || _hasError ? 2 : 1,
                 ),
               ),
@@ -248,8 +246,7 @@ class _ModernSliderState extends State<ModernSlider> {
         child: SliderTheme(
           data: SliderTheme.of(context).copyWith(
             activeTrackColor: widget.activeColor ?? DesignTokens.primary,
-            inactiveTrackColor:
-                widget.inactiveColor ??
+            inactiveTrackColor: widget.inactiveColor ??
                 colorScheme.outline.withValues(alpha: 0.3),
             thumbColor: widget.thumbColor ?? DesignTokens.primary,
             overlayColor: (widget.thumbColor ?? DesignTokens.primary)
@@ -317,16 +314,15 @@ class _ModernToggleState extends State<ModernToggle>
       CurvedAnimation(parent: _animationController, curve: Curves.easeOutCubic),
     );
 
-    _trackColorAnimation =
-        ColorTween(
-          begin: widget.inactiveColor ?? Colors.grey.withValues(alpha: 0.3),
-          end: widget.activeColor ?? DesignTokens.primary,
-        ).animate(
-          CurvedAnimation(
-            parent: _animationController,
-            curve: Curves.easeOutCubic,
-          ),
-        );
+    _trackColorAnimation = ColorTween(
+      begin: widget.inactiveColor ?? Colors.grey.withValues(alpha: 0.3),
+      end: widget.activeColor ?? DesignTokens.primary,
+    ).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeOutCubic,
+      ),
+    );
 
     if (widget.value) {
       _animationController.value = 1.0;
@@ -376,8 +372,7 @@ class _ModernToggleState extends State<ModernToggle>
               children: [
                 AnimatedPositioned(
                   duration: DesignTokens.animationFast,
-                  left:
-                      _thumbAnimation.value *
+                  left: _thumbAnimation.value *
                           (dimensions.width - dimensions.thumbSize - 4) +
                       2,
                   top: 2,
@@ -469,16 +464,15 @@ class _ModernCheckboxState extends State<ModernCheckbox>
       CurvedAnimation(parent: _animationController, curve: Curves.easeOutCubic),
     );
 
-    _colorAnimation =
-        ColorTween(
-          begin: Colors.transparent,
-          end: widget.activeColor ?? DesignTokens.primary,
-        ).animate(
-          CurvedAnimation(
-            parent: _animationController,
-            curve: Curves.easeOutCubic,
-          ),
-        );
+    _colorAnimation = ColorTween(
+      begin: Colors.transparent,
+      end: widget.activeColor ?? DesignTokens.primary,
+    ).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeOutCubic,
+      ),
+    );
 
     if (widget.value) {
       _animationController.value = 1.0;
@@ -567,7 +561,6 @@ class _ModernRadioState<T> extends State<ModernRadio<T>>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _dotAnimation;
-  late Animation<Color?> _colorAnimation;
 
   bool get isSelected => widget.value == widget.groupValue;
 
@@ -583,17 +576,6 @@ class _ModernRadioState<T> extends State<ModernRadio<T>>
     _dotAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(parent: _animationController, curve: Curves.easeOutCubic),
     );
-
-    _colorAnimation =
-        ColorTween(
-          begin: Colors.transparent,
-          end: widget.activeColor ?? DesignTokens.primary,
-        ).animate(
-          CurvedAnimation(
-            parent: _animationController,
-            curve: Curves.easeOutCubic,
-          ),
-        );
 
     if (isSelected) {
       _animationController.value = 1.0;

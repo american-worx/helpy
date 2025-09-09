@@ -29,8 +29,6 @@ class _HelpyCustomizationScreenState
   late Animation<double> _floatAnimation;
 
   String _selectedPersonality = 'friendly';
-  String _selectedAvatar = 'ninja_blue';
-  String _selectedVoice = 'calm';
   bool _isLoading = false;
 
   // Helpy personality options
@@ -69,68 +67,6 @@ class _HelpyCustomizationScreenState
     },
   ];
 
-  // Avatar options
-  final List<Map<String, dynamic>> _avatars = [
-    {
-      'id': 'ninja_blue',
-      'name': 'Blue Ninja',
-      'emoji': '🥷',
-      'color': const Color(0xFF3B82F6),
-    },
-    {
-      'id': 'ninja_purple',
-      'name': 'Purple Ninja',
-      'emoji': '🟣',
-      'color': const Color(0xFF8B5CF6),
-    },
-    {
-      'id': 'ninja_green',
-      'name': 'Green Ninja',
-      'emoji': '🟢',
-      'color': const Color(0xFF10B981),
-    },
-    {
-      'id': 'robot',
-      'name': 'Friendly Robot',
-      'emoji': '🤖',
-      'color': const Color(0xFF6B7280),
-    },
-    {
-      'id': 'wizard',
-      'name': 'Study Wizard',
-      'emoji': '🧙‍♂️',
-      'color': const Color(0xFF7C3AED),
-    },
-    {
-      'id': 'owl',
-      'name': 'Wise Owl',
-      'emoji': '🦉',
-      'color': const Color(0xFF92400E),
-    },
-  ];
-
-  // Voice options
-  final List<Map<String, dynamic>> _voices = [
-    {
-      'id': 'calm',
-      'name': 'Calm & Soothing',
-      'description': 'Gentle pace, relaxing tone',
-      'icon': Icons.spa,
-    },
-    {
-      'id': 'energetic',
-      'name': 'Energetic & Upbeat',
-      'description': 'Fast pace, motivating tone',
-      'icon': Icons.bolt,
-    },
-    {
-      'id': 'neutral',
-      'name': 'Neutral & Clear',
-      'description': 'Standard pace, clear pronunciation',
-      'icon': Icons.record_voice_over,
-    },
-  ];
-
   @override
   void initState() {
     super.initState();
@@ -160,8 +96,8 @@ class _HelpyCustomizationScreenState
 
     _slideAnimation =
         Tween<Offset>(begin: const Offset(0, 0.3), end: Offset.zero).animate(
-          CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic),
-        );
+      CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic),
+    );
 
     _floatAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(parent: _floatController, curve: Curves.easeInOut),
@@ -300,23 +236,23 @@ class _HelpyCustomizationScreenState
                     children: [
                       Text(
                         personality['name'],
-                        style: Theme.of(context).textTheme.titleMedium
-                            ?.copyWith(
-                              fontWeight: isSelected
-                                  ? FontWeight.w600
-                                  : FontWeight.w500,
-                              color: isSelected
-                                  ? personality['color'] as Color
-                                  : Theme.of(context).colorScheme.onSurface,
-                            ),
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontWeight: isSelected
+                                      ? FontWeight.w600
+                                      : FontWeight.w500,
+                                  color: isSelected
+                                      ? personality['color'] as Color
+                                      : Theme.of(context).colorScheme.onSurface,
+                                ),
                       ),
                       Text(
                         personality['description'],
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Theme.of(
-                            context,
-                          ).colorScheme.onSurface.withValues(alpha: 0.7),
-                        ),
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.onSurface.withValues(alpha: 0.7),
+                            ),
                       ),
                     ],
                   ),
@@ -349,13 +285,13 @@ class _HelpyCustomizationScreenState
                   child: Text(
                     trait,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: isSelected
-                          ? personality['color'] as Color
-                          : Theme.of(
-                              context,
-                            ).colorScheme.onSurface.withValues(alpha: 0.7),
-                      fontWeight: FontWeight.w500,
-                    ),
+                          color: isSelected
+                              ? personality['color'] as Color
+                              : Theme.of(
+                                  context,
+                                ).colorScheme.onSurface.withValues(alpha: 0.7),
+                          fontWeight: FontWeight.w500,
+                        ),
                   ),
                 );
               }).toList(),
@@ -428,20 +364,20 @@ class _HelpyCustomizationScreenState
                     children: [
                       Text(
                         'Hi! I\'m Helpy 👋',
-                        style: Theme.of(context).textTheme.titleMedium
-                            ?.copyWith(
-                              fontWeight: FontWeight.w600,
-                              color: selectedPersonality['color'] as Color,
-                            ),
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: selectedPersonality['color'] as Color,
+                                ),
                       ),
                       const SizedBox(height: DesignTokens.spaceXS),
                       Text(
                         _getPersonalityGreeting(_selectedPersonality),
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Theme.of(
-                            context,
-                          ).colorScheme.onSurface.withValues(alpha: 0.8),
-                        ),
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.onSurface.withValues(alpha: 0.8),
+                            ),
                         textAlign: TextAlign.center,
                       ),
                     ],
@@ -509,7 +445,9 @@ class _HelpyCustomizationScreenState
                             const SizedBox(width: DesignTokens.spaceS),
                             Text(
                               'Meet Your Helpy',
-                              style: Theme.of(context).textTheme.headlineSmall
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineSmall
                                   ?.copyWith(fontWeight: FontWeight.bold),
                             ),
                           ],
@@ -529,12 +467,12 @@ class _HelpyCustomizationScreenState
                         const SizedBox(height: DesignTokens.spaceS),
                         Text(
                           'Step 3 of 3 - Almost done!',
-                          style: Theme.of(context).textTheme.bodySmall
-                              ?.copyWith(
-                                color: colorScheme.onSurface.withValues(
-                                  alpha: 0.6,
-                                ),
-                              ),
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: colorScheme.onSurface.withValues(
+                                      alpha: 0.6,
+                                    ),
+                                  ),
                         ),
                       ],
                     ),
@@ -556,7 +494,9 @@ class _HelpyCustomizationScreenState
                           // Personality selection
                           Text(
                             'Choose Helpy\'s Personality',
-                            style: Theme.of(context).textTheme.titleLarge
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge
                                 ?.copyWith(
                                   fontWeight: FontWeight.bold,
                                   color: DesignTokens.accent,
@@ -565,7 +505,9 @@ class _HelpyCustomizationScreenState
                           const SizedBox(height: DesignTokens.spaceS),
                           Text(
                             'Select the personality that matches your learning style best.',
-                            style: Theme.of(context).textTheme.bodyMedium
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
                                 ?.copyWith(
                                   color: colorScheme.onSurface.withValues(
                                     alpha: 0.7,

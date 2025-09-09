@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../config/design_tokens.dart';
 import '../../../../domain/entities/helpy_personality.dart';
-import 'package:helpy_ninja/l10n/app_localizations.dart';
 
 /// Quick personality selection card for chat list
 class ChatListPersonalityQuickCard extends StatelessWidget {
@@ -17,8 +16,6 @@ class ChatListPersonalityQuickCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-
     return Container(
       margin: const EdgeInsets.only(bottom: DesignTokens.spaceM),
       child: GestureDetector(
@@ -76,17 +73,17 @@ class ChatListPersonalityQuickCard extends StatelessWidget {
                     Text(
                       personality.name,
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                            fontWeight: FontWeight.bold,
+                          ),
                     ),
                     const SizedBox(height: DesignTokens.spaceXS),
                     Text(
                       personality.description,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Theme.of(
-                          context,
-                        ).colorScheme.onSurface.withValues(alpha: 0.7),
-                      ),
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.onSurface.withValues(alpha: 0.7),
+                          ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),

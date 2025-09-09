@@ -45,11 +45,11 @@ class _ChatListScreenState extends ConsumerState<ChatListScreen>
 
     _slideAnimation =
         Tween<Offset>(begin: const Offset(0, 0.3), end: Offset.zero).animate(
-          CurvedAnimation(
-            parent: _slideAnimationController,
-            curve: Curves.easeOutCubic,
-          ),
-        );
+      CurvedAnimation(
+        parent: _slideAnimationController,
+        curve: Curves.easeOutCubic,
+      ),
+    );
 
     // Start animations
     _fadeAnimationController.forward();
@@ -80,20 +80,22 @@ class _ChatListScreenState extends ConsumerState<ChatListScreen>
           child: chatState.isLoading
               ? const Center(child: CircularProgressIndicator())
               : chatState.error != null
-              ? ChatListErrorState(
-                  error: chatState.error!,
-                  onRetry: () => ref.read(chatProvider.notifier).refresh(),
-                )
-              : chatState.conversations.isEmpty
-              ? ChatListEmptyState(
-                  personalities: ref.watch(availablePersonalitiesProvider),
-                  onStartFirstChat: () => _showNewChatOptions(context),
-                  onSeeAllPersonalities: () => _showNewChatOptions(context),
-                )
-              : ChatListConversationsList(
-                  conversations: chatState.conversations,
-                  onConversationAction: _handleConversationAction,
-                ),
+                  ? ChatListErrorState(
+                      error: chatState.error!,
+                      onRetry: () => ref.read(chatProvider.notifier).refresh(),
+                    )
+                  : chatState.conversations.isEmpty
+                      ? ChatListEmptyState(
+                          personalities:
+                              ref.watch(availablePersonalitiesProvider),
+                          onStartFirstChat: () => _showNewChatOptions(context),
+                          onSeeAllPersonalities: () =>
+                              _showNewChatOptions(context),
+                        )
+                      : ChatListConversationsList(
+                          conversations: chatState.conversations,
+                          onConversationAction: _handleConversationAction,
+                        ),
         ),
       ),
       floatingActionButton: chatState.conversations.isNotEmpty
@@ -170,14 +172,13 @@ class _ChatListScreenState extends ConsumerState<ChatListScreen>
         );
       }
 
-      final conversation = await ref
-          .read(chatProvider.notifier)
-          .createConversation(
-            title: '',
-            userId: user.id,
-            helpyPersonalityId: personality.id,
-            type: ConversationType.general,
-          );
+      final conversation =
+          await ref.read(chatProvider.notifier).createConversation(
+                title: '',
+                userId: user.id,
+                helpyPersonalityId: personality.id,
+                type: ConversationType.general,
+              );
 
       debugPrint('Conversation created with ID: ${conversation.id}');
       debugPrint('Conversation title: ${conversation.displayTitle}');
@@ -225,57 +226,6 @@ class _ChatListScreenState extends ConsumerState<ChatListScreen>
               textColor: Colors.white,
               onPressed: () => _startNewChat(personality),
             ),
-          ),
-        );
-      }
-    }
-  }
-
-  void _openConversation(Conversation conversation) {
-    final routePath = '/chat/${conversation.id}';
-    debugPrint('Opening conversation: ${conversation.id}');
-    debugPrint('Conversation title: ${conversation.displayTitle}');
-    debugPrint('Navigation path: $routePath');
-    debugPrint(
-      'Current location: ${GoRouter.of(context).routerDelegate.currentConfiguration.uri.path}',
-    );
-
-    try {
-      context.go(routePath);
-
-      // Add a small delay and check if navigation succeeded
-      Future.delayed(Duration(milliseconds: 500), () {
-        if (mounted) {
-          final currentPath = GoRouter.of(
-            context,
-          ).routerDelegate.currentConfiguration.uri.path;
-          debugPrint('Navigation result - Current path: $currentPath');
-          if (currentPath != routePath) {
-            debugPrint(
-              'WARNING: Navigation may have failed. Expected: $routePath, Actual: $currentPath',
-            );
-            // Show error to user
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('Failed to open chat. Please try again.'),
-                backgroundColor: DesignTokens.error,
-                action: SnackBarAction(
-                  label: 'Retry',
-                  textColor: Colors.white,
-                  onPressed: () => _openConversation(conversation),
-                ),
-              ),
-            );
-          }
-        }
-      });
-    } catch (e) {
-      debugPrint('Error during navigation: $e');
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Navigation error: ${e.toString()}'),
-            backgroundColor: DesignTokens.error,
           ),
         );
       }

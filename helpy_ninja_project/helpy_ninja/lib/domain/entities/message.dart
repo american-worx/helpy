@@ -19,6 +19,16 @@ class Message {
   final DateTime? editedAt;
   final MessagePriority priority;
   final Map<String, dynamic>? aiSettings;
+  // New fields for message ordering and conflict resolution
+  final int sequenceNumber;
+  final bool isConflict;
+  final List<String> conflictingMessageIds;
+  // New fields for WebSocket sequencing and acknowledgment
+  final String messageId;
+  final DateTime? sentAt;
+  final DateTime? deliveredAt;
+  final DateTime? readAt;
+  final MessageDeliveryStatus deliveryStatus;
 
   const Message({
     required this.id,
@@ -38,6 +48,16 @@ class Message {
     this.editedAt,
     this.priority = MessagePriority.normal,
     this.aiSettings,
+    // New parameters with default values
+    this.sequenceNumber = 0,
+    this.isConflict = false,
+    this.conflictingMessageIds = const [],
+    // WebSocket-specific parameters with default values
+    this.messageId = '',
+    this.sentAt, // Default to null
+    this.deliveredAt,
+    this.readAt,
+    this.deliveryStatus = MessageDeliveryStatus.sent,
   });
 
   Message copyWith({
@@ -58,6 +78,14 @@ class Message {
     DateTime? editedAt,
     MessagePriority? priority,
     Map<String, dynamic>? aiSettings,
+    int? sequenceNumber,
+    bool? isConflict,
+    List<String>? conflictingMessageIds,
+    String? messageId,
+    DateTime? sentAt,
+    DateTime? deliveredAt,
+    DateTime? readAt,
+    MessageDeliveryStatus? deliveryStatus,
   }) {
     return Message(
       id: id ?? this.id,
@@ -77,6 +105,15 @@ class Message {
       editedAt: editedAt ?? this.editedAt,
       priority: priority ?? this.priority,
       aiSettings: aiSettings ?? this.aiSettings,
+      sequenceNumber: sequenceNumber ?? this.sequenceNumber,
+      isConflict: isConflict ?? this.isConflict,
+      conflictingMessageIds:
+          conflictingMessageIds ?? this.conflictingMessageIds,
+      messageId: messageId ?? this.messageId,
+      sentAt: sentAt ?? this.sentAt,
+      deliveredAt: deliveredAt ?? this.deliveredAt,
+      readAt: readAt ?? this.readAt,
+      deliveryStatus: deliveryStatus ?? this.deliveryStatus,
     );
   }
 
@@ -154,9 +191,8 @@ class Message {
     if (existingReactionIndex != -1) {
       final existingReaction = updatedReactions[existingReactionIndex];
       if (existingReaction.userIds.contains(userId)) {
-        final updatedUserIds = existingReaction.userIds
-            .where((id) => id != userId)
-            .toList();
+        final updatedUserIds =
+            existingReaction.userIds.where((id) => id != userId).toList();
 
         if (updatedUserIds.isEmpty) {
           updatedReactions.removeAt(existingReactionIndex);
@@ -208,6 +244,16 @@ class Message {
       'editedAt': editedAt?.toIso8601String(),
       'priority': priority.name,
       'aiSettings': aiSettings,
+      // New fields for message ordering and conflict resolution
+      'sequenceNumber': sequenceNumber,
+      'isConflict': isConflict,
+      'conflictingMessageIds': conflictingMessageIds,
+      // New fields for WebSocket sequencing and acknowledgment
+      'messageId': messageId,
+      'sentAt': sentAt?.toIso8601String(),
+      'deliveredAt': deliveredAt?.toIso8601String(),
+      'readAt': readAt?.toIso8601String(),
+      'deliveryStatus': deliveryStatus.name,
     };
   }
 
@@ -230,30 +276,45 @@ class Message {
       timestamp: DateTime.parse(
         json['timestamp'] ?? DateTime.now().toIso8601String(),
       ),
-      updatedAt: json['updatedAt'] != null
-          ? DateTime.parse(json['updatedAt'])
-          : null,
+      updatedAt:
+          json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
       metadata: json['metadata'],
       replyToMessageId: json['replyToMessageId'],
       attachments: json['attachments'] != null
           ? (json['attachments'] as List)
-                .map((a) => MessageAttachment.fromJson(a))
-                .toList()
+              .map((a) => MessageAttachment.fromJson(a))
+              .toList()
           : null,
       reactions: json['reactions'] != null
           ? (json['reactions'] as List)
-                .map((r) => MessageReaction.fromJson(r))
-                .toList()
+              .map((r) => MessageReaction.fromJson(r))
+              .toList()
           : null,
       isEdited: json['isEdited'] ?? false,
-      editedAt: json['editedAt'] != null
-          ? DateTime.parse(json['editedAt'])
-          : null,
+      editedAt:
+          json['editedAt'] != null ? DateTime.parse(json['editedAt']) : null,
       priority: MessagePriority.values.firstWhere(
         (priority) => priority.name == json['priority'],
         orElse: () => MessagePriority.normal,
       ),
       aiSettings: json['aiSettings'],
+      // New fields for message ordering and conflict resolution
+      sequenceNumber: json['sequenceNumber'] ?? 0,
+      isConflict: json['isConflict'] ?? false,
+      conflictingMessageIds: json['conflictingMessageIds'] != null
+          ? List<String>.from(json['conflictingMessageIds'])
+          : const [],
+      // New fields for WebSocket sequencing and acknowledgment
+      messageId: json['messageId'] ?? '',
+      sentAt: json['sentAt'] != null ? DateTime.parse(json['sentAt']) : null,
+      deliveredAt: json['deliveredAt'] != null
+          ? DateTime.parse(json['deliveredAt'])
+          : null,
+      readAt: json['readAt'] != null ? DateTime.parse(json['readAt']) : null,
+      deliveryStatus: MessageDeliveryStatus.values.firstWhere(
+        (status) => status.name == json['deliveryStatus'],
+        orElse: () => MessageDeliveryStatus.sent,
+      ),
     );
   }
 
@@ -341,8 +402,8 @@ class MessageAttachment {
     this.uploadedBy,
     this.isEncrypted = false,
     this.encryptionKey,
-  }) : originalFileName = originalFileName ?? fileName,
-       uploadedAt = uploadedAt ?? DateTime.now();
+  })  : originalFileName = originalFileName ?? fileName,
+        uploadedAt = uploadedAt ?? DateTime.now();
 
   MessageAttachment copyWith({
     String? id,

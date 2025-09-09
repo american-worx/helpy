@@ -28,7 +28,6 @@ class _LessonViewerScreenState extends ConsumerState<LessonViewerScreen>
   late Animation<double> _progressAnimation;
 
   PageController? _pageController;
-  LearningSession? _currentSession;
   int _currentSectionIndex = 0;
   double _readingProgress = 0.0;
 
@@ -79,17 +78,11 @@ class _LessonViewerScreenState extends ConsumerState<LessonViewerScreen>
     if (user == null) return;
 
     try {
-      final session = await ref
-          .read(learningSessionProvider.notifier)
-          .startLearningSession(
+      await ref.read(learningSessionProvider.notifier).startLearningSession(
             userId: user.id,
             lessonId: widget.lessonId,
             type: SessionType.lesson,
           );
-
-      setState(() {
-        _currentSession = session;
-      });
     } catch (e) {
       if (mounted) {
         final l10n = AppLocalizations.of(context)!;
