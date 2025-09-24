@@ -121,6 +121,7 @@ class AppConstants {
 
   // API Endpoints (placeholder - will be configured per environment)
   static const String baseUrl = 'https://api.helpy.ninja';
+  static const String apiBaseUrl = baseUrl; // Alias for API client
   static const String websocketUrl = 'wss://ws.helpy.ninja';
 
   // Feature Flags
@@ -131,6 +132,13 @@ class AppConstants {
   static const bool enableAnalytics = false; // Disabled for privacy
   static const bool enableAuthDuringDevelopment =
       false; // Disable auth for development
+      
+  // Development/Offline Flags
+  static const bool enableNetworkRequests = false; // Disable all network calls for development
+  static const bool enableWebSocketConnection = false; // Disable WebSocket for development
+  static const bool enableApiCalls = false; // Disable API calls for development
+  static const bool enableLLMRequests = false; // Use mock LLM responses only
+  static const bool enableImageLoading = false; // Use placeholder images only
 
   // UI Constants
   static const double appBarHeight = 56.0;

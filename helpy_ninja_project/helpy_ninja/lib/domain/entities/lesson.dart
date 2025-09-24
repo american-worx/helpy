@@ -1,26 +1,50 @@
+import 'package:hive/hive.dart';
 import 'shared_enums.dart';
 
+part 'lesson.g.dart';
+
 /// Lesson entity representing learning content
+@HiveType(typeId: 10)
 class Lesson {
+  @HiveField(0)
   final String id;
+  @HiveField(1)
   final String title;
+  @HiveField(2)
   final String description;
+  @HiveField(3)
   final String subjectId;
+  @HiveField(4)
   final String content;
+  @HiveField(5)
   final LessonType type;
+  @HiveField(6)
   final DifficultyLevel difficulty;
+  @HiveField(7)
   final int estimatedDuration; // in minutes
+  @HiveField(8)
   final List<String> prerequisites;
+  @HiveField(9)
   final List<String> learningObjectives;
+  @HiveField(10)
   final List<LessonSection> sections;
+  @HiveField(11)
   final List<String> tags;
+  @HiveField(12)
   final Map<String, dynamic>? metadata;
+  @HiveField(13)
   final LessonStatus status;
+  @HiveField(14)
   final DateTime createdAt;
+  @HiveField(15)
   final DateTime? updatedAt;
+  @HiveField(16)
   final String? imageUrl;
+  @HiveField(17)
   final String? videoUrl;
+  @HiveField(18)
   final bool isPublished;
+  @HiveField(19)
   final int orderIndex;
 
   const Lesson({
@@ -226,30 +250,49 @@ class Lesson {
 }
 
 /// Types of lessons
+@HiveType(typeId: 11)
 enum LessonType {
+  @HiveField(0)
   reading, // Text-based lessons
+  @HiveField(1)
   video, // Video content
+  @HiveField(2)
   interactive, // Interactive exercises
+  @HiveField(3)
   quiz, // Quiz/assessment
+  @HiveField(4)
   practice, // Practice problems
+  @HiveField(5)
   project, // Project-based learning
 }
 
 /// Lesson status
+@HiveType(typeId: 12)
 enum LessonStatus {
+  @HiveField(0)
   draft, // Being created
+  @HiveField(1)
   review, // Under review
+  @HiveField(2)
   published, // Live and available
+  @HiveField(3)
   archived, // No longer active
 }
 
 /// Lesson section for organizing content
+@HiveType(typeId: 13)
 class LessonSection {
+  @HiveField(0)
   final String id;
+  @HiveField(1)
   final String title;
+  @HiveField(2)
   final String content;
+  @HiveField(3)
   final LessonSectionType type;
+  @HiveField(4)
   final int orderIndex;
+  @HiveField(5)
   final Map<String, dynamic>? metadata;
 
   const LessonSection({
@@ -315,12 +358,20 @@ class LessonSection {
 }
 
 /// Types of lesson sections
+@HiveType(typeId: 14)
 enum LessonSectionType {
+  @HiveField(0)
   text, // Text content
+  @HiveField(1)
   image, // Image content
+  @HiveField(2)
   video, // Video content
+  @HiveField(3)
   audio, // Audio content
+  @HiveField(4)
   code, // Code examples
+  @HiveField(5)
   exercise, // Interactive exercise
+  @HiveField(6)
   quiz, // Quiz questions
 }

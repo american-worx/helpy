@@ -1,19 +1,39 @@
+import 'package:hive/hive.dart';
+
+part 'learning_session.g.dart';
+
 /// Learning session entity representing a user's learning activity
+@HiveType(typeId: 15)
 class LearningSession {
+  @HiveField(0)
   final String id;
+  @HiveField(1)
   final String userId;
+  @HiveField(2)
   final String lessonId;
+  @HiveField(3)
   final SessionType type;
+  @HiveField(4)
   final SessionStatus status;
+  @HiveField(5)
   final DateTime startedAt;
+  @HiveField(6)
   final DateTime? completedAt;
+  @HiveField(7)
   final DateTime? pausedAt;
+  @HiveField(8)
   final Duration totalTimeSpent;
+  @HiveField(9)
   final double progressPercentage;
+  @HiveField(10)
   final int currentSectionIndex;
+  @HiveField(11)
   final Map<String, dynamic> sessionData;
+  @HiveField(12)
   final List<SessionEvent> events;
+  @HiveField(13)
   final SessionScore? score;
+  @HiveField(14)
   final Map<String, dynamic>? metadata;
 
   const LearningSession({
@@ -215,28 +235,45 @@ class LearningSession {
 }
 
 /// Types of learning sessions
+@HiveType(typeId: 16)
 enum SessionType {
+  @HiveField(0)
   lesson, // Regular lesson session
+  @HiveField(1)
   practice, // Practice session
+  @HiveField(2)
   quiz, // Quiz session
+  @HiveField(3)
   review, // Review session
+  @HiveField(4)
   project, // Project session
 }
 
 /// Session status
+@HiveType(typeId: 17)
 enum SessionStatus {
+  @HiveField(0)
   active, // Currently in progress
+  @HiveField(1)
   paused, // Temporarily paused
+  @HiveField(2)
   completed, // Successfully completed
+  @HiveField(3)
   abandoned, // Left incomplete
+  @HiveField(4)
   expired, // Timed out
 }
 
 /// Session event for tracking user interactions
+@HiveType(typeId: 18)
 class SessionEvent {
+  @HiveField(0)
   final String id;
+  @HiveField(1)
   final SessionEventType type;
+  @HiveField(2)
   final DateTime timestamp;
+  @HiveField(3)
   final Map<String, dynamic> data;
 
   const SessionEvent({
@@ -294,27 +331,46 @@ class SessionEvent {
 }
 
 /// Types of session events
+@HiveType(typeId: 19)
 enum SessionEventType {
+  @HiveField(0)
   start, // Session started
+  @HiveField(1)
   pause, // Session paused
+  @HiveField(2)
   resume, // Session resumed
+  @HiveField(3)
   complete, // Session completed
+  @HiveField(4)
   sectionStart, // Started new section
+  @HiveField(5)
   sectionComplete, // Completed section
+  @HiveField(6)
   interaction, // User interaction
+  @HiveField(7)
   answer, // Answer submitted
+  @HiveField(8)
   hint, // Hint requested
+  @HiveField(9)
   error, // Error occurred
 }
 
 /// Session score for tracking performance
+@HiveType(typeId: 28)
 class SessionScore {
+  @HiveField(0)
   final double totalScore;
+  @HiveField(1)
   final double maxScore;
+  @HiveField(2)
   final int correctAnswers;
+  @HiveField(3)
   final int totalAnswers;
+  @HiveField(4)
   final int hintsUsed;
+  @HiveField(5)
   final Duration timeToComplete;
+  @HiveField(6)
   final Map<String, double> sectionScores;
 
   const SessionScore({

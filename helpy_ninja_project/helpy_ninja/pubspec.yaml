@@ -52,6 +52,13 @@ dependencies:
   freezed_annotation: 
   json_annotation:
 
+  # Dependency Injection
+  get_it:
+  injectable:
+
+  # Security
+  flutter_secure_storage:
+
   # Local ML (for offline LLM)
   tflite_flutter: 
 
@@ -70,7 +77,8 @@ dev_dependencies:
   build_runner:
   hive_generator: 
   json_serializable: 
-  freezed: 
+  freezed:
+  injectable_generator: 
 
   # Localization
   intl_utils: 

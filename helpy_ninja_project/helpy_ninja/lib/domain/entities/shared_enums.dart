@@ -1,26 +1,76 @@
 /// Shared enums used across multiple entities
+import 'package:hive/hive.dart';
+
+part 'shared_enums.g.dart';
 
 /// Difficulty levels for lessons and questions
-enum DifficultyLevel { beginner, intermediate, advanced, expert }
+@HiveType(typeId: 20)
+enum DifficultyLevel {
+  @HiveField(0)
+  beginner,
+  @HiveField(1)
+  intermediate,
+  @HiveField(2)
+  advanced,
+  @HiveField(3)
+  expert
+}
 
 /// Theme mode options
-enum ThemeMode { light, dark, system }
+@HiveType(typeId: 21)
+enum ThemeMode {
+  @HiveField(0)
+  light,
+  @HiveField(1)
+  dark,
+  @HiveField(2)
+  system
+}
 
 /// Types of attachments
-enum AttachmentType { image, video, audio, document, file }
+@HiveType(typeId: 22)
+enum AttachmentType {
+  @HiveField(0)
+  image,
+  @HiveField(1)
+  video,
+  @HiveField(2)
+  audio,
+  @HiveField(3)
+  document,
+  @HiveField(4)
+  file
+}
 
 /// Attachment processing status
+@HiveType(typeId: 23)
 enum AttachmentStatus {
+  @HiveField(0)
   uploading,
+  @HiveField(1)
   uploaded,
+  @HiveField(2)
   failed,
+  @HiveField(3)
   processing,
+  @HiveField(4)
   compressed,
+  @HiveField(5)
   encrypted,
 }
 
 /// Message priority levels
-enum MessagePriority { low, normal, high, urgent }
+@HiveType(typeId: 24)
+enum MessagePriority {
+  @HiveField(0)
+  low,
+  @HiveField(1)
+  normal,
+  @HiveField(2)
+  high,
+  @HiveField(3)
+  urgent
+}
 
 /// AI response formats
 enum ResponseFormat { text, json, markdown, html }
@@ -51,11 +101,17 @@ enum ParticipantStatus {
 }
 
 /// Message reaction class for emoji reactions
+@HiveType(typeId: 26)
 class MessageReaction {
+  @HiveField(0)
   final String emoji;
+  @HiveField(1)
   final List<String> userIds;
+  @HiveField(2)
   final int count;
+  @HiveField(3)
   final DateTime timestamp;
+  @HiveField(4)
   final String? userName;
 
   MessageReaction({
@@ -118,12 +174,19 @@ class MessageReaction {
 }
 
 /// Compression information for file attachments
+@HiveType(typeId: 27)
 class CompressionInfo {
+  @HiveField(0)
   final int originalSize;
+  @HiveField(1)
   final int compressedSize;
+  @HiveField(2)
   final double compressionRatio;
+  @HiveField(3)
   final String algorithm;
+  @HiveField(4)
   final Duration processingTime;
+  @HiveField(5)
   final Map<String, dynamic>? metadata;
 
   const CompressionInfo({
@@ -189,11 +252,18 @@ class CompressionInfo {
 }
 
 /// Message delivery status for WebSocket tracking
+@HiveType(typeId: 25)
 enum MessageDeliveryStatus {
+  @HiveField(0)
   sending, // Message is being sent
+  @HiveField(1)
   sent, // Message sent to server
+  @HiveField(2)
   delivered, // Message delivered to recipients
+  @HiveField(3)
   read, // Message read by recipients
+  @HiveField(4)
   failed, // Message failed to send
+  @HiveField(5)
   acknowledged, // Message acknowledged by recipients
 }

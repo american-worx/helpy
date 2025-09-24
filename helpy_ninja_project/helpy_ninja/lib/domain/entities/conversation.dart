@@ -1,19 +1,39 @@
+import 'package:hive/hive.dart';
+
+part 'conversation.g.dart';
+
 /// Conversation entity representing a chat session with Helpy
+@HiveType(typeId: 6)
 class Conversation {
+  @HiveField(0)
   final String id;
+  @HiveField(1)
   final String title;
+  @HiveField(2)
   final String userId;
+  @HiveField(3)
   final String helpyPersonalityId;
+  @HiveField(4)
   final ConversationType type;
+  @HiveField(5)
   final ConversationStatus status;
+  @HiveField(6)
   final DateTime createdAt;
+  @HiveField(7)
   final DateTime updatedAt;
+  @HiveField(8)
   final String? lastMessageId;
+  @HiveField(9)
   final String? lastMessagePreview;
+  @HiveField(10)
   final DateTime? lastMessageTime;
+  @HiveField(11)
   final int unreadCount;
+  @HiveField(12)
   final List<String> participants;
+  @HiveField(13)
   final Map<String, dynamic>? metadata;
+  @HiveField(14)
   final ConversationSettings settings;
 
   const Conversation({
@@ -190,30 +210,49 @@ class Conversation {
 }
 
 /// Types of conversations
+@HiveType(typeId: 7)
 enum ConversationType {
+  @HiveField(0)
   general, // General chat with Helpy
+  @HiveField(1)
   subjectHelp, // Help with specific subject
+  @HiveField(2)
   homework, // Homework assistance
+  @HiveField(3)
   quiz, // Quiz or assessment
+  @HiveField(4)
   lesson, // Lesson-related chat
+  @HiveField(5)
   group, // Group study session
 }
 
 /// Conversation status
+@HiveType(typeId: 8)
 enum ConversationStatus {
+  @HiveField(0)
   active, // Conversation is active
+  @HiveField(1)
   paused, // Conversation is paused
+  @HiveField(2)
   ended, // Conversation has ended
+  @HiveField(3)
   archived, // Conversation is archived
 }
 
 /// Conversation settings and preferences
+@HiveType(typeId: 9)
 class ConversationSettings {
+  @HiveField(0)
   final bool notificationsEnabled;
+  @HiveField(1)
   final bool soundEnabled;
+  @HiveField(2)
   final bool autoSaveEnabled;
+  @HiveField(3)
   final int maxMessages;
+  @HiveField(4)
   final Duration typingTimeout;
+  @HiveField(5)
   final Map<String, dynamic>? customSettings;
 
   const ConversationSettings({
