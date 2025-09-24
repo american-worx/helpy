@@ -6,7 +6,7 @@ import 'package:logger/logger.dart';
 import '../../domain/entities/conversation.dart';
 import '../../domain/entities/message.dart';
 import '../../domain/entities/helpy_personality.dart';
-import '../../services/helpy_ai_service.dart';
+import '../../core/ai/enhanced_helpy_ai_service.dart';
 
 /// Chat state notifier for managing conversations and messages
 class ChatNotifier extends StateNotifier<ChatState> {
@@ -460,7 +460,7 @@ class ChatNotifier extends StateNotifier<ChatState> {
     final subject = conversation.metadata?['subject'];
 
     // Generate response using enhanced AI service
-    final response = HelpyAIService.generateResponse(
+    final response = await EnhancedHelpyAIService.generateContextualResponse(
       userMessage.content,
       personality,
       recentMessages,

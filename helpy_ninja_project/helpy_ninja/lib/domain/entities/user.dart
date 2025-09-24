@@ -1,11 +1,23 @@
+import 'package:hive/hive.dart';
+
+part 'user.g.dart';
+
 /// User entity representing an authenticated user
+@HiveType(typeId: 0)
 class User {
+  @HiveField(0)
   final String id;
+  @HiveField(1)
   final String email;
+  @HiveField(2)
   final String name;
+  @HiveField(3)
   final String? profileImageUrl;
+  @HiveField(4)
   final UserPreferences preferences;
+  @HiveField(5)
   final DateTime createdAt;
+  @HiveField(6)
   final DateTime? updatedAt;
 
   const User({
@@ -82,17 +94,29 @@ class User {
 }
 
 /// User preferences and settings
+@HiveType(typeId: 1)
 class UserPreferences {
+  @HiveField(0)
   final String locale;
+  @HiveField(1)
   final bool isDarkMode;
+  @HiveField(2)
   final bool notificationsEnabled;
+  @HiveField(3)
   final bool soundEnabled;
+  @HiveField(4)
   final bool hapticFeedbackEnabled;
+  @HiveField(5)
   final String preferredHelpyPersonality;
+  @HiveField(6)
   final List<String> subjects;
+  @HiveField(7)
   final String gradeLevel;
+  @HiveField(8)
   final String learningStyle;
+  @HiveField(9)
   final String curriculum;
+  @HiveField(10)
   final bool offlineMode;
 
   const UserPreferences({

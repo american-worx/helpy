@@ -1,33 +1,62 @@
+import 'package:hive/hive.dart';
 import 'shared_enums.dart';
 
+part 'message.g.dart';
+
 /// Message entity for chat conversations
+@HiveType(typeId: 2)
 class Message {
+  @HiveField(0)
   final String id;
+  @HiveField(1)
   final String conversationId;
+  @HiveField(2)
   final String senderId;
+  @HiveField(3)
   final String senderName;
+  @HiveField(4)
   final String content;
+  @HiveField(5)
   final MessageType type;
+  @HiveField(6)
   final MessageStatus status;
+  @HiveField(7)
   final DateTime timestamp;
+  @HiveField(8)
   final DateTime? updatedAt;
+  @HiveField(9)
   final Map<String, dynamic>? metadata;
+  @HiveField(10)
   final String? replyToMessageId;
+  @HiveField(11)
   final List<MessageAttachment>? attachments;
+  @HiveField(12)
   final List<MessageReaction>? reactions;
+  @HiveField(13)
   final bool isEdited;
+  @HiveField(14)
   final DateTime? editedAt;
+  @HiveField(15)
   final MessagePriority priority;
+  @HiveField(16)
   final Map<String, dynamic>? aiSettings;
   // New fields for message ordering and conflict resolution
+  @HiveField(17)
   final int sequenceNumber;
+  @HiveField(18)
   final bool isConflict;
+  @HiveField(19)
   final List<String> conflictingMessageIds;
   // New fields for WebSocket sequencing and acknowledgment
+  @HiveField(20)
   final String messageId;
+  @HiveField(21)
   final DateTime? sentAt;
+  @HiveField(22)
   final DateTime? deliveredAt;
+  @HiveField(23)
   final DateTime? readAt;
+  @HiveField(24)
   final MessageDeliveryStatus deliveryStatus;
 
   const Message({
@@ -334,54 +363,97 @@ class Message {
 }
 
 /// Types of messages in chat
+@HiveType(typeId: 3)
 enum MessageType {
+  @HiveField(0)
   text, // Regular text message
+  @HiveField(1)
   image, // Image attachment
+  @HiveField(2)
   file, // File attachment
+  @HiveField(3)
   audio, // Audio message
+  @HiveField(4)
   video, // Video message
+  @HiveField(5)
   document, // Document file
+  @HiveField(6)
   system, // System notification
+  @HiveField(7)
   typing, // Typing indicator
+  @HiveField(8)
   quiz, // Interactive quiz
+  @HiveField(9)
   lesson, // Lesson content
+  @HiveField(10)
   achievement, // Achievement notification
+  @HiveField(11)
   suggestion, // AI suggestion
+  @HiveField(12)
   emoji, // Emoji-only message
+  @HiveField(13)
   sticker, // Sticker message
+  @HiveField(14)
   location, // Location sharing
+  @HiveField(15)
   contact, // Contact sharing
 }
 
 /// Message delivery and read status
+@HiveType(typeId: 4)
 enum MessageStatus {
+  @HiveField(0)
   sending, // Message is being sent
+  @HiveField(1)
   sent, // Message delivered to server
+  @HiveField(2)
   delivered, // Message delivered to recipient
+  @HiveField(3)
   read, // Message has been read
+  @HiveField(4)
   failed, // Message failed to send
+  @HiveField(5)
   encrypted, // Message is encrypted
+  @HiveField(6)
   deleted, // Message was deleted
 }
 
 /// Message attachments with advanced file handling
+@HiveType(typeId: 5)
 class MessageAttachment {
+  @HiveField(0)
   final String id;
+  @HiveField(1)
   final String fileName;
+  @HiveField(2)
   final String originalFileName;
+  @HiveField(3)
   final String fileType;
+  @HiveField(4)
   final int fileSize;
+  @HiveField(5)
   final int? originalFileSize;
+  @HiveField(6)
   final String url;
+  @HiveField(7)
   final String? localPath;
+  @HiveField(8)
   final String? thumbnail;
+  @HiveField(9)
   final AttachmentType type;
+  @HiveField(10)
   final AttachmentStatus status;
+  @HiveField(11)
   final CompressionInfo? compressionInfo;
+  @HiveField(12)
   final Map<String, dynamic>? metadata;
+  @HiveField(13)
   final DateTime uploadedAt;
+  @HiveField(14)
   final String? uploadedBy;
+  @HiveField(15)
   final bool isEncrypted;
+  @HiveField(16)
   final String? encryptionKey;
 
   MessageAttachment({

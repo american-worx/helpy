@@ -1,0 +1,195 @@
+spring:
+  application:
+    name: helpy-backend
+  profiles:
+    active: local
+
+  # Common configuration
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    deserialization:
+      fail-on-unknown-properties: false
+    property-naming-strategy: SNAKE_CASE
+
+  # WebSocket Configuration
+  websocket:
+    allowed-origins: "*"
+    stomp:
+      endpoint: "/ws"
+      app-destination-prefix: "/app"
+      topic-prefix: "/topic"
+      queue-prefix: "/queue"
+
+# Management and Monitoring
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info,metrics,prometheus"
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+# Logging Configuration
+logging:
+  level:
+    com.americanworx.helpy_backend: DEBUG
+    org.springframework.web: DEBUG
+    software.amazon.awssdk: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# Application-specific configuration
+helpy:
+  llm:
+    providers:
+      anthropic:
+        enabled: true
+        base-url: "https://api.anthropic.com"
+        model: "claude-3-sonnet-20240229"
+      openai:
+        enabled: true
+        base-url: "https://api.openai.com"
+        model: "gpt-4"
+      local:
+        enabled: false
+        base-url: "http://localhost:8080"
+        model: "llama3"
+    default-provider: "anthropic"
+    timeout-seconds: 30
+    max-retries: 3
+
+  multi-agent:
+    max-helpys-per-session: 4
+    response-delay-seconds: 2
+    coordination-timeout-seconds: 10
+    conflict-resolution-enabled: true
+
+---
+# Development Profile
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  # Redis Configuration - Local
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password:
+      timeout: 2000ms
+      database: 0
+      jedis:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+
+  # Development specific settings
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: true
+
+# AWS Configuration - Local Development
+aws:
+  region: us-east-1
+  dynamodb:
+    endpoint: http://localhost:8000
+    table-name: helpy-dev
+  s3:
+    endpoint: http://localhost:4566
+    bucket-name: helpy-dev-attachments
+
+# Development flags (aligned with frontend)
+helpy:
+  development:
+    offline-mode: true
+    mock-llm-responses: true
+    mock-websocket: false
+    enable-auth: false
+    debug-mode: true
+
+---
+# Staging Profile
+spring:
+  config:
+    activate:
+      on-profile: staging
+
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      timeout: 5000ms
+      database: 0
+
+aws:
+  region: ${AWS_REGION:us-east-1}
+  dynamodb:
+    endpoint:
+    table-name: helpy-staging
+  s3:
+    endpoint:
+    bucket-name: helpy-staging-attachments
+
+helpy:
+  development:
+    offline-mode: false
+    mock-llm-responses: false
+    mock-websocket: false
+    enable-auth: true
+    debug-mode: true
+
+---
+# Production Profile
+spring:
+  config:
+    activate:
+      on-profile: production
+
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD}
+      timeout: 5000ms
+      database: 0
+      jedis:
+        pool:
+          max-active: 20
+          max-idle: 10
+          min-idle: 5
+
+aws:
+  region: ${AWS_REGION:us-east-1}
+  dynamodb:
+    table-name: helpy-production
+  s3:
+    bucket-name: helpy-production-attachments
+
+helpy:
+  development:
+    offline-mode: false
+    mock-llm-responses: false
+    mock-websocket: false
+    enable-auth: true
+    debug-mode: false
+  llm:
+    timeout-seconds: 60
+    max-retries: 5
+
+logging:
+  level:
+    com.americanworx.helpy_backend: INFO
+    org.springframework.web: WARN
+    root: WARN

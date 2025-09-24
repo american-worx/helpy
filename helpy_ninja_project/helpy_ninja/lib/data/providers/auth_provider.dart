@@ -4,6 +4,9 @@ import 'package:logger/logger.dart';
 
 import '../../config/constants.dart';
 import '../../domain/entities/user.dart';
+import '../../domain/repositories/i_auth_repository.dart';
+import '../../core/di/injection.dart';
+import '../../core/errors/api_exception.dart';
 
 /// Authentication state enum
 enum AuthStatus { initial, loading, authenticated, unauthenticated, error }
@@ -42,8 +45,9 @@ class AuthState {
   bool get hasError => status == AuthStatus.error && error != null;
 }
 
-/// Authentication state notifier
+/// Authentication state notifier with repository pattern
 class AuthNotifier extends StateNotifier<AuthState> {
+  final IAuthRepository _authRepository;
   final Logger _logger = Logger(
     printer: PrettyPrinter(
       methodCount: 0,
@@ -55,14 +59,14 @@ class AuthNotifier extends StateNotifier<AuthState> {
     ),
   );
 
-  AuthNotifier() : super(const AuthState()) {
-    _logger.d('AuthNotifier initialized');
+  AuthNotifier(this._authRepository) : super(const AuthState()) {
+    _logger.d('AuthNotifier initialized with repository');
     _initializeAuth();
   }
 
   late Box _authBox;
 
-  /// Initialize authentication state from local storage
+  /// Initialize authentication state
   Future<void> _initializeAuth() async {
     _logger.d('Initializing authentication state');
     state = state.copyWith(status: AuthStatus.loading);
@@ -71,100 +75,50 @@ class AuthNotifier extends StateNotifier<AuthState> {
       _authBox = await Hive.openBox('auth');
       _logger.d('Auth box opened successfully');
 
-      // DEVELOPMENT: Auto-authenticate with mock user if auth is disabled
-      if (!AppConstants.enableAuthDuringDevelopment) {
-        _logger.d('Development mode: Auto-authenticating with mock user');
-        final mockUser = User(
-          id: 'dev_user_001',
-          email: 'dev@helpy.ninja',
-          name: 'Developer User',
-          profileImageUrl: null,
-          preferences: const UserPreferences(),
-          createdAt: DateTime.now(),
-        );
+      // Check if user is authenticated using repository
+      final isAuthenticated = await _authRepository.isAuthenticated();
+      _logger.d('Authentication status from repository: $isAuthenticated');
 
-        // Store mock token and mark onboarding as complete
-        await _authBox.put(AppConstants.userTokenKey, 'dev_mock_token');
-        await _authBox.put(AppConstants.onboardingCompleteKey, true);
-        _logger.d('Stored mock token and marked onboarding as complete');
+      if (isAuthenticated) {
+        // Try to get current user
+        final user = await _authRepository.getCurrentUser();
+        if (user != null) {
+          final hasCompletedOnboarding = _authBox.get(
+            AppConstants.onboardingCompleteKey,
+            defaultValue: false,
+          );
 
-        state = state.copyWith(
-          status: AuthStatus.authenticated,
-          user: mockUser,
-          isFirstTime: false,
-        );
-        _logger.d('Development user authenticated successfully');
-        return;
-      }
-
-      // PRODUCTION: Check if user has completed onboarding
-      final hasCompletedOnboarding = _authBox.get(
-        AppConstants.onboardingCompleteKey,
-        defaultValue: false,
-      );
-      _logger.d(
-        'Onboarding status: ${hasCompletedOnboarding ? 'completed' : 'not completed'}',
-      );
-
-      // Check for stored user token
-      final token = _authBox.get(AppConstants.userTokenKey);
-      _logger.d('Token found: ${token != null}');
-
-      if (token != null && hasCompletedOnboarding) {
-        // Validate token and restore user session
-        _logger.d('Valid token found, restoring user session');
-        await _restoreUserSession(token);
+          state = state.copyWith(
+            status: AuthStatus.authenticated,
+            user: user,
+            isFirstTime: !hasCompletedOnboarding,
+          );
+          _logger.d('User authenticated and restored: ${user.id}');
+        } else {
+          // Token exists but user fetch failed - clear auth state
+          await _authRepository.clearTokens();
+          state = state.copyWith(
+            status: AuthStatus.unauthenticated,
+            isFirstTime: true,
+          );
+          _logger.w('Token exists but user fetch failed, cleared auth state');
+        }
       } else {
         state = state.copyWith(
           status: AuthStatus.unauthenticated,
-          isFirstTime: !hasCompletedOnboarding,
+          isFirstTime: true,
         );
-        _logger.d(
-          'User is unauthenticated, first time: ${!hasCompletedOnboarding}',
-        );
+        _logger.d('User is not authenticated');
       }
     } catch (e) {
       _logger.e('Failed to initialize authentication: $e');
       state = state.copyWith(
         status: AuthStatus.error,
-        error: 'Failed to initialize authentication: $e',
+        error: e is ApiException ? e.userMessage : 'Authentication initialization failed',
       );
     }
   }
 
-  /// Restore user session from stored token
-  Future<void> _restoreUserSession(String token) async {
-    _logger.d('Restoring user session from token');
-    try {
-      // TODO: Validate token with backend
-      // For now, create a mock user
-      final user = User(
-        id: 'user_123',
-        email: 'demo@helpy.ninja',
-        name: 'Demo User',
-        profileImageUrl: null,
-        preferences: const UserPreferences(),
-        createdAt: DateTime.now(),
-      );
-
-      state = state.copyWith(
-        status: AuthStatus.authenticated,
-        user: user,
-        isFirstTime: false,
-      );
-      _logger.d('User session restored successfully');
-    } catch (e) {
-      _logger.e('Failed to restore user session: $e');
-      // Clear invalid token
-      await _authBox.delete(AppConstants.userTokenKey);
-      _logger.d('Invalid token cleared from storage');
-
-      state = state.copyWith(
-        status: AuthStatus.unauthenticated,
-        error: 'Session expired. Please login again.',
-      );
-    }
-  }
 
   /// Sign in with email and password
   Future<void> signInWithEmail(String email, String password) async {
@@ -172,39 +126,24 @@ class AuthNotifier extends StateNotifier<AuthState> {
     state = state.copyWith(status: AuthStatus.loading, error: null);
 
     try {
-      // TODO: Implement actual authentication with backend
-      await Future.delayed(const Duration(seconds: 2)); // Simulate API call
-      _logger.d('API call simulated for sign in');
-
-      // Mock successful authentication
-      final user = User(
-        id: 'user_${DateTime.now().millisecondsSinceEpoch}',
-        email: email,
-        name: email.split('@').first.replaceAll('.', ' ').toUpperCase(),
-        profileImageUrl: null,
-        preferences: const UserPreferences(),
-        createdAt: DateTime.now(),
-      );
-
-      // Store authentication token
-      const mockToken = 'mock_jwt_token_123';
-      await _authBox.put(AppConstants.userTokenKey, mockToken);
+      final user = await _authRepository.signInWithEmail(email, password);
+      
+      // Mark onboarding as complete for existing users
       await _authBox.put(AppConstants.onboardingCompleteKey, true);
-      _logger.d(
-        'Authentication token stored and onboarding marked as complete',
-      );
+      _logger.d('Authentication successful and onboarding marked as complete');
 
       state = state.copyWith(
         status: AuthStatus.authenticated,
         user: user,
         isFirstTime: false,
       );
-      _logger.d('User signed in successfully');
+      _logger.d('User signed in successfully: ${user.id}');
     } catch (e) {
       _logger.e('Sign in failed: $e');
+      final errorMessage = e is ApiException ? e.userMessage : 'Login failed: ${e.toString()}';
       state = state.copyWith(
         status: AuthStatus.error,
-        error: 'Login failed: $e',
+        error: errorMessage,
       );
     }
   }
@@ -219,36 +158,22 @@ class AuthNotifier extends StateNotifier<AuthState> {
     state = state.copyWith(status: AuthStatus.loading, error: null);
 
     try {
-      // TODO: Implement actual registration with backend
-      await Future.delayed(const Duration(seconds: 2)); // Simulate API call
-      _logger.d('API call simulated for sign up');
-
-      // Mock successful registration
-      final user = User(
-        id: 'user_${DateTime.now().millisecondsSinceEpoch}',
-        email: email,
-        name: name,
-        profileImageUrl: null,
-        preferences: const UserPreferences(),
-        createdAt: DateTime.now(),
-      );
-
-      // Store authentication token
-      const mockToken = 'mock_jwt_token_456';
-      await _authBox.put(AppConstants.userTokenKey, mockToken);
-      _logger.d('Authentication token stored');
+      final user = await _authRepository.signUpWithEmail(email, password, name);
+      
+      _logger.d('Registration successful');
 
       state = state.copyWith(
         status: AuthStatus.authenticated,
         user: user,
         isFirstTime: true, // New user needs onboarding
       );
-      _logger.d('User signed up successfully, requires onboarding');
+      _logger.d('User signed up successfully, requires onboarding: ${user.id}');
     } catch (e) {
       _logger.e('Sign up failed: $e');
+      final errorMessage = e is ApiException ? e.userMessage : 'Registration failed: ${e.toString()}';
       state = state.copyWith(
         status: AuthStatus.error,
-        error: 'Registration failed: $e',
+        error: errorMessage,
       );
     }
   }
@@ -265,10 +190,12 @@ class AuthNotifier extends StateNotifier<AuthState> {
   Future<void> signOut() async {
     _logger.d('Signing out user');
     try {
-      // Clear stored authentication data
-      await _authBox.delete(AppConstants.userTokenKey);
+      // Sign out using repository
+      await _authRepository.signOut();
+      
+      // Clear local onboarding state
       await _authBox.delete(AppConstants.onboardingCompleteKey);
-      _logger.d('Authentication data cleared from storage');
+      _logger.d('Authentication data cleared');
 
       state = state.copyWith(
         status: AuthStatus.unauthenticated,
@@ -279,9 +206,10 @@ class AuthNotifier extends StateNotifier<AuthState> {
       _logger.d('User signed out successfully');
     } catch (e) {
       _logger.e('Failed to sign out: $e');
+      final errorMessage = e is ApiException ? e.userMessage : 'Failed to sign out: ${e.toString()}';
       state = state.copyWith(
         status: AuthStatus.error,
-        error: 'Failed to sign out: $e',
+        error: errorMessage,
       );
     }
   }
@@ -296,10 +224,19 @@ class AuthNotifier extends StateNotifier<AuthState> {
   /// Update user profile
   Future<void> updateUserProfile(User updatedUser) async {
     _logger.d('Updating user profile for userId: ${updatedUser.id}');
-    if (state.user != null) {
-      state = state.copyWith(user: updatedUser);
-      // TODO: Sync with backend
-      _logger.d('User profile updated in state');
+    try {
+      if (state.user != null) {
+        final user = await _authRepository.updateProfile(updatedUser);
+        state = state.copyWith(user: user);
+        _logger.d('User profile updated successfully');
+      }
+    } catch (e) {
+      _logger.e('Failed to update user profile: $e');
+      final errorMessage = e is ApiException ? e.userMessage : 'Profile update failed: ${e.toString()}';
+      state = state.copyWith(
+        status: AuthStatus.error,
+        error: errorMessage,
+      );
     }
   }
 
@@ -328,7 +265,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       await _authBox.put('user_profile', updatedUser.toJson());
       _logger.d('User profile stored to local storage');
 
-      // TODO: Sync with backend
+      // Profile will be synced with backend when onboarding completes
     } else {
       // Create temporary user for onboarding flow
       final tempUser = User(
@@ -351,7 +288,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
 /// Authentication provider
 final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
-  return AuthNotifier();
+  return AuthNotifier(getIt<IAuthRepository>());
 });
 
 /// Current user provider (convenience)
